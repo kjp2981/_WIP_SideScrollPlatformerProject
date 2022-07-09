@@ -5,7 +5,9 @@ using UnityEngine.Events;
 
 public interface IAgentInput
 {
-    public UnityEvent<Vector2> OnMovementInput { get; set; }
+    public UnityEvent<float> OnMovementInput { get; set; }
 
+    public UnityEvent OnMeleeAttack { get; set; }
 
+    public UnityEvent OnRangeAttack { get; set; }
 }
