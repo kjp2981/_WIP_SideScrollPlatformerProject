@@ -11,6 +11,7 @@ public class AgentMovement : MonoBehaviour
     private MovementDataSO movementData = null;
 
     public UnityEvent<float> OnVelocityChange;
+    public UnityEvent<float> OnJumpAnimation;
 
     [SerializeField]
     private float jumpPower = 1f;
@@ -55,12 +56,22 @@ public class AgentMovement : MonoBehaviour
         return Mathf.Clamp(currentVelocity, 0, movementData.maxSpeed);
     }
 
+    public bool IsGround()
+    {
+        return rigid.velocity.y == 0f;
+    }
+
     private void FixedUpdate()
     {
-        OnVelocityChange?.Invoke(currentVelocity);
+        OnVelocityChange?.Invoke(moveDirection.x);
 
         Vector2 velocity = rigid.velocity;
         velocity.x = moveDirection.x * currentVelocity;
         rigid.velocity = velocity;
+
+        if (IsGround() == true)
+        {
+            OnJumpAnimation?.Invoke(rigid.velocity.y);
+        }
     }
 }
