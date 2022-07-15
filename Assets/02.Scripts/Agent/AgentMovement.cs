@@ -12,12 +12,20 @@ public class AgentMovement : MonoBehaviour
 
     public UnityEvent<float> OnVelocityChange;
 
+    [SerializeField]
+    private float jumpPower = 1f;
+
     private float currentVelocity = 3f;
     private Vector2 moveDirection = Vector2.zero;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+    }
+
+    public void Jump()
+    {
+        rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
     public void Movement(float xInput)

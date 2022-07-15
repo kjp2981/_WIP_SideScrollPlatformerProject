@@ -7,6 +7,8 @@ public interface IAgentInput
 {
     public UnityEvent<float> OnMovementInput { get; set; }
 
+    public UnityEvent OnJumpInput { get; set; }
+
     public UnityEvent OnMeleeAttack { get; set; }
 
     public UnityEvent OnRangeAttack { get; set; }

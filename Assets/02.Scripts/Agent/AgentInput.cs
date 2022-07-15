@@ -11,14 +11,25 @@ public class AgentInput : MonoBehaviour, IAgentInput
     public UnityEvent OnMeleeAttack { get; set; }
     [field : SerializeField]
     public UnityEvent OnRangeAttack { get; set; }
+    [field : SerializeField]
+    public UnityEvent OnJumpInput { get; set; }
 
     private void Update()
     {
         Movement();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
     }
 
-    private void Movement()
+    public void Movement()
     {
         OnMovementInput?.Invoke(Input.GetAxisRaw("Horizontal"));
+    }
+
+    public void Jump()
+    {
+        OnJumpInput?.Invoke();
     }
 }
