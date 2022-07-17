@@ -1,2 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+#Unity files
+*.mete -text merge=unityamlmerge diff
+*.unity -text merge=unityamlmerge diff
+*.asset -text merge=unityamlmerge diff
+*.prefab -text merge=unityamlmerge diff
