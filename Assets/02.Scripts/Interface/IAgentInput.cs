@@ -9,7 +9,7 @@ public interface IAgentInput
 
     public UnityEvent OnJumpInput { get; set; }
 
-    public UnityEvent<float> OnMeleeAttack { get; set; }
+    public UnityEvent<bool> OnMeleeAttack { get; set; }
 
-    public UnityEvent<float> OnRangeAttack { get; set; }
+    public UnityEvent<bool> OnRangeAttack { get; set; }
 }

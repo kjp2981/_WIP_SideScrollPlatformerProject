@@ -61,6 +61,14 @@ public class AgentMovement : MonoBehaviour
         return rigid.velocity.y == 0f;
     }
 
+    public void StopPlayer()
+    {
+        currentVelocity = 0f;
+        Vector2 pos = rigid.velocity;
+        pos.x = 0f;
+        rigid.velocity = pos;
+    }
+
     private void FixedUpdate()
     {
         OnVelocityChange?.Invoke(moveDirection.x);

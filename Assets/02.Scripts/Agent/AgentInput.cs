@@ -11,33 +11,92 @@ public class AgentInput : MonoBehaviour, IAgentInput
     [field : SerializeField, Foldout("Movement Event")]
     public UnityEvent OnJumpInput { get; set; }
 
-    // 마우스를 누른 시간을 체크 후 약공격인지 강곡격인지 판별 후 넘겨줌
+    // 마우스를 누른 시간을 체크 후 약공격인지 강곡격인지 판별 후 넘겨줌(불 값을로 넘겨주기)
     [field : SerializeField, Foldout("Attack Event")]
-    public UnityEvent<float> OnMeleeAttack { get; set; } // 근거리 공격
+    public UnityEvent<bool> OnMeleeAttack { get; set; } // 근거리 공격
     [field : SerializeField, Foldout("Attack Event")]
-    public UnityEvent<float> OnRangeAttack { get; set; } // 원거리 공격
+    public UnityEvent<bool> OnRangeAttack { get; set; } // 원거리 공격
 
     #region 콤보 공격 체크 변수
     private float meleeAttackTimer = 0f;
     private float rangeAttackTimer = 0f;
+
+    private readonly float meleeStrongAttackTime = 0.7f;
+    private readonly float rangeStrongAttackTime = 0.7f;
+
+    private bool isAttack = false;
     #endregion
 
     private void Update()
     {
-        Movement();
+        if (isAttack == false)
+        {
+            Movement();
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
+
         if (Input.GetMouseButtonDown(0))
         {
-            meleeAttackTimer += Time.deltaTime;
+            if (isAttack == false)
+                isAttack = true;
         }
-        else if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButton(0))
         {
-            MeleeAttack(meleeAttackTimer);
-            meleeAttackTimer = 0f;
+            if(isAttack == true)
+                meleeAttackTimer += Time.deltaTime;
         }
+        if (Input.GetMouseButtonUp(0) || meleeAttackTimer >= meleeStrongAttackTime)
+        {
+            if (isAttack == true)
+            {
+                if (meleeAttackTimer <= meleeStrongAttackTime)
+                {
+                    MeleeAttack(true);
+                }
+                else if (meleeAttackTimer > meleeStrongAttackTime)
+                {
+                    MeleeAttack(false);
+                }
+                meleeAttackTimer = 0f;
+                //isAttack = false;
+            }
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if(isAttack == false)
+                isAttack = true;
+        }
+        if (Input.GetMouseButton(1))
+        {
+            if(isAttack == true)
+                rangeAttackTimer += Time.deltaTime;
+        }
+        if (Input.GetMouseButtonUp(1) || rangeAttackTimer >= rangeStrongAttackTime)
+        {
+            if (isAttack == true)
+            {
+                if (rangeAttackTimer <= rangeStrongAttackTime)
+                {
+                    RangeAttack(true);
+                }
+                else if (rangeAttackTimer > rangeStrongAttackTime)
+                {
+                    RangeAttack(false);
+                }
+                rangeAttackTimer = 0f;
+                //isAttack = false;
+            }
+        }
+    }
+
+    public void StopAttack()
+    {
+        isAttack = false;
     }
 
     public void Movement()
@@ -50,13 +109,13 @@ public class AgentInput : MonoBehaviour, IAgentInput
         OnJumpInput?.Invoke();
     }
 
-    public void MeleeAttack(float timer)
+    public void MeleeAttack(bool isWeak)
     {
-        OnMeleeAttack?.Invoke(timer);
+        OnMeleeAttack?.Invoke(isWeak);
     }
 
-    public void RangeAttack(float timer)
+    public void RangeAttack(bool isWeak)
     {
-        OnRangeAttack?.Invoke(timer);
+        OnRangeAttack?.Invoke(isWeak);
     }
 }
