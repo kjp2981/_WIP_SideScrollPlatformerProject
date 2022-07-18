@@ -25,71 +25,98 @@ public class AgentInput : MonoBehaviour, IAgentInput
     private readonly float rangeStrongAttackTime = 0.7f;
 
     private bool isAttack = false;
+    public bool IsAttack => isAttack;
+
+    private float meleeAttackCoolTimer = 0f;
+    private float rangeAttackCoolTimer = 0f;
+
+    private readonly float meleeAttackCoolTime = 0.5f;
+    private readonly float rangeAttackCoolTime = 1f;
     #endregion
+
+    private void Start()
+    {
+        meleeAttackCoolTimer = meleeAttackCoolTime;
+        rangeAttackCoolTimer = rangeAttackCoolTime;
+    }
 
     private void Update()
     {
         if (isAttack == false)
         {
             Movement();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (isAttack == false)
-                isAttack = true;
-        }
-        if (Input.GetMouseButton(0))
-        {
-            if(isAttack == true)
-                meleeAttackTimer += Time.deltaTime;
-        }
-        if (Input.GetMouseButtonUp(0) || meleeAttackTimer >= meleeStrongAttackTime)
-        {
-            if (isAttack == true)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (meleeAttackTimer <= meleeStrongAttackTime)
-                {
-                    MeleeAttack(true);
-                }
-                else if (meleeAttackTimer > meleeStrongAttackTime)
-                {
-                    MeleeAttack(false);
-                }
-                meleeAttackTimer = 0f;
-                //isAttack = false;
+                Jump();
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        AttackInput();
+        meleeAttackCoolTimer += Time.deltaTime;
+        rangeAttackCoolTimer += Time.deltaTime;
+    }
+
+    private void AttackInput()
+    {
+        if (meleeAttackCoolTimer >= meleeAttackCoolTime)
         {
-            if(isAttack == false)
-                isAttack = true;
-        }
-        if (Input.GetMouseButton(1))
-        {
-            if(isAttack == true)
-                rangeAttackTimer += Time.deltaTime;
-        }
-        if (Input.GetMouseButtonUp(1) || rangeAttackTimer >= rangeStrongAttackTime)
-        {
-            if (isAttack == true)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (rangeAttackTimer <= rangeStrongAttackTime)
+                if (isAttack == false)
+                    isAttack = true;
+            }
+            if (Input.GetMouseButton(0))
+            {
+                if (isAttack == true)
+                    meleeAttackTimer += Time.deltaTime;
+            }
+            if (Input.GetMouseButtonUp(0) || meleeAttackTimer >= meleeStrongAttackTime)
+            {
+                if (isAttack == true)
                 {
-                    RangeAttack(true);
+                    if (meleeAttackTimer <= meleeStrongAttackTime)
+                    {
+                        MeleeAttack(true);
+                    }
+                    else if (meleeAttackTimer > meleeStrongAttackTime)
+                    {
+                        MeleeAttack(false);
+                    }
+                    meleeAttackTimer = 0f;
+                    meleeAttackCoolTimer = 0f;
+                    //isAttack = false;
                 }
-                else if (rangeAttackTimer > rangeStrongAttackTime)
+            }
+        }
+
+        if (rangeAttackCoolTimer >= rangeAttackCoolTime)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                if (isAttack == false)
+                    isAttack = true;
+            }
+            if (Input.GetMouseButton(1))
+            {
+                if (isAttack == true)
+                    rangeAttackTimer += Time.deltaTime;
+            }
+            if (Input.GetMouseButtonUp(1) || rangeAttackTimer >= rangeStrongAttackTime)
+            {
+                if (isAttack == true)
                 {
-                    RangeAttack(false);
+                    if (rangeAttackTimer <= rangeStrongAttackTime)
+                    {
+                        RangeAttack(true);
+                    }
+                    else if (rangeAttackTimer > rangeStrongAttackTime)
+                    {
+                        RangeAttack(false);
+                    }
+                    rangeAttackTimer = 0f;
+                    rangeAttackCoolTimer = 0f;
+                    //isAttack = false;
                 }
-                rangeAttackTimer = 0f;
-                //isAttack = false;
             }
         }
     }

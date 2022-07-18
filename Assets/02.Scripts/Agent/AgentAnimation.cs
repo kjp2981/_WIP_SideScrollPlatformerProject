@@ -2,28 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Define;
 
 public class AgentAnimation : MonoBehaviour
 {
     private RaycastHit2D ray;
 
-    public UnityEvent OnAttackComplete = null;
     public UnityEvent OnAttackUncomplete = null;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    private AgentAttack agentAttack;
 
     private readonly int hashIsMove = Animator.StringToHash("isMove");
     private readonly int hashJumpUp = Animator.StringToHash("jumpUp");
     private readonly int hashJumpDown = Animator.StringToHash("jumpDown");
     private readonly int hashIsMeleeAttack = Animator.StringToHash("isMeleeAttack");
     private readonly int hashIsRangeAttack = Animator.StringToHash("isRangeAttack");
+    private readonly int hashMeleeCnt = Animator.StringToHash("meleeCnt");
+    private readonly int hashRangeCnt = Animator.StringToHash("rangeCnt");
     private readonly int hashIsWeak = Animator.StringToHash("isWeak");
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        agentAttack = Player.GetComponent<AgentAttack>();
     }
 
     public void SpriteFlipX(float value)
@@ -59,24 +63,21 @@ public class AgentAnimation : MonoBehaviour
     public void MeleeAttackAnim(bool isWeak)
     {
         OnAttackUncomplete?.Invoke();
-        animator.SetTrigger(hashIsMeleeAttack);
         animator.SetFloat(hashIsWeak, isWeak == true ? 1 : 0);
-        float animTime = animator.GetCurrentAnimatorStateInfo(0).length;
-        StartCoroutine(StopAttackCroutine(animTime));
+        animator.SetFloat(hashMeleeCnt, agentAttack.Combo);
+        animator.SetTrigger(hashIsMeleeAttack);
     }
 
     public void RangeAttackAnim(bool isWeak)
     {
         OnAttackUncomplete?.Invoke();
-        animator.SetTrigger(hashIsRangeAttack);
+        animator.SetFloat(hashRangeCnt, 1);
         animator.SetFloat(hashIsWeak, isWeak == true ? 1 : 0);
-        float animTime = animator.GetCurrentAnimatorStateInfo(0).length;
-        StartCoroutine(StopAttackCroutine(animTime));
+        animator.SetTrigger(hashIsRangeAttack);
     }
 
-    private IEnumerator StopAttackCroutine(float time)
+    public void StopAttack()
     {
-        yield return new WaitForSeconds(time);
-        OnAttackComplete?.Invoke();
+        Player.GetComponent<AgentInput>().StopAttack();
     }
 }

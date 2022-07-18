@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Define;
 
 public class AgentMovement : MonoBehaviour
 {
@@ -26,7 +27,8 @@ public class AgentMovement : MonoBehaviour
 
     public void Jump()
     {
-        rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        if(IsGround() == true)
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
     public void Movement(float xInput)
