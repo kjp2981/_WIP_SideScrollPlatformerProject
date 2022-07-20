@@ -9,16 +9,28 @@ public class AgentAttack : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
-    private int combo = 0;
-    public int Combo => combo;
+    private int mwCombo = 0;
+    public int MWCombo => mwCombo;
 
-    private float comboTimer = 0f;
+    private int msCombo = 0;
+    public int MSCombo => msCombo;
+
+    private int rwCombo = 0;
+    public int RWCombo => rwCombo;
+
+    private int rsCombo = 0;
+    public int RSCombo => rsCombo;
+
+    private float mwcomboTimer = 0f;
+    private float mscomboTimer = 0f;
+    private float rwcomboTimer = 0f;
+    private float rscomboTimer = 0f;
     private float comboTime = 3f;
 
     private RaycastHit2D ray;
     private Vector3 offset = new Vector3(-0.5f, -0.5f);
-    [SerializeField, Layer]
-    private int hitLayer;
+    [SerializeField]
+    private LayerMask hitLayer;
 
     private void Start()
     {
@@ -27,21 +39,33 @@ public class AgentAttack : MonoBehaviour
 
     public void MeleeAttack(bool isWeak)
     {
-        if(isWeak == true)
+        offset = spriteRenderer.flipX == true ? new Vector2(0.5f, -0.5f) : new Vector2(-0.5f, -0.5f);
+        ray = Physics2D.BoxCast(transform.position + offset, Vector2.one, 0f, Vector2.zero, 0f, hitLayer);
+        if (isWeak == true)
         {
-            ++combo;
-            Debug.Log($"근거리 약공격, combo : {combo}");
-            offset = spriteRenderer.flipX == true ? new Vector2(0.5f, -0.5f) : new Vector2(-0.5f, -0.5f);
-            ray = Physics2D.BoxCast(transform.position + offset, Vector2.one, 0f, Vector2.zero, 0f, 1 << hitLayer);
+            msCombo = 0;
+            rwCombo = 0;
+            rsCombo = 0;
+
+            ++mwCombo;
+            
             if(ray.collider != null)
             {
+                Debug.Log($"근거리 약공격, combo : {mwCombo}");
                 Debug.Log($"Name : {ray.collider.name}, Eenmy!");
             }
         }
         else
         {
-            ++combo;
-            Debug.Log($"근거리 강공격, combo : {combo}");
+            mwCombo = 0;
+            rwCombo = 0;
+            rsCombo = 0;
+
+            ++msCombo;
+            if (ray.collider != null)
+            {
+                Debug.Log($"근거리 강공격, combo : {mwCombo}");
+            }
         }
     }
 
@@ -49,24 +73,67 @@ public class AgentAttack : MonoBehaviour
     {
         if (isWeak == true)
         {
+            mwCombo = 0;
+            msCombo = 0;
+            rsCombo = 0;
+
+            ++rwCombo;
             Debug.Log("원거리 약공격");
         }
         else
         {
+            mwCombo = 0;
+            msCombo = 0;
+            rwCombo = 0;
+
+            ++rsCombo;
             Debug.Log("원거리 강공격");
         }
     }
 
     private void Update()
     {
-        if(combo != 0)
+        if(mwCombo != 0)
         {
-            comboTimer += Time.deltaTime;
+            mwcomboTimer += Time.deltaTime;
 
-            if(comboTimer >= comboTime || combo >= 3)
+            if(mwcomboTimer >= comboTime || mwCombo >= 3)
             {
-                combo = 0;
-                comboTimer = 0f;
+                mwCombo = 0;
+                mwcomboTimer = 0f;
+            }
+        }
+
+        if (msCombo != 0)
+        {
+            mscomboTimer += Time.deltaTime;
+
+            if (mscomboTimer >= comboTime || msCombo >= 3)
+            {
+                msCombo = 0;
+                mscomboTimer = 0f;
+            }
+        }
+
+        if (rwCombo != 0)
+        {
+            rwcomboTimer += Time.deltaTime;
+
+            if (rwcomboTimer >= comboTime || rwCombo >= 3)
+            {
+                rwCombo = 0;
+                rwcomboTimer = 0f;
+            }
+        }
+
+        if (rsCombo != 0)
+        {
+            rscomboTimer += Time.deltaTime;
+
+            if (rscomboTimer >= comboTime || rsCombo >= 3)
+            {
+                rsCombo = 0;
+                rscomboTimer = 0f;
             }
         }
     }

@@ -57,6 +57,7 @@ public class AgentAnimation : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("JumpUp") == true)
         {
             animator.SetTrigger(hashJumpDown);
+            //OnAttackUncomplete?.Invoke(); // 점프 후 착지시 약간의 멈움지기게 하기
         }
     }
 
@@ -64,7 +65,7 @@ public class AgentAnimation : MonoBehaviour
     {
         OnAttackUncomplete?.Invoke();
         animator.SetFloat(hashIsWeak, isWeak == true ? 1 : 0);
-        animator.SetFloat(hashMeleeCnt, agentAttack.Combo);
+        animator.SetFloat(hashMeleeCnt, agentAttack.MWCombo);
         animator.SetTrigger(hashIsMeleeAttack);
     }
 
