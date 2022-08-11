@@ -27,7 +27,7 @@ public class AgentAnimation : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        agentAttack = Player.GetComponent<AgentAttack>();
+        agentAttack = Define.Player.GetComponent<AgentAttack>();
     }
 
     public void SpriteFlipX(float value)
@@ -79,6 +79,6 @@ public class AgentAnimation : MonoBehaviour
 
     public void StopAttack()
     {
-        Player.GetComponent<AgentInput>().StopAttack();
+        Define.Player.GetComponent<AgentInput>().StopAttack();
     }
 }

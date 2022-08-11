@@ -9,6 +9,7 @@ public class AgentAttack : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
+    #region 콤보 체크 관련 변수
     private int mwCombo = 0;
     public int MWCombo => mwCombo;
 
@@ -26,21 +27,28 @@ public class AgentAttack : MonoBehaviour
     private float rwcomboTimer = 0f;
     private float rscomboTimer = 0f;
     private float comboTime = 3f;
+    #endregion
 
     private RaycastHit2D ray;
     private Vector3 offset = new Vector3(-0.5f, -0.5f);
     [SerializeField]
     private LayerMask hitLayer;
+    [SerializeField]
+    private Transform arrowPos;
+
+    private Player player;
 
     private void Start()
     {
-        spriteRenderer = Player.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
+        spriteRenderer = Define.Player.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
+        player = Define.Player.GetComponent<Player>();
     }
 
     public void MeleeAttack(bool isWeak)
     {
         offset = spriteRenderer.flipX == true ? new Vector2(0.5f, -0.5f) : new Vector2(-0.5f, -0.5f);
         ray = Physics2D.BoxCast(transform.position + offset, Vector2.one, 0f, Vector2.zero, 0f, hitLayer);
+
         if (isWeak == true)
         {
             msCombo = 0;
@@ -51,8 +59,8 @@ public class AgentAttack : MonoBehaviour
             
             if(ray.collider != null)
             {
-                Debug.Log($"근거리 약공격, combo : {mwCombo}");
-                Debug.Log($"Name : {ray.collider.name}, Eenmy!");
+                IHittable hit = ray.collider.GetComponent<IHittable>();
+                hit.Damage(player.Status.meleeAttack, this.gameObject);
             }
         }
         else
@@ -65,6 +73,8 @@ public class AgentAttack : MonoBehaviour
             if (ray.collider != null)
             {
                 Debug.Log($"근거리 강공격, combo : {mwCombo}");
+                IHittable hit = ray.collider.GetComponent<IHittable>();
+                hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject);
             }
         }
     }
@@ -79,6 +89,8 @@ public class AgentAttack : MonoBehaviour
 
             ++rwCombo;
             Debug.Log("원거리 약공격");
+            Arrow weakArrow = PoolManager.Instance.Pop("Arrow") as Arrow;
+            weakArrow.transform.position = arrowPos.position;
         }
         else
         {
@@ -88,6 +100,8 @@ public class AgentAttack : MonoBehaviour
 
             ++rsCombo;
             Debug.Log("원거리 강공격");
+            Arrow weakArrow = PoolManager.Instance.Pop("Arrow") as Arrow;
+            weakArrow.transform.position = arrowPos.position;
         }
     }
 
