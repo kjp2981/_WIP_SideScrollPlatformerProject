@@ -89,8 +89,9 @@ public class AgentAttack : MonoBehaviour
 
             ++rwCombo;
             Debug.Log("원거리 약공격");
-            Arrow weakArrow = PoolManager.Instance.Pop("Arrow") as Arrow;
-            weakArrow.transform.position = arrowPos.position;
+            // 애니메이션 후 화살 생성
+            // 플레이어 방향에 맞춰 화살 뒤집기
+            StartCoroutine(CreateArrow(0.2f, spriteRenderer.transform.localScale.x == 1 ? false : true));
         }
         else
         {
@@ -100,9 +101,30 @@ public class AgentAttack : MonoBehaviour
 
             ++rsCombo;
             Debug.Log("원거리 강공격");
-            Arrow weakArrow = PoolManager.Instance.Pop("Arrow") as Arrow;
-            weakArrow.transform.position = arrowPos.position;
+            // 애니메이션 후 화살 생성
+            // 플레이어 방향에 맞춰 화살 뒤집기
+            StartCoroutine(CreateArrow(0.5f, spriteRenderer.transform.localScale.x == 1 ? false : true));
         }
+    }
+
+    public IEnumerator CreateArrow(float delay, bool isFlip)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Arrow arrow = PoolManager.Instance.Pop("Arrow") as Arrow;
+        if(isFlip == true) // 오른쪽으로 뒤집기
+        {
+            Vector3 vec = arrow.transform.localScale;
+            vec.x = -1;
+            arrow.transform.localScale = vec;
+        }
+        else
+        {
+            Vector3 vec = arrow.transform.localScale;
+            vec.x = 1;
+            arrow.transform.localScale = vec;
+        }
+        arrow.transform.position = arrowPos.position;
     }
 
     private void Update()

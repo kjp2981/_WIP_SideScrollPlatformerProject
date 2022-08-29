@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance = null;
+
     [SerializeField]
     private PoolingListSO poolingList;
 
     void Awake()
     {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
         PoolManager.Instance = new PoolManager(transform);
 
         CreatePool();

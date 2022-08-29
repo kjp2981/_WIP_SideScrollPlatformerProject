@@ -34,11 +34,17 @@ public class AgentAnimation : MonoBehaviour
     {
         if(value > 0)
         {
-            spriteRenderer.flipX = true;
+            //spriteRenderer.flipX = true;
+            Vector3 vec = transform.localScale;
+            vec.x = -1;
+            transform.localScale = vec;
         }
         else if(value < 0)
         {
-            spriteRenderer.flipX = false;
+            //spriteRenderer.flipX = false;
+            Vector3 vec = transform.localScale;
+            vec.x = 1;
+            transform.localScale = vec;
         }
     }
 
