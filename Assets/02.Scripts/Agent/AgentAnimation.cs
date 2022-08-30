@@ -6,8 +6,6 @@ using static Define;
 
 public class AgentAnimation : MonoBehaviour
 {
-    private RaycastHit2D ray;
-
     public UnityEvent OnAttackUncomplete = null;
 
     private SpriteRenderer spriteRenderer;

@@ -7,13 +7,13 @@ using static Define;
 
 public class AgentAttack : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    protected SpriteRenderer spriteRenderer;
 
     #region 콤보 체크 관련 변수
-    private int mwCombo = 0;
+    protected int mwCombo = 0;
     public int MWCombo => mwCombo;
 
-    private int msCombo = 0;
+    protected int msCombo = 0;
     public int MSCombo => msCombo;
 
     private int rwCombo = 0;
@@ -22,31 +22,31 @@ public class AgentAttack : MonoBehaviour
     private int rsCombo = 0;
     public int RSCombo => rsCombo;
 
-    private float mwcomboTimer = 0f;
-    private float mscomboTimer = 0f;
+    protected float mwcomboTimer = 0f;
+    protected float mscomboTimer = 0f;
     private float rwcomboTimer = 0f;
     private float rscomboTimer = 0f;
-    private float comboTime = 3f;
+    protected float comboTime = 3f;
     #endregion
 
-    private RaycastHit2D ray;
-    private Vector3 offset = new Vector3(-0.5f, -0.5f);
+    protected RaycastHit2D ray;
+    protected Vector3 offset = new Vector3(-0.5f, -0.5f);
     [SerializeField]
-    private LayerMask hitLayer;
+    protected LayerMask hitLayer;
     [SerializeField]
     private Transform arrowPos;
 
     private Player player;
 
-    private void Start()
+    protected virtual void Start()
     {
         spriteRenderer = Define.Player.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
         player = Define.Player.GetComponent<Player>();
     }
 
-    public void MeleeAttack(bool isWeak)
+    public virtual void MeleeAttack(bool isWeak)
     {
-        offset = spriteRenderer.flipX == true ? new Vector2(0.5f, -0.5f) : new Vector2(-0.5f, -0.5f);
+        offset = spriteRenderer.transform.localScale.x == -1 ? new Vector2(0.5f, -0.5f) : new Vector2(-0.5f, -0.5f);
         ray = Physics2D.BoxCast(transform.position + offset, Vector2.one, 0f, Vector2.zero, 0f, hitLayer);
 
         if (isWeak == true)

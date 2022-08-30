@@ -15,6 +15,6 @@ public class Player : MonoBehaviour, IHittable
 
     public void Damage(int damage, GameObject damageFactor)
     {
-        
+        Debug.Log("데미지 입었다!");
     }
 }
