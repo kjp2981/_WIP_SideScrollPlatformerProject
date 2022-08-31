@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour, IHittable
 
     private void Start()
     {
-        hp = status.hp;
+        HP = status.hp;
     }
 
     public void Damage(int damage, GameObject damageFactor)

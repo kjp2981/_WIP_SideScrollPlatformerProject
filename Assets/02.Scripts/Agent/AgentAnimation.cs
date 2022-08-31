@@ -20,12 +20,13 @@ public class AgentAnimation : MonoBehaviour
     private readonly int hashMeleeCnt = Animator.StringToHash("meleeCnt");
     private readonly int hashRangeCnt = Animator.StringToHash("rangeCnt");
     private readonly int hashIsWeak = Animator.StringToHash("isWeak");
+    private readonly int hashHit = Animator.StringToHash("Hit");
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        agentAttack = Define.Player.GetComponent<AgentAttack>();
+        agentAttack = GetComponentInParent<AgentAttack>();
     }
 
     public void SpriteFlipX(float value)
@@ -79,6 +80,11 @@ public class AgentAnimation : MonoBehaviour
         animator.SetFloat(hashRangeCnt, 1);
         animator.SetFloat(hashIsWeak, isWeak == true ? 1 : 0);
         animator.SetTrigger(hashIsRangeAttack);
+    }
+
+    public void HitAnimation()
+    {
+        animator.SetTrigger(hashHit);
     }
 
     public void StopAttack()

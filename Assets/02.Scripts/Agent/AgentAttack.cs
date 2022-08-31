@@ -59,8 +59,11 @@ public class AgentAttack : MonoBehaviour
             
             if(ray.collider != null)
             {
-                IHittable hit = ray.collider.GetComponent<IHittable>();
-                hit.Damage(player.Status.meleeAttack, this.gameObject);
+                if (ray.collider.CompareTag("Enemy"))
+                {
+                    IHittable hit = ray.collider.GetComponent<IHittable>();
+                    hit.Damage(player.Status.meleeAttack, this.gameObject);
+                }
             }
         }
         else
@@ -72,9 +75,12 @@ public class AgentAttack : MonoBehaviour
             ++msCombo;
             if (ray.collider != null)
             {
-                Debug.Log($"근거리 강공격, combo : {mwCombo}");
-                IHittable hit = ray.collider.GetComponent<IHittable>();
-                hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject);
+                if (ray.collider.CompareTag("Enemy"))
+                {
+                    Debug.Log($"근거리 강공격, combo : {mwCombo}");
+                    IHittable hit = ray.collider.GetComponent<IHittable>();
+                    hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject);
+                }
             }
         }
     }
