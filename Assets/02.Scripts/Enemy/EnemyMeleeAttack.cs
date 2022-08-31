@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyMeleeAttack : AgentAttack
 {
     private Enemy enemy;
+    [SerializeField]
+    private float attackDelay = 1f;
+    private float attackTimer = 0f;
 
     protected override void Start()
     {
@@ -20,31 +23,38 @@ public class EnemyMeleeAttack : AgentAttack
 
         if (isWeak == true)
         {
-            msCombo = 0;
-
-            ++mwCombo;
-
-            if (ray.collider != null)
+            if (attackTimer >= attackDelay)
             {
-                if (ray.collider.CompareTag("Player"))
+                msCombo = 0;
+
+                ++mwCombo;
+
+                if (ray.collider != null)
                 {
-                    IHittable hit = ray.collider.GetComponent<IHittable>();
-                    hit.Damage(enemy.Status.meleeAttack, this.gameObject);
+                    if (ray.collider.CompareTag("Player"))
+                    {
+                        IHittable hit = ray.collider.GetComponent<IHittable>();
+                        hit.Damage(enemy.Status.meleeAttack, this.gameObject);
+                        attackTimer = 0;
+                    }
                 }
             }
         }
         else
         {
-            mwCombo = 0;
-
-            ++msCombo;
-            if (ray.collider != null)
+            if (attackTimer >= attackDelay)
             {
-                if (ray.collider.CompareTag("Player"))
+                mwCombo = 0;
+
+                ++msCombo;
+
+                if (ray.collider != null)
                 {
-                    Debug.Log($"근거리 강공격, combo : {mwCombo}");
-                    IHittable hit = ray.collider.GetComponent<IHittable>();
-                    hit.Damage(Mathf.CeilToInt(enemy.Status.meleeAttack * 1.5f), this.gameObject);
+                    if (ray.collider.CompareTag("Player"))
+                    {
+                        IHittable hit = ray.collider.GetComponent<IHittable>();
+                        hit.Damage(Mathf.CeilToInt(enemy.Status.meleeAttack * 1.5f), this.gameObject);
+                    }
                 }
             }
         }

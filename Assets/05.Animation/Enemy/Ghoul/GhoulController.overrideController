@@ -8,4 +8,12 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: GhoulController
   m_Controller: {fileID: 9100000, guid: 130f3f50c9ac604479c20e98f4c6775b, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8b9cbd2d2afa7054d8af40ca2f650f68, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a0e75e80ed798754499140552218c037, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6c4320f8a793d58438ff7d6bb40ed3c7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8b860eaa3299189479a0d0346e02b20a, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 11a28cbe54d6d8a45ac42268c0f4ba1a, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: da0f5233eefccd84e9fd7e723f0ec411, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5af2086d6d43b5a4fabf3fcc3c1e1887, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 15dd2cdae8f895d4b986e6e96635b343, type: 2}

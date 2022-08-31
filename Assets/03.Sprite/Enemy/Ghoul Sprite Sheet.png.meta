@@ -116,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_0
+      name: Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,7 +124,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -137,7 +137,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_1
+      name: Idle_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,7 +145,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,7 +158,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_2
+      name: Idle_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,7 +166,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -179,7 +179,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_3
+      name: Idle_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,7 +187,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -200,7 +200,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_4
+      name: Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -208,7 +208,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -221,7 +221,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_5
+      name: Walk_1
       rect:
         serializedVersion: 2
         x: 32
@@ -229,7 +229,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -242,7 +242,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_6
+      name: Walk_2
       rect:
         serializedVersion: 2
         x: 64
@@ -250,7 +250,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -263,7 +263,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_7
+      name: Walk_3
       rect:
         serializedVersion: 2
         x: 96
@@ -271,7 +271,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -284,7 +284,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_8
+      name: Walk_4
       rect:
         serializedVersion: 2
         x: 128
@@ -292,7 +292,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -305,7 +305,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_9
+      name: Walk_5
       rect:
         serializedVersion: 2
         x: 160
@@ -313,7 +313,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -326,7 +326,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_10
+      name: Walk_6
       rect:
         serializedVersion: 2
         x: 192
@@ -334,7 +334,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -347,7 +347,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_11
+      name: Walk_7
       rect:
         serializedVersion: 2
         x: 224
@@ -355,7 +355,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -368,7 +368,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_12
+      name: Attack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -376,7 +376,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -389,7 +389,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_13
+      name: Attack_1
       rect:
         serializedVersion: 2
         x: 32
@@ -397,7 +397,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -410,7 +410,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_14
+      name: Attack_2
       rect:
         serializedVersion: 2
         x: 64
@@ -418,7 +418,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -431,7 +431,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_15
+      name: Attack_3
       rect:
         serializedVersion: 2
         x: 96
@@ -439,7 +439,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -452,7 +452,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_16
+      name: Attack_4
       rect:
         serializedVersion: 2
         x: 128
@@ -460,7 +460,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -473,7 +473,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_17
+      name: Attack_5
       rect:
         serializedVersion: 2
         x: 160
@@ -481,7 +481,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -494,7 +494,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_18
+      name: Hit_0
       rect:
         serializedVersion: 2
         x: 0
@@ -502,7 +502,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -515,7 +515,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_19
+      name: Hit_1
       rect:
         serializedVersion: 2
         x: 32
@@ -523,7 +523,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -536,7 +536,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_20
+      name: Hit_2
       rect:
         serializedVersion: 2
         x: 64
@@ -544,7 +544,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -557,7 +557,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_21
+      name: Hit_3
       rect:
         serializedVersion: 2
         x: 96
@@ -565,7 +565,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -578,7 +578,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_22
+      name: Dead_0
       rect:
         serializedVersion: 2
         x: 0
@@ -586,7 +586,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -599,7 +599,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_23
+      name: Dead_1
       rect:
         serializedVersion: 2
         x: 32
@@ -607,7 +607,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -620,7 +620,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_24
+      name: Dead_2
       rect:
         serializedVersion: 2
         x: 64
@@ -628,7 +628,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -641,7 +641,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_25
+      name: Dead_3
       rect:
         serializedVersion: 2
         x: 96
@@ -649,7 +649,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -662,7 +662,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_26
+      name: Dead_4
       rect:
         serializedVersion: 2
         x: 128
@@ -670,7 +670,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -683,7 +683,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ghoul Sprite Sheet_27
+      name: Dead_5
       rect:
         serializedVersion: 2
         x: 160
@@ -691,7 +691,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -714,34 +714,34 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Ghoul Sprite Sheet_23: -1531763661
-      Ghoul Sprite Sheet_22: -1356406385
-      Ghoul Sprite Sheet_3: -1160926785
-      Ghoul Sprite Sheet_1: -1361106172
-      Ghoul Sprite Sheet_10: 1841681412
-      Ghoul Sprite Sheet_7: -1881571419
-      Ghoul Sprite Sheet_17: 797462561
-      Ghoul Sprite Sheet_14: 1220734951
-      Ghoul Sprite Sheet_5: -586133162
-      Ghoul Sprite Sheet_19: 526094710
-      Ghoul Sprite Sheet_20: 1800733922
-      Ghoul Sprite Sheet_16: -388124309
-      Ghoul Sprite Sheet_8: 626352457
-      Ghoul Sprite Sheet_4: 2025451643
-      Ghoul Sprite Sheet_21: 264567592
-      Ghoul Sprite Sheet_12: 355689348
-      Ghoul Sprite Sheet_11: -1671295242
-      Ghoul Sprite Sheet_0: 876700512
-      Ghoul Sprite Sheet_13: -1089843615
-      Ghoul Sprite Sheet_2: 1494940952
-      Ghoul Sprite Sheet_9: 1735616821
-      Ghoul Sprite Sheet_15: 142204019
-      Ghoul Sprite Sheet_26: 625822466
-      Ghoul Sprite Sheet_6: -351574548
-      Ghoul Sprite Sheet_27: -1368012346
-      Ghoul Sprite Sheet_18: -1190937970
-      Ghoul Sprite Sheet_25: -488635116
-      Ghoul Sprite Sheet_24: 1848307166
+      Attack_5: 797462561
+      Walk_5: 1735616821
+      Idle_1: -1361106172
+      Hit_2: 1800733922
+      Dead_1: -1531763661
+      Attack_0: 355689348
+      Walk_0: 2025451643
+      Idle_3: -1160926785
+      Dead_3: -488635116
+      Walk_4: 626352457
+      Hit_1: 526094710
+      Idle_0: 876700512
+      Dead_0: -1356406385
+      Walk_6: 1841681412
+      Dead_5: -1368012346
+      Attack_4: -388124309
+      Dead_4: 625822466
+      Walk_2: -351574548
+      Attack_2: 1220734951
+      Walk_7: -1671295242
+      Hit_0: -1190937970
+      Walk_3: -1881571419
+      Attack_3: 142204019
+      Idle_2: 1494940952
+      Hit_3: 264567592
+      Walk_1: -586133162
+      Dead_2: 1848307166
+      Attack_1: -1089843615
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

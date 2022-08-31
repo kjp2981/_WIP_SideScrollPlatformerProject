@@ -635,7 +635,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2c0be1f17835a468f70b47507b77cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actions: []
+  _actions:
+  - {fileID: 423690581}
   _transitions:
   - {fileID: 1462732635}
 --- !u!114 &423690581
@@ -872,7 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914ddffb0c2395a47b301976f3124d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1.5
+  distance: 1.2
 --- !u!1 &882802620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1060,7 +1061,7 @@ Animator:
   m_GameObject: {fileID: 976551800}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: afc1c59f6161d26498f16ea50f7d934f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1433,7 +1434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 914ddffb0c2395a47b301976f3124d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 1.5
+  distance: 1.2
 --- !u!114 &1462732638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1678,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 976551803}
+        m_TargetAssemblyTypeName: AgentAnimation, Assembly-CSharp
+        m_MethodName: MeleeAttackAnim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <OnRangeAttack>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
@@ -1725,7 +1738,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623452910}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 321135e68d590fd4c988d0a20c71304b, type: 3}
   m_Name: 
@@ -1734,6 +1747,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   arrowPos: {fileID: 0}
+  attackDelay: 1
 --- !u!114 &1623452921
 MonoBehaviour:
   m_ObjectHideFlags: 0
