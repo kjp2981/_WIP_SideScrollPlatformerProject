@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyMeleeAttack : AgentAttack
 {
@@ -8,6 +9,8 @@ public class EnemyMeleeAttack : AgentAttack
     [SerializeField]
     private float attackDelay = 1f;
     private float attackTimer = 0f;
+
+    public UnityEvent AttackAnim;
 
     protected override void Start()
     {
@@ -29,15 +32,10 @@ public class EnemyMeleeAttack : AgentAttack
 
                 ++mwCombo;
 
-                if (ray.collider != null)
-                {
-                    if (ray.collider.CompareTag("Player"))
-                    {
-                        IHittable hit = ray.collider.GetComponent<IHittable>();
-                        hit.Damage(enemy.Status.meleeAttack, this.gameObject);
-                        attackTimer = 0;
-                    }
-                }
+                AttackAnim?.Invoke();
+                StartCoroutine(Attack());
+
+                attackTimer = 0;
             }
         }
         else
@@ -48,20 +46,30 @@ public class EnemyMeleeAttack : AgentAttack
 
                 ++msCombo;
 
-                if (ray.collider != null)
-                {
-                    if (ray.collider.CompareTag("Player"))
-                    {
-                        IHittable hit = ray.collider.GetComponent<IHittable>();
-                        hit.Damage(Mathf.CeilToInt(enemy.Status.meleeAttack * 1.5f), this.gameObject);
-                    }
-                }
+                AttackAnim?.Invoke();
+                StartCoroutine(Attack());
+
+                attackTimer = 0f;
+            }
+        }
+    }
+
+    private IEnumerator Attack()
+    {
+        yield return new WaitForSeconds(.3f);
+        if (ray.collider != null)
+        {
+            if (ray.collider.CompareTag("Player"))
+            {
+                IHittable hit = ray.collider.GetComponent<IHittable>();
+                hit.Damage(Mathf.CeilToInt(enemy.Status.meleeAttack * 1.5f), this.gameObject);
             }
         }
     }
 
     private void Update()
     {
+        attackTimer += Time.deltaTime;
         if (mwCombo != 0)
         {
             mwcomboTimer += Time.deltaTime;

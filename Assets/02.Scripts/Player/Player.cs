@@ -15,7 +15,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback
 
     public Vector2 HitPos { get; private set; }
 
-    public UnityEvent OnHit;
+    [field : SerializeField] public UnityEvent OnHit { get; set; }
 
     #region HP 구현부
     private int hp;
@@ -38,6 +38,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback
 
     public void Damage(int damage, GameObject damageFactor)
     {
+        HP -= damage;
+        // 피 이펙트 넣기
         OnHit?.Invoke();
 
         if (transform.position == damageFactor.transform.position)

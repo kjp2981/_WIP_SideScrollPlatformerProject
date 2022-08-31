@@ -1,8 +1,10 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class Enemy : MonoBehaviour, IHittable
+public class Enemy : MonoBehaviour, IHittable, IKnockback
 {
     [SerializeField]
     private StatusDataSO status;
@@ -25,6 +27,8 @@ public class Enemy : MonoBehaviour, IHittable
             // hp바 변경 등.
         }
     }
+
+    [field : SerializeField] public UnityEvent OnHit { get; set; }
     #endregion
 
     private void Start()
@@ -34,6 +38,32 @@ public class Enemy : MonoBehaviour, IHittable
 
     public void Damage(int damage, GameObject damageFactor)
     {
+        HP -= damage;
+        // 피격 이펙트 넣기 예) 피
 
+        OnHit?.Invoke();
+
+        if (transform.position == damageFactor.transform.position)
+        {
+            Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
+        }
+        else
+        {
+            if (transform.position.x < damageFactor.transform.position.x)
+            {
+                Knockback(-1, 1f, 0.3f);
+            }
+            else
+            {
+                Knockback(1, 1f, 0.3f);
+            }
+        }
+
+        Debug.Log("맞았다!");
+    }
+
+    public void Knockback(float direction, float power, float duration)
+    {
+        transform.DOMoveX(direction * power, duration).SetRelative();
     }
 }
