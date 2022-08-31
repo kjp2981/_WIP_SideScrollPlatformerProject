@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using static Define;
 using NaughtyAttributes;
 
 public class AgentInput : MonoBehaviour, IAgentInput
@@ -34,24 +35,31 @@ public class AgentInput : MonoBehaviour, IAgentInput
     private readonly float rangeAttackCoolTime = 1f;
     #endregion
 
+    private Player player;
+
     private void Start()
     {
+        player = Define.Player.GetComponent<Player>();
+
         meleeAttackCoolTimer = meleeAttackCoolTime;
         rangeAttackCoolTimer = rangeAttackCoolTime;
     }
 
     private void Update()
     {
-        if (isAttack == false)
+        if (player.Death == false)
         {
-            Movement();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (isAttack == false)
             {
-                Jump();
+                Movement();
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Jump();
+                }
             }
-        }
 
-        AttackInput();
+            AttackInput();
+        }
         meleeAttackCoolTimer += Time.deltaTime;
         rangeAttackCoolTimer += Time.deltaTime;
     }

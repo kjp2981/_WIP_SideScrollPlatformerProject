@@ -21,6 +21,7 @@ public class AgentAnimation : MonoBehaviour
     private readonly int hashRangeCnt = Animator.StringToHash("rangeCnt");
     private readonly int hashIsWeak = Animator.StringToHash("isWeak");
     private readonly int hashHit = Animator.StringToHash("Hit");
+    private readonly int hashDie = Animator.StringToHash("Die");
 
     private void Start()
     {
@@ -85,6 +86,11 @@ public class AgentAnimation : MonoBehaviour
     public void HitAnimation()
     {
         animator.SetTrigger(hashHit);
+    }
+
+    public void DieAnimation()
+    {
+        animator.SetTrigger(hashDie);
     }
 
     public void StopAttack()

@@ -16,6 +16,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback
     public Vector2 HitPos { get; private set; }
 
     [field : SerializeField] public UnityEvent OnHit { get; set; }
+    public UnityEvent OnDie;
 
     #region HP 구현부
     private int hp;
@@ -29,6 +30,9 @@ public class Player : MonoBehaviour, IHittable, IKnockback
             // hp바 변경 등.
         }
     }
+
+    private bool death = false;
+    public bool Death => death;
     #endregion
 
     private void Start()
@@ -39,22 +43,31 @@ public class Player : MonoBehaviour, IHittable, IKnockback
     public void Damage(int damage, GameObject damageFactor)
     {
         HP -= damage;
-        // 피 이펙트 넣기
-        OnHit?.Invoke();
 
-        if (transform.position == damageFactor.transform.position)
+        if (HP <= 0)
         {
-            Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
+            death = true;
+            OnDie?.Invoke(); // 여기에 사맘 이펙ㅌ 넣기 예) 스탑, 슬로우 모션, 쉐이크
         }
         else
         {
-            if (transform.position.x < damageFactor.transform.position.x)
+            // 피 이펙트 넣기
+            OnHit?.Invoke();
+
+            if (transform.position == damageFactor.transform.position)
             {
-                Knockback(-1, 0.7f, 0.3f);
+                Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
             }
             else
             {
-                Knockback(1, 0.7f, 0.3f);
+                if (transform.position.x < damageFactor.transform.position.x)
+                {
+                    Knockback(-1, 0.7f, 0.3f);
+                }
+                else
+                {
+                    Knockback(1, 0.7f, 0.3f);
+                }
             }
         }
     }
