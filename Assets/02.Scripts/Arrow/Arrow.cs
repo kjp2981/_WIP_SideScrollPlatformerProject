@@ -54,7 +54,7 @@ public class Arrow : PoolableMono
             hit.Damage(player.Status.rangeAttack, this.gameObject);
         }
 
-        if ((collision.CompareTag("Player") == false) || (collision.CompareTag("Jump") == false) || (collision.CompareTag("Movement") == false))
+        if ((collision.CompareTag("Player") == false) && (collision.CompareTag("Jump") == false) && (collision.CompareTag("Movement") == false))
         {
             PoolManager.Instance.Push(this);
         }
