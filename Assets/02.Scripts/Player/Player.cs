@@ -42,6 +42,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback
 
     public void Damage(int damage, GameObject damageFactor)
     {
+        if (death == true) return;
+
         HP -= damage;
 
         if (HP <= 0)

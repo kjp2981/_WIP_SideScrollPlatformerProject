@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
+using DG.Tweening;
 using static Define;
 
 public class EnemyAIBrain : MonoBehaviour, IAgentInput
@@ -25,6 +26,15 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
 
     private AIActionData _aiActionData;
     public AIActionData AIActionData => _aiActionData;
+
+    private Transform initTransform;
+    public Transform InitTransform => initTransform;
+
+    private void OnEnable()
+    {
+        initTransform = this.transform;
+        Debug.Log(initTransform.position);
+    }
 
     protected virtual void Awake()
     {
