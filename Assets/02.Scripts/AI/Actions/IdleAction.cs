@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class IdleAction : AIAction
 {
+    public override void OnStateEnter()
+    {
+        Debug.Log("Enter the IdleState");
+    }
+
+    public override void OnStateLeave()
+    {
+        Debug.Log("Leave the IdleState");
+    }
+
     public override void TakeAction()
     {
         _aiActionData.arrived = false;

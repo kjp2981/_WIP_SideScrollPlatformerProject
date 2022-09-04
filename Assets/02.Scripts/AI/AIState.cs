@@ -41,7 +41,9 @@ public class AIState : MonoBehaviour
             {
                 if(transition.positiveState != null)
                 {
+                    _enemyBrain.GetState().GetComponent<AIAction>().OnStateLeave();
                     _enemyBrain.ChangeState(transition.positiveState);
+                    _enemyBrain.GetState().GetComponent<AIAction>().OnStateEnter();
                     return;
                 }
             }
@@ -49,7 +51,9 @@ public class AIState : MonoBehaviour
             {
                 if(transition.negativeState != null)
                 {
+                    _enemyBrain.GetState().GetComponent<AIAction>().OnStateLeave();
                     _enemyBrain.ChangeState(transition.negativeState);
+                    _enemyBrain.GetState().GetComponent<AIAction>().OnStateEnter();
                     return;
                 }
             }

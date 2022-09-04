@@ -16,4 +16,8 @@ public abstract class AIAction : MonoBehaviour
     }
 
     public abstract void TakeAction();
+
+    public abstract void OnStateEnter();
+
+    public abstract void OnStateLeave();
 }

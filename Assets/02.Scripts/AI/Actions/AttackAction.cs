@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class AttackAction : AIAction
 {
+    public override void OnStateEnter()
+    {
+        Debug.Log("Enter the AttackState");
+    }
+
+    public override void OnStateLeave()
+    {
+        Debug.Log("Leave the AttackState");
+    }
+
     public override void TakeAction()
     {
         _aiActionData.arrived = false;

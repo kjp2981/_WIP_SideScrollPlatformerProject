@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using NaughtyAttributes;
 using static Define;
 
 public class EnemyAIBrain : MonoBehaviour, IAgentInput
 {
-    [field : SerializeField]
+    [field : SerializeField, Foldout("Movement Event")]
     public UnityEvent<float> OnMovementInput { get; set; }
-    [field: SerializeField]
+    [field: SerializeField, Foldout("Movement Event")]
     public UnityEvent OnJumpInput { get; set; }
-    [field: SerializeField]
+    [field: SerializeField, Foldout("Attack Event")]
     public UnityEvent<bool> OnMeleeAttack { get; set; }
-    [field: SerializeField]
+    [field: SerializeField, Foldout("Attack Event")]
     public UnityEvent<bool> OnRangeAttack { get; set; }
 
     public UnityEvent<float> OnLook;
@@ -54,6 +55,11 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     public void ChangeState(AIState state)
     {
         _currentState = state; //상태 변경
+    }
+
+    public AIState GetState()
+    {
+        return _currentState;
     }
 
     protected virtual void Update()
