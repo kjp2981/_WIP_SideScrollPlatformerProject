@@ -22,6 +22,7 @@ public class AgentAnimation : MonoBehaviour
     private readonly int hashIsWeak = Animator.StringToHash("isWeak");
     private readonly int hashHit = Animator.StringToHash("Hit");
     private readonly int hashDie = Animator.StringToHash("Die");
+    private readonly int hashDash = Animator.StringToHash("Dash");
 
     private void Start()
     {
@@ -51,6 +52,11 @@ public class AgentAnimation : MonoBehaviour
     public void MovementAnim(float value)
     {
         animator.SetBool(hashIsMove, value != 0);
+    }
+
+    public void DashAnimation(bool isDash)
+    {
+        animator.SetBool(hashDash, isDash);
     }
 
     public void JumpUp()
