@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
 
-public class Player : MonoBehaviour, IHittable, IKnockback
+public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 {
     [SerializeField]
     private StatusDataSO status;
@@ -35,6 +35,13 @@ public class Player : MonoBehaviour, IHittable, IKnockback
     public bool Death => death;
     #endregion
 
+    private AgentMovement movement;
+
+    private void Awake()
+    {
+        movement = GetComponent<AgentMovement>();
+    }
+
     private void Start()
     {
         HP = status.hp;
@@ -44,31 +51,38 @@ public class Player : MonoBehaviour, IHittable, IKnockback
     {
         if (death == true) return;
 
-        HP -= damage;
-
-        if (HP <= 0)
+        if (movement.IsDash == true)
         {
-            death = true;
-            OnDie?.Invoke(); // 여기에 사맘 이펙ㅌ 넣기 예) 스탑, 슬로우 모션, 쉐이크
+            Avoid();
         }
         else
         {
-            // 피 이펙트 넣기
-            OnHit?.Invoke();
+            HP -= damage;
 
-            if (transform.position == damageFactor.transform.position)
+            if (HP <= 0)
             {
-                Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
+                death = true;
+                OnDie?.Invoke(); // 여기에 사맘 이펙ㅌ 넣기 예) 스탑, 슬로우 모션, 쉐이크
             }
             else
             {
-                if (transform.position.x < damageFactor.transform.position.x)
+                // 피 이펙트 넣기
+                OnHit?.Invoke();
+
+                if (transform.position == damageFactor.transform.position)
                 {
-                    Knockback(-1, 0.7f, 0.3f);
+                    Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
                 }
                 else
                 {
-                    Knockback(1, 0.7f, 0.3f);
+                    if (transform.position.x < damageFactor.transform.position.x)
+                    {
+                        Knockback(-1, 0.7f, 0.3f);
+                    }
+                    else
+                    {
+                        Knockback(1, 0.7f, 0.3f);
+                    }
                 }
             }
         }
@@ -77,5 +91,11 @@ public class Player : MonoBehaviour, IHittable, IKnockback
     public void Knockback(float direction, float power, float duration)
     {
         transform.DOMoveX(direction * power, duration).SetRelative();
+    }
+
+    public void Avoid()
+    {
+        // 회피가 되면 이펙트(붕괴3rd에 Q.T.E 같은거?) 보여주고 다음 공격 추가피해주기 이건 할 수 있으면 하기
+        // 최선 사항 : 회피 클자 뛰우기, 카메라 쉐이크 같은 이펙트?
     }
 }

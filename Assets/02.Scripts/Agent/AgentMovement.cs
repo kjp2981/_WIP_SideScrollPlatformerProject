@@ -26,6 +26,7 @@ public class AgentMovement : MonoBehaviour
     private Vector2 moveDirection = Vector2.zero;
 
     private bool isDash = false;
+    public bool IsDash => isDash;
 
     private void Awake()
     {
