@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Jump
   - Movement
+  - VCam
   layers:
   - Default
   - TransparentFX
