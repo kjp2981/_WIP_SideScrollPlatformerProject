@@ -964,6 +964,9 @@ MonoBehaviour:
   <OnJumpInput>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
+  <OnDashInput>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
   <OnMeleeAttack>k__BackingField:
     m_PersistentCalls:
       m_Calls:
@@ -1031,7 +1034,12 @@ MonoBehaviour:
   OnJumpAnimation:
     m_PersistentCalls:
       m_Calls: []
+  OnDashAnimation:
+    m_PersistentCalls:
+      m_Calls: []
   jumpPower: 1
+  dashPower: 2
+  dashTime: 0.5
 --- !u!114 &5604776280674166137
 MonoBehaviour:
   m_ObjectHideFlags: 0

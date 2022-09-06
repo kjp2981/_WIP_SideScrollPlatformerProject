@@ -97,5 +97,6 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     {
         // 회피가 되면 이펙트(붕괴3rd에 Q.T.E 같은거?) 보여주고 다음 공격 추가피해주기 이건 할 수 있으면 하기
         // 최선 사항 : 회피 클자 뛰우기, 카메라 쉐이크 같은 이펙트?
+        Debug.Log("Avoid!");
     }
 }

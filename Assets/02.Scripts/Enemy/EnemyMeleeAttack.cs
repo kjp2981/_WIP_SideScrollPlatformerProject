@@ -9,6 +9,8 @@ public class EnemyMeleeAttack : AgentAttack
     [SerializeField]
     private float attackDelay = 1f;
     private float attackTimer = 0f;
+    [SerializeField]
+    private float damageDalay = 0.3f;
 
     public UnityEvent AttackAnim;
 
@@ -56,7 +58,7 @@ public class EnemyMeleeAttack : AgentAttack
 
     private IEnumerator Attack()
     {
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(damageDalay);
         if (ray.collider != null)
         {
             if (ray.collider.CompareTag("Player"))

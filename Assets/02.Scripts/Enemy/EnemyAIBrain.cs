@@ -29,13 +29,13 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     private AIActionData _aiActionData;
     public AIActionData AIActionData => _aiActionData;
 
-    private Transform initTransform;
-    public Transform InitTransform => initTransform;
+    private Vector2 initPos;
+    public Vector2 InitPos => initPos;
 
     private void OnEnable()
     {
-        initTransform = this.transform;
-        Debug.Log(initTransform.position);
+        initPos = this.transform.position;
+        Debug.Log(initPos);
     }
 
     protected virtual void Awake()
