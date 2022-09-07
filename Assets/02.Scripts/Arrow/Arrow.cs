@@ -12,11 +12,6 @@ public class Arrow : PoolableMono
     [SerializeField]
     private float destroyDelay;
 
-    private void Awake()
-    {
-        player = Define.Player.GetComponent<Player>();
-    }
-
     private void OnEnable()
     {
         StartCoroutine(DestroyArrow(destroyDelay));
@@ -51,6 +46,10 @@ public class Arrow : PoolableMono
         if (collision.CompareTag("Enemy"))
         {
             IHittable hit = collision.GetComponent<IHittable>();
+            if(player == null)
+            {
+                player = Define.Player.GetComponent<Player>();
+            }
             hit.Damage(player.Status.rangeAttack, this.gameObject);
         }
 

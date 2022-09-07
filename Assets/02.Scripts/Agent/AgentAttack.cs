@@ -77,7 +77,6 @@ public class AgentAttack : MonoBehaviour
             {
                 if (ray.collider.CompareTag("Enemy"))
                 {
-                    Debug.Log($"근거리 강공격, combo : {mwCombo}");
                     IHittable hit = ray.collider.GetComponent<IHittable>();
                     hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject);
                 }
@@ -150,7 +149,7 @@ public class AgentAttack : MonoBehaviour
         {
             mscomboTimer += Time.deltaTime;
 
-            if (mscomboTimer >= comboTime || msCombo >= 3)
+            if (mscomboTimer >= comboTime + 2 || msCombo >= 3)
             {
                 msCombo = 0;
                 mscomboTimer = 0f;

@@ -28,9 +28,16 @@ public class AgentMovement : MonoBehaviour
     private bool isDash = false;
     public bool IsDash => isDash;
 
+    private SpriteRenderer spriteRenderer;
+    private float dashEffectTimer = 0f;
+    [SerializeField, Tooltip("대쉬 이펙트가 생성되는 주기")]
+    private float dashEffectTime = 0.3f;
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = this.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
+        dashEffectTimer = dashEffectTime;
     }
 
     public void Jump()
@@ -99,6 +106,18 @@ public class AgentMovement : MonoBehaviour
 
         Vector2 velocity = rigid.velocity;
         velocity.x = moveDirection.x * currentVelocity * (isDash ? dashPower : 1);
+        if(isDash == true)
+        {
+            if(dashEffectTime >= dashEffectTimer)
+            {
+                DashEffect dash = PoolManager.Instance.Pop("DashEffect") as DashEffect;
+                dash.transform.position = this.transform.position;
+                dash.SpriteRenderer.sprite = spriteRenderer.sprite;
+                dash.SpriteRenderer.flipX = this.spriteRenderer.transform.localScale.x == 1 ? false : true;
+                dashEffectTimer = 0f;
+            }
+            dashEffectTimer += Time.deltaTime;
+        }
         rigid.velocity = velocity;
 
         if (IsGround() == true)

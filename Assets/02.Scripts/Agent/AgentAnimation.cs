@@ -77,7 +77,7 @@ public class AgentAnimation : MonoBehaviour
     {
         OnAttackUncomplete?.Invoke();
         animator.SetFloat(hashIsWeak, isWeak == true ? 1 : 0);
-        animator.SetFloat(hashMeleeCnt, agentAttack.MWCombo);
+        animator.SetFloat(hashMeleeCnt, isWeak == true ? agentAttack.MWCombo : agentAttack.MSCombo);
         animator.SetTrigger(hashIsMeleeAttack);
     }
 

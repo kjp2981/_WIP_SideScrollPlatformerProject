@@ -61,7 +61,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
         {
             if (isAttack == false)
             {
-                Movement();
+                Movement(Input.GetAxisRaw("Horizontal"));
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     Jump();
@@ -70,6 +70,10 @@ public class AgentInput : MonoBehaviour, IAgentInput
                 {
                     Dash();
                 }
+            }
+            else if(isAttack == true)
+            {
+                Movement(0);
             }
 
             AttackInput();
@@ -86,6 +90,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
         {
             if (Input.GetMouseButtonDown(0))
             {
+                Movement(0);
                 if (isAttack == false)
                     isAttack = true;
             }
@@ -117,6 +122,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
         {
             if (Input.GetMouseButtonDown(1))
             {
+                
                 if (isAttack == false)
                     isAttack = true;
             }
@@ -150,9 +156,9 @@ public class AgentInput : MonoBehaviour, IAgentInput
         isAttack = false;
     }
 
-    public void Movement()
+    public void Movement(float value)
     {
-        OnMovementInput?.Invoke(Input.GetAxisRaw("Horizontal"));
+        OnMovementInput?.Invoke(value);
     }
 
     public void Jump()
