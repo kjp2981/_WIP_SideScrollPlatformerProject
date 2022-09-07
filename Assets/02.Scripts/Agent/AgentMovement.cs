@@ -100,15 +100,11 @@ public class AgentMovement : MonoBehaviour
         rigid.velocity = pos;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        OnVelocityChange?.Invoke(moveDirection.x);
-
-        Vector2 velocity = rigid.velocity;
-        velocity.x = moveDirection.x * currentVelocity * (isDash ? dashPower : 1);
-        if(isDash == true)
+        if (isDash == true)
         {
-            if(dashEffectTime >= dashEffectTimer)
+            if (dashEffectTime >= dashEffectTimer)
             {
                 DashEffect dash = PoolManager.Instance.Pop("DashEffect") as DashEffect;
                 dash.transform.position = this.transform.position;
@@ -118,6 +114,15 @@ public class AgentMovement : MonoBehaviour
             }
             dashEffectTimer += Time.deltaTime;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        OnVelocityChange?.Invoke(moveDirection.x);
+
+        Vector2 velocity = rigid.velocity;
+        velocity.x = moveDirection.x * currentVelocity * (isDash ? dashPower : 1);
+        
         rigid.velocity = velocity;
 
         if (IsGround() == true)
