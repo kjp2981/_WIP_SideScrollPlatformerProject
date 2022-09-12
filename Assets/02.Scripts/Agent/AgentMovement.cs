@@ -28,10 +28,15 @@ public class AgentMovement : MonoBehaviour
     private bool isDash = false;
     public bool IsDash => isDash;
 
+    #region 무지설 플링 대쉬 이펙트의 흔적
     private SpriteRenderer spriteRenderer;
     private float dashEffectTimer = 0f;
     [SerializeField, Tooltip("대쉬 이펙트가 생성되는 주기")]
     private float dashEffectTime = 0.3f;
+    #endregion
+
+    [SerializeField]
+    private ParticleSystem dashParticle;
 
     private void Awake()
     {
@@ -67,6 +72,7 @@ public class AgentMovement : MonoBehaviour
     private IEnumerator DashCoroutine(float time)
     {
         isDash = true;
+        dashParticle.gameObject.SetActive(true);
         OnDashAnimation?.Invoke(isDash);
         yield return new WaitForSeconds(time);
         isDash = false;
@@ -102,18 +108,19 @@ public class AgentMovement : MonoBehaviour
 
     private void Update()
     {
-        if (isDash == true)
-        {
-            if (dashEffectTime >= dashEffectTimer)
-            {
-                DashEffect dash = PoolManager.Instance.Pop("DashEffect") as DashEffect;
-                dash.transform.position = this.transform.position;
-                dash.SpriteRenderer.sprite = spriteRenderer.sprite;
-                dash.SpriteRenderer.flipX = this.spriteRenderer.transform.localScale.x == 1 ? false : true;
-                dashEffectTimer = 0f;
-            }
-            dashEffectTimer += Time.deltaTime;
-        }
+        // 무지성 풀링으로 만든 대쉬 파티클. 근데 이게 뭔가 저 예쁨
+        //if (isDash == true)
+        //{
+        //    if (dashEffectTime >= dashEffectTimer)
+        //    {
+        //        DashEffect dash = PoolManager.Instance.Pop("DashEffect") as DashEffect;
+        //        dash.transform.position = this.transform.position;
+        //        dash.SpriteRenderer.sprite = spriteRenderer.sprite;
+        //        dash.SpriteRenderer.flipX = this.spriteRenderer.transform.localScale.x == 1 ? false : true;
+        //        dashEffectTimer = 0f;
+        //    }
+        //    dashEffectTimer += Time.deltaTime;
+        //}
     }
 
     private void FixedUpdate()
