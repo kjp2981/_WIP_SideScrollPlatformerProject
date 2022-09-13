@@ -8,6 +8,7 @@ public class SkillDataSO : ScriptableObject
 {
     public new string name;
     public Sprite image;
+    [ResizableTextArea]
     public string description;
 
     public int coolTime;
