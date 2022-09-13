@@ -28,6 +28,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
             hp = value;
             // hp 변경후 처리하기
             // hp바 변경 등.
+            UIManager.Instance.PlayerOutHpbar(HP, status.hp);
         }
     }
 
