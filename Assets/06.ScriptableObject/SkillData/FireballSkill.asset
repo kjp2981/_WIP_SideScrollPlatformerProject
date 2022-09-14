@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84b91df15bbcb0742adbdad2423a40f1, type: 3}
-  m_Name: TestSkill
+  m_Name: FireballSkill
   m_EditorClassIdentifier: 
-  name: Test
-  image: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  description: this is test skill.
+  name: Fireball
+  image: {fileID: 21300000, guid: 10acfaec10dfdb74d87b416198f62f8e, type: 3}
+  description: "\uD30C\uC774\uC5B4\uBCFC\uC744 \uC3DC\uB2E4"
   coolTime: 3

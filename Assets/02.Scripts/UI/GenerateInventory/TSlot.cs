@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public abstract class TSlot<T> : PoolableMono where T : ScriptableObject
 {
+    private int id;
+    public int Id
+    {
+        get => id;
+        set => id = value;
+    }
+
     [SerializeField] protected Image image;
 
     protected T list;

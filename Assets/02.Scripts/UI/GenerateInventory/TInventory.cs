@@ -15,6 +15,11 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
     protected void OnValidate()
     {
         slots = slotParent.GetComponentsInChildren<TSlot<T>>();
+
+        for(int i = 0; i < slots.Length; i++)
+        {
+            slots[i].Id = i;
+        }
     }
 
     protected void Awake()
@@ -48,5 +53,10 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
         {
             Debug.LogWarning("슬롯이 가득 차 있습니다.");
         }
+    }
+
+    public SkillDataSO GetIndexOfSkillData(int index)
+    {
+        
     }
 }

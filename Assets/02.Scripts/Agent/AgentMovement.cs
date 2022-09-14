@@ -75,7 +75,7 @@ public class AgentMovement : MonoBehaviour
         dashParticle.gameObject.SetActive(true);
         if(currentVelocity < 0.1f)
         {
-            rigid.AddForce((spriteRenderer.transform.localScale.x == 1 ? Vector2.left : Vector2.right) * dashPower * 2, ForceMode2D.Impulse);
+            rigid.AddForce((spriteRenderer.transform.localScale.x == 1 ? Vector2.left : Vector2.right) * dashPower * 1.5f, ForceMode2D.Impulse);
         }
         OnDashAnimation?.Invoke(isDash);
         yield return new WaitForSeconds(time);
