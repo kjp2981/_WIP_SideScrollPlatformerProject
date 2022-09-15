@@ -38,13 +38,14 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // 인벤토리 뛰우기
             if (Time.timeScale != 0)
             {
+                UIManager.Instance.SetInventoryActive(true);
                 TimeManager.Instance.ModifyTimeScale(0, 0);
             }
             else
             {
+                UIManager.Instance.SetInventoryActive(false);
                 TimeManager.Instance.ModifyTimeScale(1, 0);
             }
         }

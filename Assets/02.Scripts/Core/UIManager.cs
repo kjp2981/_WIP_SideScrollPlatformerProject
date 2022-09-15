@@ -133,4 +133,9 @@ public class UIManager : MonoBehaviour
     {
         skillCollection.SetSkill(skillInventory.SelectSlot, isLeft);
     }
+
+    public void SetInventoryActive(bool isActive)
+    {
+        skillInventory.gameObject.SetActive(isActive);
+    }
 }

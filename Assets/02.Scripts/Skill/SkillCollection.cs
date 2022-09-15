@@ -67,6 +67,8 @@ public class SkillCollection : MonoBehaviour
 
     public void SetSkill(SkillDataSO skill, bool isLeft)
     {
+        if (skill == null) return;
+
         if(isLeft == true)
         {
             if(rightSkill == skill)
