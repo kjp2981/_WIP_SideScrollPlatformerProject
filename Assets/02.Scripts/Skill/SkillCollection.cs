@@ -98,6 +98,8 @@ public class SkillCollection : MonoBehaviour
     #region 스킬 사용 함수들
     public void UseSkill(SkillDataSO skill)
     {
+        if (Time.timeScale == 0) return;
+
         if (skill != null)
         {
             this.GetType().GetMethod(skill.name).Invoke(this, null);
@@ -106,6 +108,8 @@ public class SkillCollection : MonoBehaviour
 
     public void UseLeftSkill()
     {
+        if (Time.timeScale == 0) return;
+
         if (leftSkill != null && leftSkillCoolTime <= 0)
         {
             UseSkill(leftSkill);
@@ -115,6 +119,8 @@ public class SkillCollection : MonoBehaviour
 
     public void UseRightSkill()
     {
+        if (Time.timeScale == 0) return;
+
         if (rightSkill != null && rightSkillCoolTime <= 0)
         {
             UseSkill(rightSkill);

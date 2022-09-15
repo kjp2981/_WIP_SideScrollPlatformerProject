@@ -33,4 +33,20 @@ public class GameManager : MonoBehaviour
             PoolManager.Instance.CreatePool(pair.prefab, pair.poolCnt);
         }
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // 인벤토리 뛰우기
+            if (Time.timeScale != 0)
+            {
+                TimeManager.Instance.ModifyTimeScale(0, 0);
+            }
+            else
+            {
+                TimeManager.Instance.ModifyTimeScale(1, 0);
+            }
+        }
+    }
 }

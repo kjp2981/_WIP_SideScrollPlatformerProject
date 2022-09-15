@@ -57,6 +57,8 @@ public class AgentInput : MonoBehaviour, IAgentInput
 
     private void Update()
     {
+        if (Time.timeScale == 0) return;
+
         if (player.Death == false)
         {
             if (isAttack == false)
