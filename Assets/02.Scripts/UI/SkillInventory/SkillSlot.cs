@@ -19,4 +19,12 @@ public class SkillSlot : TSlot<SkillDataSO>
     {
         image.color = new Color(1, 1, 1, 0);
     }
+
+    public override void OnClickEvent()
+    {
+        //SkillDataSO data = parentInventory.GetIndexOfData(Id);
+        SkillDataSO data = List;
+        UIManager.Instance.SkillDescriptionPanel(data);
+        parentInventory.SelectSlot = data;
+    }
 }

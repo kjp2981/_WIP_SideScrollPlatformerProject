@@ -12,6 +12,13 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
     [SerializeField]
     protected TSlot<T>[] slots;
 
+    protected T selectSlot;
+    public T SelectSlot
+    {
+        get => selectSlot;
+        set => selectSlot = value;
+    }
+
     protected void OnValidate()
     {
         slots = slotParent.GetComponentsInChildren<TSlot<T>>();
@@ -55,8 +62,9 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
         }
     }
 
-    public SkillDataSO GetIndexOfSkillData(int index)
+    public T GetIndexOfData(int index)
     {
-        
+        T data = tList[index];
+        return data;
     }
 }

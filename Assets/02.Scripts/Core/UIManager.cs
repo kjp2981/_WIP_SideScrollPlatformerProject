@@ -9,24 +9,39 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance = null;
 
+    #region HP bar
     [SerializeField, Foldout("HPbar")]
     private GameObject playerOutHpbar;
     [SerializeField, Foldout("HPbar")]
     private GameObject playerInHpbar;
+    #endregion
 
+    #region CoolTImeImage
     [SerializeField, Foldout("CoolTimeImage")]
     private Image leftCoolTimeImage;
     [SerializeField, Foldout("CoolTimeImage")]
     private Image rightCoolTimeImage;
+    #endregion
 
-    [SerializeField]
+    #region Skill Panel
+    [SerializeField, Foldout("Skill Panel")]
     private GameObject skillDescriptionPanel;
+    [SerializeField, Foldout("Skill Panel")]
+    private Sprite defaultImage;
 
     private Image skillImage;
     private Text skillName;
     private Text skillDescription;
+    #endregion
+
+    #region Skill UI
+    [SerializeField, Foldout("Skill Image")]
+    private Image leftSkill, rightSkill;
+    #endregion
 
     private SkillCollection skillCollection;
+    [SerializeField]
+    private TInventory<SkillDataSO> skillInventory;
 
     private void Awake()
     {
@@ -44,6 +59,9 @@ public class UIManager : MonoBehaviour
         skillImage = skillDescriptionPanel.transform.Find("SkillImage").GetComponent<Image>();
         skillName = skillDescriptionPanel.transform.Find("SkillName").GetComponent<Text>();
         skillDescription = skillDescriptionPanel.transform.Find("Description").GetComponent<Text>();
+
+        UpdateSkillImage(true);
+        UpdateSkillImage(false);
     }
 
     #region 플레이어 HP바
@@ -86,9 +104,33 @@ public class UIManager : MonoBehaviour
     #region 스킬 설명 띄우기
     public void SkillDescriptionPanel(SkillDataSO skill)
     {
-        skillImage.sprite = skill.image;
-        skillName.text = skill.name;
-        skillDescription.text = skill.description;
+        if (skill != null)
+        {
+            skillImage.sprite = skill.image;
+            skillName.text = skill.name;
+            skillDescription.text = skill.description;
+        }
+        else
+        {
+            skillImage.sprite = defaultImage;
+            skillName.text = "";
+            skillDescription.text = "";
+        }
     }
     #endregion
+
+    #region 사용 스킬 UI 업데이트
+    public void UpdateSkillImage(bool isLeft)
+    {
+        if(isLeft == true)
+            leftSkill.sprite = skillCollection.LeftSkill.image;
+        else
+            rightSkill.sprite = skillCollection.RightSkill.image;
+    }
+    #endregion
+
+    public void SetSkill(bool isLeft)
+    {
+        skillCollection.SetSkill(skillInventory.SelectSlot, isLeft);
+    }
 }

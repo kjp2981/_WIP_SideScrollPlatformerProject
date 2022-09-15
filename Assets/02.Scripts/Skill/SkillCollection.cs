@@ -7,6 +7,7 @@ public class SkillCollection : MonoBehaviour
     // 에기에 스킬 함수를 작성한다
     // 유의사항 : 스킬 SO에 적은 이름을 함수이름으로 해야한다. GetMethod로 불러오기 때문!
 
+    #region Skill
     [SerializeField]
     private SkillDataSO leftSkill;
     public SkillDataSO LeftSkill
@@ -29,6 +30,7 @@ public class SkillCollection : MonoBehaviour
             rightSkillCoolTime = rightSkill.coolTime;
         }
     }
+    #endregion
 
     private float leftSkillCoolTime = 0f;
     public float LeftSkillCoolTime => leftSkillCoolTime;
@@ -60,6 +62,36 @@ public class SkillCollection : MonoBehaviour
         {
             rightSkillCoolTime -= Time.deltaTime;
             UIManager.Instance.SkillCoolTime();
+        }
+    }
+
+    public void SetSkill(SkillDataSO skill, bool isLeft)
+    {
+        if(isLeft == true)
+        {
+            if(rightSkill == skill)
+            {
+                rightSkill = leftSkill;
+                leftSkill = skill;
+                UIManager.Instance.UpdateSkillImage(true);
+                UIManager.Instance.UpdateSkillImage(false);
+                return;
+            }
+            leftSkill = skill;
+            UIManager.Instance.UpdateSkillImage(true);
+        }
+        else
+        {
+            if(leftSkill == skill)
+            {
+                leftSkill = rightSkill;
+                rightSkill = skill;
+                UIManager.Instance.UpdateSkillImage(false);
+                UIManager.Instance.UpdateSkillImage(true);
+                return;
+            }
+            rightSkill = skill;
+            UIManager.Instance.UpdateSkillImage(false);
         }
     }
 
@@ -96,6 +128,11 @@ public class SkillCollection : MonoBehaviour
     {
         Debug.Log("크앙! 무서운 파이어볼이 발사됬다.");
 
+    }
+
+    public void Slash()
+    {
+        Debug.Log("베기!");
     }
     #endregion
 }

@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public abstract class TSlot<T> : PoolableMono where T : ScriptableObject
 {
+    protected TInventory<T> parentInventory;
+
+    protected virtual void Awake()
+    {
+        //parentInventory = transform.parent.parent.GetComponent<TInventory<T>>();
+        parentInventory = transform.GetComponentInParent<TInventory<T>>();
+    }
+
     private int id;
     public int Id
     {
@@ -35,4 +43,6 @@ public abstract class TSlot<T> : PoolableMono where T : ScriptableObject
     protected abstract void IsValue();
 
     protected abstract void IsNotValue();
+
+    public abstract void OnClickEvent();
 }
