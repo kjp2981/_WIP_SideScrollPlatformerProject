@@ -7,6 +7,9 @@ public class SkillCollection : MonoBehaviour
     // 에기에 스킬 함수를 작성한다
     // 유의사항 : 스킬 SO에 적은 이름을 함수이름으로 해야한다. GetMethod로 불러오기 때문!
 
+    private AgentAttack playerAttack;
+    private SpriteRenderer playerSpriteRenderer;
+
     #region Skill
     [SerializeField]
     private SkillDataSO leftSkill;
@@ -39,6 +42,9 @@ public class SkillCollection : MonoBehaviour
 
     private void Awake()
     {
+        playerAttack = Define.Player.GetComponent<AgentAttack>();
+        playerSpriteRenderer = Define.Player.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
+
         if(leftSkill != null)
         {
             leftSkillCoolTime = leftSkill.coolTime;
@@ -136,8 +142,9 @@ public class SkillCollection : MonoBehaviour
     #region 스킬들
     public void Fireball()
     {
-        Debug.Log("크앙! 무서운 파이어볼이 발사됬다.");
-
+        Fireball fireball = PoolManager.Instance.Pop("Fireball") as Fireball;
+        fireball.IsLeft = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
+        fireball.transform.position = playerAttack.ArrowPos.position;
     }
 
     public void Slash()

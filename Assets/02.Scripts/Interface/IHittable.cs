@@ -10,5 +10,5 @@ public interface IHittable
 
     public UnityEvent OnHit { get; set; }
 
-    public void Damage(int damage, GameObject damageFactor);
+    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f);
 }

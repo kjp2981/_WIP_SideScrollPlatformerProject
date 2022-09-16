@@ -35,6 +35,7 @@ public class AgentAttack : MonoBehaviour
     protected LayerMask hitLayer;
     [SerializeField]
     private Transform arrowPos;
+    public Transform ArrowPos => arrowPos;
 
     private Player player;
 

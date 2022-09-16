@@ -8,7 +8,9 @@ public class Fireball : PoolableMono
     public bool IsLeft { get => isLeft; set => isLeft = value; }
 
     [SerializeField]
-    private int damage = 5;
+    private int fireballDamage = 5;
+    [SerializeField]
+    private int explosionDamage = 8;
     [SerializeField]
     private float flyPower = 2f;
     [SerializeField]
@@ -31,10 +33,33 @@ public class Fireball : PoolableMono
         transform.Translate((isLeft == true ? Vector3.left : Vector3.right) * flyPower * Time.deltaTime);
     }
 
+    private void Explosion()
+    {
+        StopAllCoroutines();
+
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, LayerMask.NameToLayer("Enemy"));
+        Slash explosion = PoolManager.Instance.Pop("Explosion") as Slash;
+        Quaternion rot = Quaternion.Euler(0, 0, Random.Range(0, 361));
+        explosion.transform.SetPositionAndRotation(this.transform.position, rot);
+
+        if (col.Length > 0)
+        {
+            foreach (Collider2D hitCol in col)
+            {
+                IHittable hit = hitCol.GetComponent<IHittable>();
+                if (hit == null) continue;
+                if (hitCol.CompareTag("Enemy") == false) continue;
+                hit.Damage(explosionDamage, this.gameObject, true, 0.7f);
+            }
+        }
+        PoolManager.Instance.Push(this);
+    }
+
     private IEnumerator FireballDestroy()
     {
         yield return new WaitForSeconds(flyTime);
-        PoolManager.Instance.Push(this);
+        //StartCoroutine(Explosion());
+        Explosion();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,7 +67,9 @@ public class Fireball : PoolableMono
         if (collision.CompareTag("Enemy"))
         {
             IHittable hit = collision.GetComponent<IHittable>();
-            hit.Damage(damage, Define.Player);
+            hit.Damage(fireballDamage, this.gameObject);
+            //StartCoroutine(Explosion());
+            Explosion();
         }
     }
 
