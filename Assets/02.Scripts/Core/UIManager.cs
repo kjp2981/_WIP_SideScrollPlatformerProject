@@ -120,12 +120,36 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region 사용 스킬 UI 업데이트
+    public void UpdateSkillImage()
+    {
+        UpdateSkillImage(true);
+        UpdateSkillImage(false);
+    }
+
     public void UpdateSkillImage(bool isLeft)
     {
-        if(isLeft == true)
-            leftSkill.sprite = skillCollection.LeftSkill.image;
+        if (isLeft == true)
+        {
+            if (skillCollection.LeftSkill == null)
+            {
+                leftSkill.sprite = defaultImage;
+            }
+            else
+            {
+                leftSkill.sprite = skillCollection.LeftSkill.image;
+            }
+        }
         else
-            rightSkill.sprite = skillCollection.RightSkill.image;
+        {
+            if (skillCollection.RightSkill == null)
+            {
+                rightSkill.sprite = defaultImage;
+            }
+            else
+            {
+                rightSkill.sprite = skillCollection.RightSkill.image;
+            }
+        }
     }
     #endregion
 

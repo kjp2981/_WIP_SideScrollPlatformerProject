@@ -75,12 +75,13 @@ public class SkillCollection : MonoBehaviour
             {
                 rightSkill = leftSkill;
                 leftSkill = skill;
-                UIManager.Instance.UpdateSkillImage(true);
-                UIManager.Instance.UpdateSkillImage(false);
+                UIManager.Instance.UpdateSkillImage();
+                UIManager.Instance.SkillCoolTime();
                 return;
             }
             leftSkill = skill;
             UIManager.Instance.UpdateSkillImage(true);
+            UIManager.Instance.SkillCoolTime();
         }
         else
         {
@@ -88,12 +89,13 @@ public class SkillCollection : MonoBehaviour
             {
                 leftSkill = rightSkill;
                 rightSkill = skill;
-                UIManager.Instance.UpdateSkillImage(false);
-                UIManager.Instance.UpdateSkillImage(true);
+                UIManager.Instance.UpdateSkillImage();
+                UIManager.Instance.SkillCoolTime();
                 return;
             }
             rightSkill = skill;
             UIManager.Instance.UpdateSkillImage(false);
+            UIManager.Instance.SkillCoolTime();
         }
     }
 
@@ -141,6 +143,11 @@ public class SkillCollection : MonoBehaviour
     public void Slash()
     {
         Debug.Log("베기!");
+    }
+
+    public void ArrowRain()
+    {
+        Debug.Log("화살비가 내려와~");
     }
     #endregion
 }

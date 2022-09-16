@@ -6,12 +6,12 @@ public class ChaseAction : AIAction
 {
     public override void OnStateEnter()
     {
-        Debug.Log("Enter the ChaseState");
+        
     }
 
     public override void OnStateLeave()
     {
-        Debug.Log("Leave the ChaseState");
+        
     }
 
     public override void TakeAction()

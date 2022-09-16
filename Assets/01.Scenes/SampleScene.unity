@@ -10522,7 +10522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftSkill: {fileID: 11400000, guid: 7adf95b80a4b2024388436445953b3fc, type: 2}
-  rightSkill: {fileID: 11400000, guid: 293e951220bf8ac4b845b3dfc93172a6, type: 2}
+  rightSkill: {fileID: 11400000, guid: 0c3fffad90f4f7743bb99246604c048e, type: 2}
 --- !u!4 &1279985311
 Transform:
   m_ObjectHideFlags: 0
