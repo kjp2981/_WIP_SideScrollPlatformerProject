@@ -18,26 +18,40 @@ public class Fireball : PoolableMono
     [SerializeField]
     private float explosionDistance = 1f;
 
+    private Vector3 direction = Vector3.left;
+    private SpriteRenderer spriteRenderer = null;
+    bool flipX = false;
+
     public override void Reset()
     {
         
     }
 
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void OnEnable()
     {
+        direction = isLeft == true ? Vector3.left : Vector3.right;
+        flipX = isLeft == true ? true : false;
+
+        spriteRenderer.flipX = flipX;
+
         StartCoroutine(FireballDestroy());
     }
 
     private void Update()
     {
-        transform.Translate((isLeft == true ? Vector3.left : Vector3.right) * flyPower * Time.deltaTime);
+        transform.Translate(direction * flyPower * Time.deltaTime);
     }
 
     private void Explosion()
     {
         StopAllCoroutines();
 
-        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, LayerMask.NameToLayer("Enemy"));
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, 1 << LayerMask.NameToLayer("Enemy"));
         Slash explosion = PoolManager.Instance.Pop("Explosion") as Slash;
         Quaternion rot = Quaternion.Euler(0, 0, Random.Range(0, 361));
         explosion.transform.SetPositionAndRotation(this.transform.position, rot);

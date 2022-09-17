@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using DG.Tweening;
+using NaughtyAttributes;
 
 public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 {
@@ -16,9 +17,10 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     public Vector2 HitPos { get; private set; }
 
     [field : SerializeField] public UnityEvent OnHit { get; set; }
-    public UnityEvent OnDie;
+    [field : SerializeField] public UnityEvent OnDie { get; set; }
 
     #region HP ±¸ÇöºÎ
+    [ShowNonSerializedField]
     private int hp;
     public int HP
     {

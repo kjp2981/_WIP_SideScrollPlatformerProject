@@ -8,6 +8,7 @@ public class SkillCollection : MonoBehaviour
     // 유의사항 : 스킬 SO에 적은 이름을 함수이름으로 해야한다. GetMethod로 불러오기 때문!
 
     private AgentAttack playerAttack;
+    private AgentAnimation playerAnimation;
     private SpriteRenderer playerSpriteRenderer;
 
     #region Skill
@@ -44,6 +45,7 @@ public class SkillCollection : MonoBehaviour
     {
         playerAttack = Define.Player.GetComponent<AgentAttack>();
         playerSpriteRenderer = Define.Player.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
+        playerAnimation = Define.Player.transform.Find("VisualSprite").GetComponent<AgentAnimation>();
 
         if(leftSkill != null)
         {
@@ -144,6 +146,7 @@ public class SkillCollection : MonoBehaviour
     {
         Fireball fireball = PoolManager.Instance.Pop("Fireball") as Fireball;
         fireball.IsLeft = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
+        //fireball.IsLeft = playerAnimation.IsFlipX ? true : false;
         fireball.transform.position = playerAttack.ArrowPos.position;
     }
 

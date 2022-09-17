@@ -12,6 +12,9 @@ public class AgentAnimation : MonoBehaviour
     private Animator animator;
     private AgentAttack agentAttack;
 
+    private bool isFlipX = false;
+    public bool IsFlipX => isFlipX;
+
     private readonly int hashIsMove = Animator.StringToHash("isMove");
     private readonly int hashJumpUp = Animator.StringToHash("jumpUp");
     private readonly int hashJumpDown = Animator.StringToHash("jumpDown");
@@ -39,6 +42,7 @@ public class AgentAnimation : MonoBehaviour
             Vector3 vec = transform.localScale;
             vec.x = -1;
             transform.localScale = vec;
+            isFlipX = true;
         }
         else if(value < 0)
         {
@@ -46,6 +50,7 @@ public class AgentAnimation : MonoBehaviour
             Vector3 vec = transform.localScale;
             vec.x = 1;
             transform.localScale = vec;
+            isFlipX = false;
         }
     }
 
