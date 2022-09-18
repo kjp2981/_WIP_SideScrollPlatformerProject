@@ -34,18 +34,24 @@ public class SkillCollection : MonoBehaviour
             rightSkillCoolTime = rightSkill.coolTime;
         }
     }
-    #endregion
+    
 
     private float leftSkillCoolTime = 0f;
     public float LeftSkillCoolTime => leftSkillCoolTime;
     private float rightSkillCoolTime = 0f;
     public float RightSkillCoolTime => rightSkillCoolTime;
+    #endregion
+
+    #region FireWall Parameta
+    [SerializeField]
+    private float spearDistance = 7f;
+    #endregion
 
     private void Awake()
     {
-        playerAttack = Define.Player.GetComponent<AgentAttack>();
-        playerSpriteRenderer = Define.Player.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
-        playerAnimation = Define.Player.transform.Find("VisualSprite").GetComponent<AgentAnimation>();
+        playerAttack = GetComponentInParent<AgentAttack>();
+        playerSpriteRenderer = transform.parent.Find("VisualSprite").GetComponent<SpriteRenderer>();
+        playerAnimation = transform.parent.Find("VisualSprite").GetComponent<AgentAnimation>();
 
         if(leftSkill != null)
         {
@@ -142,22 +148,110 @@ public class SkillCollection : MonoBehaviour
     #endregion
 
     #region 스킬들
+
+    /// <summary>
+    /// 파이어볼
+    /// </summary>
     public void Fireball()
     {
         Fireball fireball = PoolManager.Instance.Pop("Fireball") as Fireball;
-        fireball.IsLeft = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
+        //fireball.IsLeft = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
+        if(playerSpriteRenderer.transform.localScale.x == 1)
+        {
+            fireball.IsLeft = true;
+        }
+        else if(playerSpriteRenderer.transform.localScale.x == -1)
+        {
+            fireball.IsLeft = false;
+        }
         //fireball.IsLeft = playerAnimation.IsFlipX ? true : false;
         fireball.transform.position = playerAttack.ArrowPos.position;
     }
 
+    /// <summary>
+    /// 슬래쉬
+    /// </summary>
     public void Slash()
     {
-        Debug.Log("베기!");
+        
     }
 
+    /// <summary>
+    /// 화살비?(엠버 궁)
+    /// </summary>
     public void ArrowRain()
     {
-        Debug.Log("화살비가 내려와~");
+        
+    }
+
+    /// <summary>
+    /// 익스플로션(폭발)
+    /// </summary>
+    public void Explosion()
+    {
+
+    }
+
+    /// <summary>
+    /// 창 찍기
+    /// </summary>
+    public void Spear()
+    {
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, spearDistance, 1 << LayerMask.NameToLayer("Enemy"));
+        int num = 0;
+        if (col.Length > 0)
+        {
+            foreach (Collider2D hitCol in col)
+            {
+                if (num >= 3) break; // 새개만 할까 아니면 범위내에 들어온 적 모두 할까?
+
+                if (hitCol.CompareTag("Enemy") == false) continue;
+                IHittable hit = hitCol.GetComponent<IHittable>();
+                if (hit == null) continue;
+                Spear spaer = PoolManager.Instance.Pop("Spear") as Spear;
+                spaer.transform.position = hitCol.transform.position;
+                num++;
+            }
+        }
+        else
+        {
+            // 범위 내에 적이 없을 땐 어떻할까?
+        }
+    }
+
+    /// <summary>
+    /// 불 토네이도
+    /// </summary>
+    public void FireTornado()
+    {
+
+    }
+
+    /// <summary>
+    /// 불의 벽
+    /// </summary>
+    public void FireWall()
+    {
+        StartCoroutine(FireWallCoroutine());
+    }
+
+    private IEnumerator FireWallCoroutine()
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(0.1f);
+            FireWall fireWall = PoolManager.Instance.Pop("FireWall") as FireWall;
+            fireWall.transform.position = transform.position + new Vector3(i + 1, 0, 0);
+        }
     }
     #endregion
+
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, spearDistance);
+        Gizmos.color = Color.white;
+    }
+#endif
 }

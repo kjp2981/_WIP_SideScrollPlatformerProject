@@ -7,6 +7,7 @@ using NaughtyAttributes;
 public class SkillDataSO : ScriptableObject
 {
     public new string name;
+    [ShowAssetPreview(32, 32)]
     public Sprite image;
     [ResizableTextArea]
     public string description;

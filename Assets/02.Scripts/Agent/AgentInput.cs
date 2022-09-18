@@ -7,6 +7,7 @@ using NaughtyAttributes;
 
 public class AgentInput : MonoBehaviour, IAgentInput
 {
+    #region Input
     [field : SerializeField, Foldout("Movement Event")]
     public UnityEvent<float> OnMovementInput { get; set; }
     [field : SerializeField, Foldout("Movement Event")]
@@ -19,6 +20,12 @@ public class AgentInput : MonoBehaviour, IAgentInput
     public UnityEvent<bool> OnMeleeAttack { get; set; } // 근거리 공격
     [field : SerializeField, Foldout("Attack Event")]
     public UnityEvent<bool> OnRangeAttack { get; set; } // 원거리 공격
+
+    [Foldout("Skill Event")]
+    public UnityEvent OnLeftSkill;
+    [Foldout("Skill Event")]
+    public UnityEvent OnRightSkill;
+    #endregion
 
     #region 콤보 공격 체크 변수
     private float meleeAttackTimer = 0f;
@@ -71,6 +78,15 @@ public class AgentInput : MonoBehaviour, IAgentInput
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     Dash();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    OnLeftSkill?.Invoke();
+                }
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    OnRightSkill?.Invoke();
                 }
             }
             else if(isAttack == true)

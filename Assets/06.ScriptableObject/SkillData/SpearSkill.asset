@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b91df15bbcb0742adbdad2423a40f1, type: 3}
+  m_Name: SpearSkill
+  m_EditorClassIdentifier: 
+  name: Spear
+  image: {fileID: 21300000, guid: 66137fe40b8fe714089f1f862deedbcf, type: 3}
+  description: "\uC8FC\uC704\uC5D0 3\uBA85\uC5D0 \uC801\uC744 \uC704\uC5D0 \uCC3D\uC744
+    \uC18C\uD658\uD55C\uB2E4."
+  coolTime: 2

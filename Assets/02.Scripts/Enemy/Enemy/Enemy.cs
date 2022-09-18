@@ -52,7 +52,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         HP = status.hp;
     }
 
-    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f)
+    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, DamageEffect damageEffect = DamageEffect.Blood)
     {
         if (Death == true) return;
 
@@ -71,11 +71,19 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         {
             // 피격 이펙트 넣기 예) 피
 
-            #region 슬래쉬 이펙트
-            Slash slash = PoolManager.Instance.Pop("Slash") as Slash;
-            float rot = Random.Range(0, 360);
-            slash.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, rot));
-            #endregion
+            switch (damageEffect)
+            {
+                case DamageEffect.Slash:
+                    #region 슬래쉬 이펙트
+                    Slash slash = PoolManager.Instance.Pop("Slash") as Slash;
+                    float rot = Random.Range(0, 360);
+                    slash.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, rot));
+                    #endregion
+                    break;
+                case DamageEffect.Blood:
+                    break;
+            }
+            
 
             OnHit?.Invoke();
 

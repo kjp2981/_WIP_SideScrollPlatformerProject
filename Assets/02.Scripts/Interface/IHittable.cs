@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum DamageEffect
+{
+    Slash,
+    Blood
+}
+
 public interface IHittable
 {
     public bool IsEnemy { get; }
@@ -13,5 +19,5 @@ public interface IHittable
 
     public UnityEvent OnDie { get; set; }
 
-    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f);
+    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, DamageEffect damageEffect = DamageEffect.Blood);
 }
