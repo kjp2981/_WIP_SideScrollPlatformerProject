@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Slash
   image: {fileID: 21300000, guid: 1562f500efdab2946ad1791c70970062, type: 3}
-  description: "\uC55E\uC5D0 \uC801\uC744 \uBCA4\uB2E4"
+  description: "\uC55E\uC744 \uD5A5\uD574 \uAC80\uC744 \uD718\uB450\uB9B0\uB2E4"
   coolTime: 1

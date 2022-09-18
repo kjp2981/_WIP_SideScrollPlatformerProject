@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fireball
   image: {fileID: 21300000, guid: 10acfaec10dfdb74d87b416198f62f8e, type: 3}
-  description: "\uD30C\uC774\uC5B4\uBCFC\uC744 \uC3DC\uB2E4"
+  description: "\uBCF4\uACE0\uC788\uB294 \uBC29\uD5A5\uC73C\uB85C \uD30C\uC774\uC5B4\uBCFC\uC744
+    \uB0A0\uB9B0\uB2E4.\n\uC2DC\uAC04\uC774 \uC9C0\uB098\uACE0\uB098 \uC801\uC5D0
+    \uB9DE\uC73C\uBA74 \uD3ED\uBC1C\uD55C\uB2E4."
   coolTime: 3

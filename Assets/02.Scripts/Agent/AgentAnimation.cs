@@ -104,6 +104,11 @@ public class AgentAnimation : MonoBehaviour
         animator.SetTrigger(hashDie);
     }
 
+    public void DiePooling()
+    {
+        PoolManager.Instance.Push(this.transform.parent.GetComponent<PoolableMono>());
+    }
+
     public void StopAttack()
     {
         Define.Player.GetComponent<AgentInput>().StopAttack();

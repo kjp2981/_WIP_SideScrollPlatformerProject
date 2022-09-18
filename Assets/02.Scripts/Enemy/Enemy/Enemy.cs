@@ -36,6 +36,13 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     private bool death = false;
     #endregion
 
+    private EnemySpawner parentSpawner;
+    public EnemySpawner ParentSpawner
+    {
+        get => parentSpawner;
+        set => parentSpawner = value;
+    }
+
     private void Start()
     {
         HP = status.hp;
@@ -51,6 +58,8 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         if (HP <= 0)
         {
             OnDie?.Invoke();
+
+            parentSpawner.RemoveMonster(this.gameObject.name);
         }
         else
         {
