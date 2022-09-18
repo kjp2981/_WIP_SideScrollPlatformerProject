@@ -66,6 +66,7 @@ public class EnemySpawner : MonoBehaviour
         Vector3 offset = new Vector3(Random.Range(-1f, 1f), 0, 0);
         Enemy enemy = PoolManager.Instance.Pop(monsterName) as Enemy;
         enemy.transform.position = this.transform.position + offset;
+        enemy.ParentSpawner = this.GetComponent<EnemySpawner>();
 
         monsterDic[monsterName].Add(enemy.gameObject);
     }

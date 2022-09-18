@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public interface IHittable
 {
     public bool IsEnemy { get; }
+    public bool Death { get; }
     public Vector2 HitPos { get; }
 
     public UnityEvent OnHit { get; set; }

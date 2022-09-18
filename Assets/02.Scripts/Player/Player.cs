@@ -34,8 +34,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         }
     }
 
-    private bool death = false;
-    public bool Death => death;
+    public bool Death { get; private set; } = false;
     #endregion
 
     private AgentMovement movement;
@@ -52,7 +51,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f)
     {
-        if (death == true) return;
+        if (Death == true) return;
 
         if (movement.IsDash == true)
         {
@@ -64,7 +63,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 
             if (HP <= 0)
             {
-                death = true;
+                Death = true;
+
                 OnDie?.Invoke(); // 여기에 사맘 이펙ㅌ 넣기 예) 스탑, 슬로우 모션, 쉐이크
             }
             else

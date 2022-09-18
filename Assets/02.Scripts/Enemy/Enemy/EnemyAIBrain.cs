@@ -29,13 +29,9 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     private AIActionData _aiActionData;
     public AIActionData AIActionData => _aiActionData;
 
-    private Vector2 initPos;
-    public Vector2 InitPos => initPos;
-
     private void OnEnable()
     {
-        initPos = this.transform.position;
-        Debug.Log(initPos);
+
     }
 
     protected virtual void Awake()

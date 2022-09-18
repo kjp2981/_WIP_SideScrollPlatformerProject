@@ -11764,7 +11764,7 @@ MonoBehaviour:
     rate: 2
   - prefab: {fileID: 868300119663889946, guid: cdb342cbb068db442a2fc1755fb9b015, type: 3}
     rate: 5
-  totalMonsterCount: 5
+  totalMonsterCount: 1
   spawnTime: 2
 --- !u!4 &1659854238
 Transform:
@@ -11774,7 +11774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659854236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.17, z: 0}
+  m_LocalPosition: {x: -5.19, y: -2.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

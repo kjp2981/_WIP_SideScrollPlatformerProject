@@ -33,7 +33,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     [field : SerializeField] public UnityEvent OnHit { get; set; }
     [field : SerializeField] public UnityEvent OnDie { get; set; }
 
-    private bool death = false;
+    public bool Death { get; private set; } = false;
     #endregion
 
     private EnemySpawner parentSpawner;
@@ -43,20 +43,26 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         set => parentSpawner = value;
     }
 
-    private void Start()
+    private Material material;
+
+    private void Awake()
     {
+        material = transform.Find("VisualSprite").GetComponent<SpriteRenderer>().material;
+
         HP = status.hp;
     }
 
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f)
     {
-        if (death == true) return;
+        if (Death == true) return;
 
 
         HP -= damage;
 
         if (HP <= 0)
         {
+            Death = true;
+
             OnDie?.Invoke();
 
             parentSpawner.RemoveMonster(this.gameObject.name);
@@ -99,9 +105,17 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         transform.DOMoveX(direction * power, duration).SetRelative();
     }
 
+    public void DissolveEffect()
+    {
+        material.DOFloat(0f, "_Fade", 0.3f);
+    }
+
     public override void Reset()
     {
+        if(material == null)
+            material = transform.Find("VisualSprite").GetComponent<SpriteRenderer>().material;
+        material.SetFloat("_Fade", 1f);
         HP = status.hp;
-        death = false;
+        Death = false;
     }
 }
