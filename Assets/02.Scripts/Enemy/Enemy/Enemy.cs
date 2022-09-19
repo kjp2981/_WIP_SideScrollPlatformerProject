@@ -74,13 +74,15 @@ public class Enemy : PoolableMono, IHittable, IKnockback
             switch (damageEffect)
             {
                 case DamageEffect.Slash:
+                case DamageEffect.Blood:
                     #region 슬래쉬 이펙트
                     Slash slash = PoolManager.Instance.Pop("Slash") as Slash;
-                    float rot = Random.Range(0, 360);
-                    slash.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, rot));
+                    //float rot = Random.Range(0, 360);
+                    slash.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, -45));
                     #endregion
-                    break;
-                case DamageEffect.Blood:
+                    Slash blood = PoolManager.Instance.Pop("BloodEffect") as Slash;
+                    blood.transform.position = this.transform.position;
+                    blood.GetComponent<Animator>().SetFloat("Random", Random.Range(0, 9));
                     break;
             }
             

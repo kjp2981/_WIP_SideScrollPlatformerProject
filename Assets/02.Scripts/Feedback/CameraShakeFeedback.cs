@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using Cinemachine;
 using static Define;
 
@@ -51,6 +52,6 @@ public class CameraShakeFeedback : Feedback
             yield return null;
             time -= Time.deltaTime;
         }
-        noise.m_AmplitudeGain = 0;
+        CompletePrevFeedback();
     }
 }

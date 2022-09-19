@@ -46,6 +46,12 @@ public class SkillCollection : MonoBehaviour
     [SerializeField]
     private float spearDistance = 7f;
     #endregion
+    #region Explosion Parameta
+    [SerializeField]
+    private float explosionDistance = 4f;
+    [SerializeField]
+    private int explosionDamage = 50;
+    #endregion
 
     private void Awake()
     {
@@ -189,7 +195,14 @@ public class SkillCollection : MonoBehaviour
     /// </summary>
     public void Explosion()
     {
-
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, 1 << LayerMask.NameToLayer("Enemy"));
+        foreach(Collider2D hitCol in col)
+        {
+            if (hitCol.CompareTag("Enemy") == false) continue;
+            IHittable hit = hitCol.GetComponent<IHittable>();
+            if (hit == null) continue;
+            hit.Damage(explosionDamage, this.gameObject, false, 1f, DamageEffect.Blood);
+        }
     }
 
     /// <summary>
@@ -237,11 +250,13 @@ public class SkillCollection : MonoBehaviour
 
     private IEnumerator FireWallCoroutine()
     {
-        for(int i = 0; i < 5; i++)
+        Vector3 pos = transform.position;
+        bool offset = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
+        for (int i = 0; i < 5; i++)
         {
             yield return new WaitForSeconds(0.1f);
             FireWall fireWall = PoolManager.Instance.Pop("FireWall") as FireWall;
-            fireWall.transform.position = transform.position + new Vector3(i + 1, 0, 0);
+            fireWall.transform.position = pos + new Vector3(offset == true ? -i - 1 : i + 1, 0, 0);
         }
     }
     #endregion
