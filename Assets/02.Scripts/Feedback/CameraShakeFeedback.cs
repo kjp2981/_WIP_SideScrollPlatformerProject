@@ -33,7 +33,8 @@ public class CameraShakeFeedback : Feedback
     public override void CompletePrevFeedback()
     {
         StopAllCoroutines();
-        noise.m_AmplitudeGain = 0;
+        if(noise != null)
+            noise.m_AmplitudeGain = 0;
     }
 
     public override void CreateFeedback()
@@ -45,13 +46,17 @@ public class CameraShakeFeedback : Feedback
 
     private IEnumerator ShakeCoroutine()
     {
-        float time = _duration;
-        while(time > 0)
-        {
-            noise.m_AmplitudeGain = Mathf.Lerp(0, _amplitude, time / _duration);
-            yield return null;
-            time -= Time.deltaTime;
-        }
-        CompletePrevFeedback();
+        //float time = _duration;
+        //while(time > 0)
+        //{
+        //    noise.m_AmplitudeGain = Mathf.Lerp(0, _amplitude, time / _duration);
+        //    time -= Time.deltaTime;
+        //    yield return null;
+        //}
+        //CompletePrevFeedback();
+
+        noise.m_AmplitudeGain = _amplitude;
+        yield return new WaitForSeconds(0.3f);
+        noise.m_AmplitudeGain = 0;
     }
 }

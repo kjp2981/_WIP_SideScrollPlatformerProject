@@ -8,6 +8,7 @@ using static Define;
 public class AgentAttack : MonoBehaviour
 {
     protected SpriteRenderer spriteRenderer;
+    public UnityEvent OnAttackEffect = null;
 
     #region 콤보 체크 관련 변수
     protected int mwCombo = 0;
@@ -64,6 +65,7 @@ public class AgentAttack : MonoBehaviour
                 {
                     IHittable hit = ray.collider.GetComponent<IHittable>();
                     hit.Damage(player.Status.meleeAttack, this.gameObject, true, 0.2f, DamageEffect.Blood);
+                    OnAttackEffect?.Invoke();
                 }
             }
         }
@@ -178,6 +180,11 @@ public class AgentAttack : MonoBehaviour
                 rscomboTimer = 0f;
             }
         }
+    }
+
+    public void TimeDelay()
+    {
+        TimeManager.Instance.ModifyTimeScale(0.6f, 0, () => TimeManager.Instance.ModifyTimeScale(1f, 0.1f));
     }
 
 #if UNITY_EDITOR

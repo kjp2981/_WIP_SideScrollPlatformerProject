@@ -10465,6 +10465,8 @@ MonoBehaviour:
   leftSkill: {fileID: 11400000, guid: 7adf95b80a4b2024388436445953b3fc, type: 2}
   rightSkill: {fileID: 11400000, guid: 0c3fffad90f4f7743bb99246604c048e, type: 2}
   spearDistance: 7
+  explosionDistance: 4
+  explosionDamage: 50
 --- !u!4 &1279985311
 Transform:
   m_ObjectHideFlags: 0
@@ -11568,7 +11570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _amplitude: 0.2
-  _instansity: 1
+  _instansity: 2
   _duration: 0.2
 --- !u!4 &1562773737
 Transform:
@@ -11763,8 +11765,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnList:
-  - prefab: {fileID: 5604776280674166127, guid: dbc7bc87cbc0a42458089a1b4fb92e9e, type: 3}
-    rate: 2
   - prefab: {fileID: 868300119663889946, guid: cdb342cbb068db442a2fc1755fb9b015, type: 3}
     rate: 5
   totalMonsterCount: 5
@@ -13584,6 +13584,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d57933d5d74bb4288c404260d2404d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnAttackEffect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1562773735}
+        m_TargetAssemblyTypeName: FeedbackPlayer, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1997339205}
+        m_TargetAssemblyTypeName: AgentAttack, Assembly-CSharp
+        m_MethodName: TimeDelay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -13607,18 +13634,6 @@ MonoBehaviour:
       - m_Target: {fileID: 79372051}
         m_TargetAssemblyTypeName: AgentAnimation, Assembly-CSharp
         m_MethodName: HitAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1562773735}
-        m_TargetAssemblyTypeName: FeedbackPlayer, Assembly-CSharp
-        m_MethodName: PlayFeedback
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14196,3 +14211,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85a7cc082c7d694b8acd8e49200ea02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &430221210611805221
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223921, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 430221210941223924, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}
+      propertyPath: m_Name
+      value: BigExplosion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 092e6b642b502cc4c9ac0c34b4508feb, type: 3}

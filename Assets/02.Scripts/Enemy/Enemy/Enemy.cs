@@ -44,10 +44,12 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     }
 
     private Material material;
+    private Animator animator;
 
     private void Awake()
     {
         material = transform.Find("VisualSprite").GetComponent<SpriteRenderer>().material;
+        animator = transform.Find("VisualSprite").GetComponent<Animator>();
 
         HP = status.hp;
     }
@@ -76,9 +78,10 @@ public class Enemy : PoolableMono, IHittable, IKnockback
                 case DamageEffect.Slash:
                 case DamageEffect.Blood:
                     #region 슬래쉬 이펙트
-                    Slash slash = PoolManager.Instance.Pop("Slash") as Slash;
-                    //float rot = Random.Range(0, 360);
-                    slash.transform.SetPositionAndRotation(transform.position, Quaternion.Euler(0, 0, -45));
+                    Slash slash = PoolManager.Instance.Pop("HitEffect") as Slash;
+                    float rot = Random.Range(0, 360);
+                    Vector3 offset = Random.insideUnitCircle * 0.5f;
+                    slash.transform.SetPositionAndRotation(transform.position + offset, Quaternion.Euler(0, 0, rot));
                     #endregion
                     Slash blood = PoolManager.Instance.Pop("BloodEffect") as Slash;
                     blood.transform.position = this.transform.position;
@@ -117,7 +120,8 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
     public void DissolveEffect()
     {
-        material.DOFloat(0f, "_Fade", 0.3f);
+        Sequence seq = DOTween.Sequence();
+        material.DOFloat(0f, "_Fade", 0.5f).SetDelay(animator.GetCurrentAnimatorStateInfo(0).length).OnComplete(() => PoolManager.Instance.Push(this));
     }
 
     public override void Reset()
