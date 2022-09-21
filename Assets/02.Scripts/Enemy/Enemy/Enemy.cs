@@ -34,6 +34,8 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     [field : SerializeField] public UnityEvent OnDie { get; set; }
 
     public bool Death { get; private set; } = false;
+
+    private EnemyAIBrain _enemyAIBrain = null;
     #endregion
 
     private EnemySpawner parentSpawner;
@@ -50,6 +52,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
     {
         material = transform.Find("VisualSprite").GetComponent<SpriteRenderer>().material;
         animator = transform.Find("VisualSprite").GetComponent<Animator>();
+        _enemyAIBrain = GetComponent<EnemyAIBrain>();
 
         HP = status.hp;
     }
@@ -67,6 +70,8 @@ public class Enemy : PoolableMono, IHittable, IKnockback
 
             OnDie?.Invoke();
 
+            _enemyAIBrain.target = null;
+
             parentSpawner.RemoveMonster(this.gameObject.name);
         }
         else
@@ -83,9 +88,15 @@ public class Enemy : PoolableMono, IHittable, IKnockback
                     Vector3 offset = Random.insideUnitCircle * 0.5f;
                     slash.transform.SetPositionAndRotation(transform.position + offset, Quaternion.Euler(0, 0, rot));
                     #endregion
-                    Slash blood = PoolManager.Instance.Pop("BloodEffect") as Slash;
-                    blood.transform.position = this.transform.position;
-                    blood.GetComponent<Animator>().SetFloat("Random", Random.Range(0, 9));
+                    //Slash blood = PoolManager.Instance.Pop("BloodEffect") as Slash;
+                    //blood.transform.position = this.transform.position;
+                    //blood.GetComponent<Animator>().SetFloat("Random", Random.Range(0, 9));
+
+                    BloodParticle bloodParticle = PoolManager.Instance.Pop("BloodParticle") as BloodParticle;
+                    bloodParticle.transform.position = this.transform.position;
+                    float value = damageFactor.transform.position.x > this.transform.position.x ? -1 : 1;
+                    bloodParticle.SetLocalScaleX(value);
+                    //bloodParticle.SetSpeed(5);
                     break;
             }
             
@@ -131,5 +142,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         material.SetFloat("_Fade", 1f);
         HP = status.hp;
         Death = false;
+        _enemyAIBrain.target = Define.Player.transform;
     }
 }
