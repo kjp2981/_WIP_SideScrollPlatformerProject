@@ -5,6 +5,9 @@ using UnityEngine;
 public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
 {
     [SerializeField]
+    protected int listCount = 45;
+
+    [SerializeField]
     protected List<T> tList = new List<T>();
 
     [SerializeField]
@@ -31,11 +34,29 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
 
     protected void Awake()
     {
+        for (int i = 0; i < listCount; i++)
+        {
+            Slash slot = PoolManager.Instance.Pop("Slot") as Slash;
+            slot.transform.parent = slotParent;
+            slot.transform.position = Vector3.zero;
+            slot.GetComponentInChildren<TSlot<T>>().SetParentInventory(this);
+        }
+
         FreshSlot();
+    }
+
+    public void AddSlot()
+    {
+        slots = slotParent.GetComponentsInChildren<TSlot<T>>();
     }
 
     public void FreshSlot()
     {
+        if(slots.Length == 0)
+        {
+            AddSlot();
+        }
+
         int i = 0;
         for(; i < tList.Count && i < slots.Length; i++)
         {

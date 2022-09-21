@@ -9,8 +9,7 @@ public abstract class TSlot<T> : PoolableMono where T : ScriptableObject
 
     protected virtual void Awake()
     {
-        //parentInventory = transform.parent.parent.GetComponent<TInventory<T>>();
-        parentInventory = transform.GetComponentInParent<TInventory<T>>();
+        //parentInventory = transform.GetComponentInParent<TInventory<T>>();
     }
 
     private int id;
@@ -38,6 +37,11 @@ public abstract class TSlot<T> : PoolableMono where T : ScriptableObject
                 IsValue();
             }
         }
+    }
+
+    public void SetParentInventory(TInventory<T> inventory)
+    {
+        parentInventory = inventory;
     }
 
     protected abstract void IsValue();
