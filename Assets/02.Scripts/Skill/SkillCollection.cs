@@ -187,7 +187,8 @@ public class SkillCollection : MonoBehaviour
     /// </summary>
     public void ArrowRain()
     {
-        
+        Vector3 offset = playerSpriteRenderer.transform.localScale.x == 1 ? new Vector3(5, 0, 0) : new Vector3(-5, 0, 0);
+        // 풀링하기
     }
 
     /// <summary>
@@ -201,14 +202,14 @@ public class SkillCollection : MonoBehaviour
             if (hitCol.CompareTag("Enemy") == false) continue;
             IHittable hit = hitCol.GetComponent<IHittable>();
             if (hit == null) continue;
-            hit.Damage(explosionDamage, this.gameObject, false, 1f, DamageEffect.Blood);
+            hit.Damage(explosionDamage, this.gameObject, false, 1f, false);
         }
     }
 
     /// <summary>
     /// 창 찍기
     /// </summary>
-    public void Spear()
+    public void Spear() // 변경해야함
     {
         Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, spearDistance, 1 << LayerMask.NameToLayer("Enemy"));
         int num = 0;

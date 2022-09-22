@@ -57,10 +57,49 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         HP = status.hp;
     }
 
-    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, DamageEffect damageEffect = DamageEffect.Blood)
+    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)
     {
         if (Death == true) return;
 
+        Slash slash = PoolManager.Instance.Pop("HitEffect") as Slash;
+        float rot = Random.Range(0, 360);
+        Vector3 offset = Random.insideUnitCircle * 0.5f;
+        slash.transform.SetPositionAndRotation(transform.position + offset, Quaternion.Euler(0, 0, rot));
+
+        BloodParticle bloodParticle = PoolManager.Instance.Pop("BloodParticle") as BloodParticle;
+        bloodParticle.transform.position = this.transform.position;
+        float value = damageFactor.transform.position.x > this.transform.position.x ? -1 : 1;
+        bloodParticle.SetLocalScaleX(value);
+
+        DamageText text = PoolManager.Instance.Pop("DamageText") as DamageText;
+        text.transform.position = this.transform.position;
+        if (isCritical == true)
+        {
+            text.SetDamageText(damage, isCritical, 5);
+        }
+        else
+        {
+            text.SetDamageText(damage, isCritical, 4);
+        }
+
+        if (isKnockback == true)
+        {
+            if (transform.position == damageFactor.transform.position)
+            {
+                Knockback(Random.Range(0, 2) == 1 ? 1 : -1, knockPower, 0.3f);
+            }
+            else
+            {
+                if (transform.position.x < damageFactor.transform.position.x)
+                {
+                    Knockback(-1, knockPower, 0.3f);
+                }
+                else
+                {
+                    Knockback(1, knockPower, 0.3f);
+                }
+            }
+        }
 
         HP -= damage;
 
@@ -76,51 +115,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         }
         else
         {
-            // 피격 이펙트 넣기 예) 피
-
-            switch (damageEffect)
-            {
-                case DamageEffect.Slash:
-                case DamageEffect.Blood:
-                    #region 슬래쉬 이펙트
-                    Slash slash = PoolManager.Instance.Pop("HitEffect") as Slash;
-                    float rot = Random.Range(0, 360);
-                    Vector3 offset = Random.insideUnitCircle * 0.5f;
-                    slash.transform.SetPositionAndRotation(transform.position + offset, Quaternion.Euler(0, 0, rot));
-                    #endregion
-                    //Slash blood = PoolManager.Instance.Pop("BloodEffect") as Slash;
-                    //blood.transform.position = this.transform.position;
-                    //blood.GetComponent<Animator>().SetFloat("Random", Random.Range(0, 9));
-
-                    BloodParticle bloodParticle = PoolManager.Instance.Pop("BloodParticle") as BloodParticle;
-                    bloodParticle.transform.position = this.transform.position;
-                    float value = damageFactor.transform.position.x > this.transform.position.x ? -1 : 1;
-                    bloodParticle.SetLocalScaleX(value);
-                    //bloodParticle.SetSpeed(5);
-                    break;
-            }
-            
-
             OnHit?.Invoke();
-
-            if (isKnockback == true)
-            {
-                if (transform.position == damageFactor.transform.position)
-                {
-                    Knockback(Random.Range(0, 2) == 1 ? 1 : -1, knockPower, 0.3f);
-                }
-                else
-                {
-                    if (transform.position.x < damageFactor.transform.position.x)
-                    {
-                        Knockback(-1, knockPower, 0.3f);
-                    }
-                    else
-                    {
-                        Knockback(1, knockPower, 0.3f);
-                    }
-                }
-            }
         }
     }
 

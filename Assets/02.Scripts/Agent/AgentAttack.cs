@@ -64,7 +64,7 @@ public class AgentAttack : MonoBehaviour
                 if (ray.collider.CompareTag("Enemy"))
                 {
                     IHittable hit = ray.collider.GetComponent<IHittable>();
-                    hit.Damage(player.Status.meleeAttack, this.gameObject, true, 0.2f, DamageEffect.Blood);
+                    hit.Damage(player.Status.meleeAttack, this.gameObject, true, 0.2f, false);
                     OnAttackEffect?.Invoke();
                 }
             }
@@ -81,7 +81,7 @@ public class AgentAttack : MonoBehaviour
                 if (ray.collider.CompareTag("Enemy"))
                 {
                     IHittable hit = ray.collider.GetComponent<IHittable>();
-                    hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject, true, 0.5f, DamageEffect.Blood);
+                    hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject, true, 0.5f, false);
                 }
             }
         }

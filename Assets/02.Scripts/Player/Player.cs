@@ -49,7 +49,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         HP = status.hp;
     }
 
-    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, DamageEffect damageEffect = DamageEffect.Blood)
+    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)
     {
         if (Death == true) return;
 
@@ -70,13 +70,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
             else
             {
                 // 피 이펙트 넣기
-                switch (damageEffect)
-                {
-                    case DamageEffect.Slash:
-                        break;
-                    case DamageEffect.Blood:
-                        break;
-                }
+                
 
                 OnHit?.Invoke();
 

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PoolingListSO poolingList;
+
+    [SerializeField]
+    private CinemachineVirtualCamera playerVcam;
 
     void Awake()
     {
@@ -42,11 +46,13 @@ public class GameManager : MonoBehaviour
             {
                 UIManager.Instance.SetInventoryActive(true);
                 TimeManager.Instance.ModifyTimeScale(0, 0);
+                playerVcam.gameObject.SetActive(true);
             }
             else
             {
                 UIManager.Instance.SetInventoryActive(false);
                 TimeManager.Instance.ModifyTimeScale(1, 0);
+                playerVcam.gameObject.SetActive(false);
             }
         }
     }

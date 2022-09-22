@@ -19,5 +19,5 @@ public interface IHittable
 
     public UnityEvent OnDie { get; set; }
 
-    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, DamageEffect damageEffect = DamageEffect.Blood);
+    public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f,bool isCritlcal = false);
 }
