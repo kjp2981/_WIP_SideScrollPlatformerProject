@@ -1680,7 +1680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &944789208
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -7468,6 +7468,8 @@ MonoBehaviour:
   spearDistance: 7
   explosionDistance: 4
   explosionDamage: 50
+  slashRadius: 2
+  slashDamage: 5
 --- !u!4 &1279985311
 Transform:
   m_ObjectHideFlags: 0

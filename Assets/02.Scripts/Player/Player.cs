@@ -59,6 +59,25 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         }
         else
         {
+            if (isKnockback == true)
+            {
+                if (transform.position == damageFactor.transform.position)
+                {
+                    Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
+                }
+                else
+                {
+                    if (transform.position.x < damageFactor.transform.position.x)
+                    {
+                        Knockback(-1, 0.7f, 0.3f);
+                    }
+                    else
+                    {
+                        Knockback(1, 0.7f, 0.3f);
+                    }
+                }
+            }
+
             HP -= damage;
 
             if (HP <= 0)
@@ -74,24 +93,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 
                 OnHit?.Invoke();
 
-                if (isKnockback == true)
-                {
-                    if (transform.position == damageFactor.transform.position)
-                    {
-                        Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
-                    }
-                    else
-                    {
-                        if (transform.position.x < damageFactor.transform.position.x)
-                        {
-                            Knockback(-1, 0.7f, 0.3f);
-                        }
-                        else
-                        {
-                            Knockback(1, 0.7f, 0.3f);
-                        }
-                    }
-                }
+                
             }
         }
     }

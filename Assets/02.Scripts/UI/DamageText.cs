@@ -48,9 +48,9 @@ public class DamageText : PoolableMono
         //});
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(text.transform.DOMoveY(1, 0.3f).SetRelative());
-        seq.Join(text.DOFade(0, 0.3f));
-        seq.Join(text.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.3f));
+        seq.Append(text.transform.DOMoveY(1.5f, 0.5f).SetRelative());
+        seq.Join(text.transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.5f));
+        seq.Insert(0.3f, text.DOFade(0, 0.2f));
         seq.AppendCallback(() => PoolManager.Instance.Push(this));
     }
 }

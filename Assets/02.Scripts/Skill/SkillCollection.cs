@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class SkillCollection : MonoBehaviour
 {
@@ -43,14 +44,20 @@ public class SkillCollection : MonoBehaviour
     #endregion
 
     #region FireWall Parameta
-    [SerializeField]
+    [SerializeField, BoxGroup("FireWall Parameta")]
     private float spearDistance = 7f;
     #endregion
     #region Explosion Parameta
-    [SerializeField]
+    [SerializeField, BoxGroup("Explosion Parameta")]
     private float explosionDistance = 4f;
-    [SerializeField]
+    [SerializeField, BoxGroup("Explosion Parameta")]
     private int explosionDamage = 50;
+    #endregion
+    #region Slash Parameta
+    [SerializeField, BoxGroup("Slash Parameta")]
+    private float slashRadius;
+    [SerializeField, BoxGroup("Slash Parameta")]
+    private int slashDamage;
     #endregion
 
     private void Awake()
@@ -130,7 +137,7 @@ public class SkillCollection : MonoBehaviour
         }
     }
 
-    public void UseLeftSkill()
+    public void UseLeftSkill() // 이거 나중에 스킬 데미지랑 크리확률 같은거 매개변수로 넘겨져야한다.
     {
         if (Time.timeScale == 0) return;
 
@@ -166,7 +173,7 @@ public class SkillCollection : MonoBehaviour
         {
             fireball.IsLeft = true;
         }
-        else if(playerSpriteRenderer.transform.localScale.x == -1)
+        if(playerSpriteRenderer.transform.localScale.x == -1)
         {
             fireball.IsLeft = false;
         }
@@ -179,7 +186,16 @@ public class SkillCollection : MonoBehaviour
     /// </summary>
     public void Slash()
     {
-        
+        Slash slash = PoolManager.Instance.Pop("Slash360") as Slash;
+        slash.transform.position = this.transform.position;
+        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, slashRadius, 1 << LayerMask.NameToLayer("Enemy"));
+        foreach(Collider2D hitCol in hit)
+        {
+            if (!hitCol.CompareTag("Enemy")) continue;
+            IHittable hittable = hitCol.GetComponent<IHittable>();
+            if (hittable == null) continue;
+            hittable.Damage(slashDamage, this.transform.parent.gameObject, true, 0.4f);
+        }
     }
 
     /// <summary>
@@ -202,7 +218,7 @@ public class SkillCollection : MonoBehaviour
             if (hitCol.CompareTag("Enemy") == false) continue;
             IHittable hit = hitCol.GetComponent<IHittable>();
             if (hit == null) continue;
-            hit.Damage(explosionDamage, this.gameObject, false, 1f, false);
+            hit.Damage(explosionDamage, this.transform.parent.gameObject, false, 1f, false);
         }
     }
 
@@ -211,6 +227,12 @@ public class SkillCollection : MonoBehaviour
     /// </summary>
     public void Spear() // 변경해야함
     {
+        // 변경 후보
+        // 1. 3개의 유도 창
+        // 2. 상하좌우 대각선에서 유저 중심에서 밖으로 창을 찌르기
+        // 3. 플레이어가 바라보는 방향으러 찌르기
+        // 4. 대쉬하면서 뒤에 창 쫘롸락(종려 강공격)
+
         Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, spearDistance, 1 << LayerMask.NameToLayer("Enemy"));
         int num = 0;
         if (col.Length > 0)
@@ -267,6 +289,10 @@ public class SkillCollection : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, spearDistance);
+        Gizmos.color = Color.white;
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, slashRadius);
         Gizmos.color = Color.white;
     }
 #endif
