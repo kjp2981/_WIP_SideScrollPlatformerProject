@@ -22,6 +22,7 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     public UnityEvent<float> OnLook;
 
     [SerializeField] protected AIState _currentState;
+    private protected AIState _beforeState;
 
     public Transform target;
     public Transform basePosition = null;
@@ -62,12 +63,18 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
 
     public void ChangeState(AIState state)
     {
+        _beforeState = _currentState;
         _currentState = state; //상태 변경
     }
 
     public AIState GetState()
     {
         return _currentState;
+    }
+
+    public AIState GetBeforeState()
+    {
+        return _beforeState;
     }
 
     protected virtual void Update()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3082569875553626716}
   - component: {fileID: 4635665157942357692}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 4766592761762999568}
   - component: {fileID: 4766592761762999569}
   - component: {fileID: 1446363366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
