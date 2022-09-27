@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MushroomMovementData
   m_EditorClassIdentifier: 
   maxSpeed: 3
-  acceleration: 40
-  deAcceleration: 40
+  acceleration: 30
+  deAcceleration: 30

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class EM : PoolableMono
 {
@@ -17,15 +18,25 @@ public class EM : PoolableMono
     public override void Reset()
     {
         Vector3 scale = transform.localScale;
-        scale.x = 0;
+        scale.y = 0;
+        transform.localScale = scale;
     }
 
     private void OnEnable()
     {
-        Sequence seq = DOTween.Sequence(); // Y축으로 변경해야하나?
-        seq.Append(transform.DOScaleX(0.7f, 0.2f));
-        seq.Append(transform.DOScaleX(0.5f, 0.2f));
+
+
+    }
+
+    public void StartTween(Action action = null)
+    {
+        Sequence seq = DOTween.Sequence();
+
+        // Y Axis
+        seq.Append(transform.DOScaleY(0.7f, 0.2f));
+        seq.Append(transform.DOScaleY(0.5f, 0.2f));
         seq.AppendCallback(() => animator.Play("EM"));
+        seq.AppendCallback(() => action?.Invoke());
     }
 
     public void Pooling()
@@ -37,8 +48,10 @@ public class EM : PoolableMono
     {
         yield return new WaitForSeconds(0.5f);
         Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOScaleX(0.7f, 0.2f));
-        seq.Append(transform.DOScaleX(0, 0.2f));
+
+        // Y Axis
+        seq.Append(transform.DOScaleY(0.7f, 0.2f));
+        seq.Append(transform.DOScaleY(0, 0.2f));
         seq.AppendCallback(() => PoolManager.Instance.Push(this));
     }
 

@@ -23,8 +23,10 @@ public class EnemyMeleeAttack : AgentAttack
 
     public override void MeleeAttack(bool isWeak)
     {
-        offset = spriteRenderer.transform.localScale.x == -1 ? new Vector2(0.5f, 0) : new Vector2(-0.5f, 0);
-        ray = Physics2D.BoxCast(transform.position + offset, Vector2.one, 0f, Vector2.zero, 0f, hitLayer);
+        if (enemy.Death == true) return;
+
+        offset = spriteRenderer.transform.localScale.x == -1 ? new Vector2(attackRange.x * 0.5f, 0) : new Vector2(attackRange.x * 0.5f * -1, 0);
+        ray = Physics2D.BoxCast(transform.position + offset, attackRange, 0f, Vector2.zero, 0f, hitLayer);
 
         if (isWeak == true)
         {

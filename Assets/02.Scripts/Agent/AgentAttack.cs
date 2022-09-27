@@ -33,6 +33,8 @@ public class AgentAttack : MonoBehaviour
     protected RaycastHit2D ray;
     protected Vector3 offset = new Vector3(-0.5f, -0.5f);
     [SerializeField]
+    protected Vector2 attackRange = new Vector2(1, 1);
+    [SerializeField]
     protected LayerMask hitLayer;
     [SerializeField]
     private Transform arrowPos;
@@ -191,7 +193,7 @@ public class AgentAttack : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position + offset, Vector2.one);
+        Gizmos.DrawWireCube(transform.position + offset, attackRange);
         Gizmos.color = Color.white;
     }
 #endif

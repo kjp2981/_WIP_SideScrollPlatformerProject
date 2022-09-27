@@ -8376,7 +8376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659854238}
   - component: {fileID: 1659854237}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MonsterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -8397,7 +8397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnList:
   - prefab: {fileID: 868300119663889946, guid: cdb342cbb068db442a2fc1755fb9b015, type: 3}
-    rate: 5
+    rate: 0
+  - prefab: {fileID: 2214947677984625911, guid: e5faa78fa46af414cb708bff4364e0df, type: 3}
+    rate: 10
   totalMonsterCount: 5
   spawnTime: 2
 --- !u!4 &1659854238
@@ -8596,7 +8598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1991912038}
   - component: {fileID: 1991912039}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MovementCollider
   m_TagString: Movement
   m_Icon: {fileID: 0}
@@ -9067,6 +9069,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  attackRange: {x: 1, y: 1}
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -9151,7 +9154,7 @@ GameObject:
   - component: {fileID: 2064943769}
   - component: {fileID: 2064943768}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

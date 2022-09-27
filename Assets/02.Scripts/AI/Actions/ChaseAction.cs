@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class ChaseAction : AIAction
 {
+    EM em = null;
     public override void OnStateEnter()
     {
-        EM em = PoolManager.Instance.Pop("EM") as EM;
+        //if (em != null) return;
+
+        int chileCnt = this.transform.childCount;
+        if (chileCnt >= 3) return;
+        em = PoolManager.Instance.Pop("EM") as EM;
         Vector3 offset = _enemyBrain.target.transform.position.x < transform.position.x ? new Vector3(-0.5f, 0.5f, 0) : new Vector3(0.5f, 0.5f, 0);
         bool flip = _enemyBrain.target.transform.position.x < transform.position.x ? false : true;
         em.transform.position = transform.position + offset;
         em.transform.parent = this.transform;
         em.FlipX(flip);
+        //em.StartTween(() => em = null);
+        em.StartTween();
     }
 
     public override void OnStateLeave()

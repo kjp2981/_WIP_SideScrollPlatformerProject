@@ -27,8 +27,11 @@ public class Enemy : PoolableMono, IHittable, IKnockback
             hp = value;
             // hp 변경후 처리하기
             // hp바 변경 등.
+            _hpbar.SetHp((float)HP / status.hp);
         }
     }
+
+    private HPbar _hpbar;
 
     [field : SerializeField] public UnityEvent OnHit { get; set; }
     [field : SerializeField] public UnityEvent OnDie { get; set; }
@@ -53,6 +56,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         material = transform.Find("VisualSprite").GetComponent<SpriteRenderer>().material;
         animator = transform.Find("VisualSprite").GetComponent<Animator>();
         _enemyAIBrain = GetComponent<EnemyAIBrain>();
+        _hpbar = transform.Find("HPbar").GetComponent<HPbar>();
 
         HP = status.hp;
     }
