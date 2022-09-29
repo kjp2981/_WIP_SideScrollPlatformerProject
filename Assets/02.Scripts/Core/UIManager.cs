@@ -40,8 +40,12 @@ public class UIManager : MonoBehaviour
     #endregion
 
     private SkillCollection skillCollection;
-    [SerializeField]
+    #region Inventory
+    [SerializeField, Foldout("Inventory")]
+    private GameObject inventory;
+    [SerializeField, Foldout("Inventory")]
     private TInventory<SkillDataSO> skillInventory;
+    #endregion
 
     private void Awake()
     {
@@ -160,6 +164,6 @@ public class UIManager : MonoBehaviour
 
     public void SetInventoryActive(bool isActive)
     {
-        skillInventory.gameObject.SetActive(isActive);
+        inventory.SetActive(isActive);
     }
 }
