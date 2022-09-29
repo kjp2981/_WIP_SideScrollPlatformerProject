@@ -16,4 +16,5 @@ MonoBehaviour:
   meleeAttack: 8
   rangeAttack: 12
   defence: 6
-  critical: 20
+  criticalRate: 20
+  critlcalDamage: 1.5

@@ -32,7 +32,7 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
         }
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         for (int i = 0; i < listCount; i++)
         {

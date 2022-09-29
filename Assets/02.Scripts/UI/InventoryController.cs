@@ -40,6 +40,8 @@ public class InventoryController : MonoBehaviour
 
     public void NextPage()
     {
+        if (inventoryList.Count <= 1) return;
+
         SetActiveFalseCurrentPage();
         currentPage = (currentPage + 1) % inventoryList.Count;
         SetActiveTrueCurrentPage();
@@ -47,6 +49,8 @@ public class InventoryController : MonoBehaviour
 
     public void BeforePage()
     {
+        if (inventoryList.Count <= 1) return;
+
         SetActiveFalseCurrentPage();
         currentPage = (currentPage - 1 < 0 ? inventoryList.Count - 1 : currentPage - 1) % inventoryList.Count;
         SetActiveTrueCurrentPage();
