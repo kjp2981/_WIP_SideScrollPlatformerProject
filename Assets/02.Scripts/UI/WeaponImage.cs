@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WeaponImage : MonoBehaviour
 {
+
     [SerializeField]
     private Image itemImage;
     [SerializeField]

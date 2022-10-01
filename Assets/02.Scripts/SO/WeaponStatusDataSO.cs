@@ -23,6 +23,7 @@ public enum AbilityType
     CriticalDamage
 }
 
+[CreateAssetMenu(menuName = "SO/Agent/Weapon")]
 public class WeaponStatusDataSO : ScriptableObject
 {
     public new string name;

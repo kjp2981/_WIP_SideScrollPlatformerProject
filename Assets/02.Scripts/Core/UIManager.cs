@@ -34,6 +34,15 @@ public class UIManager : MonoBehaviour
     private Text skillDescription;
     #endregion
 
+    #region Weapon Panel
+    [SerializeField]
+    private GameObject weaponPanel;
+
+    private Image weaponImage;
+    private Text weaponName;
+    private Text weaponAbility;
+    #endregion
+
     #region Skill UI
     [SerializeField, Foldout("Skill Image")]
     private Image leftSkill, rightSkill;
