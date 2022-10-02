@@ -35,12 +35,15 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Weapon Panel
-    [SerializeField]
+    [SerializeField, Foldout("WeaponPanel")]
     private GameObject weaponPanel;
 
     private Image weaponImage;
     private Text weaponName;
     private Text weaponAbility;
+
+    [SerializeField, Foldout("WeaponPanel")]
+    private WeaponInfo weaponInfo;
     #endregion
 
     #region Skill UI
@@ -55,6 +58,8 @@ public class UIManager : MonoBehaviour
     [SerializeField, Foldout("Inventory")]
     private TInventory<SkillDataSO> skillInventory;
     #endregion
+
+    private Dictionary<AbilityType, string> abilityDic = new Dictionary<AbilityType, string>();
 
     private void Awake()
     {
@@ -73,8 +78,19 @@ public class UIManager : MonoBehaviour
         skillName = skillDescriptionPanel.transform.Find("SkillName").GetComponent<Text>();
         skillDescription = skillDescriptionPanel.transform.Find("Description").GetComponent<Text>();
 
-        UpdateSkillImage(true);
-        UpdateSkillImage(false);
+        weaponImage = weaponPanel.transform.Find("WeaponImage").GetComponent<Image>();
+        weaponName = weaponPanel.transform.Find("WeaponName").GetComponent<Text>();
+        weaponAbility = weaponPanel.transform.Find("Description").GetComponent<Text>();
+
+        UpdateSkillImage(isLeft: true);
+        UpdateSkillImage(isLeft: false);
+
+        abilityDic.Add(AbilityType.HP, "생명력");
+        abilityDic.Add(AbilityType.MeleeDamage, "근거리 공격력");
+        abilityDic.Add(AbilityType.RangeDamage, "원거리 공격력");
+        abilityDic.Add(AbilityType.Defence, "방어력");
+        abilityDic.Add(AbilityType.CriticalRate, "치명타 확률");
+        abilityDic.Add(AbilityType.CriticalDamage, "치명타 데미지");
     }
 
     #region 플레이어 HP바
@@ -175,4 +191,28 @@ public class UIManager : MonoBehaviour
     {
         inventory.SetActive(isActive);
     }
+
+    #region 장비 설명 띄우기
+    public void SetActiveWeaponDescriptionPanel(bool active)
+    {
+        weaponPanel.SetActive(active);
+    }
+
+    public void WeaponDescriptionPanel(WeaponStatusDataSO weapon)
+    {
+        if(weapon != null)
+        {
+            weaponImage.sprite = weapon.image;
+            weaponName.text = weapon.name;
+            weaponAbility.text = abilityDic[weapon.abilityType] + " x" + weapon.mutiplyValue;
+        }
+        else
+        {
+            weaponImage.color = new Color(1, 1, 1, 0.3f);
+            weaponImage.sprite = defaultImage;
+            weaponName.text = "";
+            weaponAbility.text = "";
+        }
+    }
+    #endregion
 }

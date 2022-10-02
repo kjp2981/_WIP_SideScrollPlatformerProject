@@ -10,9 +10,11 @@ public class WeaponImage : MonoBehaviour
     private Image itemImage;
     [SerializeField]
     private WeaponType type;
+    public WeaponType Type => type;
 
     public void ChangeItemImage(Sprite image)
     {
+        itemImage.color = Color.white;
         itemImage.sprite = image;
     }
 }

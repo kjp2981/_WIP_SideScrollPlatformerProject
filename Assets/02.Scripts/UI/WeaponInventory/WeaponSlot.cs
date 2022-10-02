@@ -50,5 +50,17 @@ public class WeaponSlot : TSlot<WeaponStatusDataSO>
     public override void OnClickEvent()
     {
         // Àåºñ ¼³¸í ¹ä¾÷Ã¢¶Ù¿ì±â
+        WeaponStatusDataSO data = List;
+        if(data != null)
+        {
+            UIManager.Instance.SetActiveWeaponDescriptionPanel(true);
+            UIManager.Instance.WeaponDescriptionPanel(data);
+            parentInventory.SelectSlot = data;
+        }
+        else
+        {
+            UIManager.Instance.WeaponDescriptionPanel(data);
+            parentInventory.SelectSlot = data;
+        }
     }
 }
