@@ -24,7 +24,18 @@ public class SkillSlot : TSlot<SkillDataSO>
     {
         //SkillDataSO data = parentInventory.GetIndexOfData(Id);
         SkillDataSO data = List;
-        UIManager.Instance.SkillDescriptionPanel(data);
-        parentInventory.SelectSlot = data;
+        if(data != null)
+        {
+            UIManager.Instance.SetActiveSkillPanel(true);
+            UIManager.Instance.SkillDescriptionPanel(data);
+            parentInventory.SelectSlot = data;
+        }
+        else
+        {
+            UIManager.Instance.SetActiveSkillPanel(false);
+            UIManager.Instance.SkillDescriptionPanel(data);
+            parentInventory.SelectSlot = data;
+        }
+        
     }
 }

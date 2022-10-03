@@ -49,6 +49,8 @@ public class UIManager : MonoBehaviour
     #region Skill UI
     [SerializeField, Foldout("Skill Image")]
     private Image leftSkill, rightSkill;
+    [SerializeField, Foldout("Skill Image")]
+    private Image leftUISkill, rightUISkill;
     #endregion
 
     private SkillCollection skillCollection;
@@ -131,6 +133,11 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region 스킬 설명 띄우기
+    public void SetActiveSkillPanel(bool active)
+    {
+        skillDescriptionPanel.SetActive(active);
+    }
+
     public void SkillDescriptionPanel(SkillDataSO skill)
     {
         if (skill != null)
@@ -202,6 +209,7 @@ public class UIManager : MonoBehaviour
     {
         if(weapon != null)
         {
+            weaponImage.color = new Color(1, 1, 1, 1);
             weaponImage.sprite = weapon.image;
             weaponName.text = weapon.name;
             weaponAbility.text = abilityDic[weapon.abilityType] + " x" + weapon.mutiplyValue;

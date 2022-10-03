@@ -19,6 +19,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     [field : SerializeField] public UnityEvent OnHit { get; set; }
     [field : SerializeField] public UnityEvent OnDie { get; set; }
 
+    public UnityEvent OnDash = null;
+
     #region HP 구현부
     [ShowNonSerializedField]
     private int hp;
@@ -28,8 +30,6 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         private set
         {
             hp = value;
-            // hp 변경후 처리하기
-            // hp바 변경 등.
             UIManager.Instance.PlayerOutHpbar(HP, status.hp);
         }
     }
@@ -108,6 +108,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         // 회피가 되면 이펙트(붕괴3rd에 Q.T.E 같은거?) 보여주고 다음 공격 추가피해주기 이건 할 수 있으면 하기
         // 최선 사항 : 회피 클자 뛰우기, 카메라 쉐이크 같은 이펙트?
         // 카메라 쉐이크, 타임 슬로우, 화려한 이펙트(되면)
+        OnDash?.Invoke();
         Debug.Log("Avoid!");
     }
 }
