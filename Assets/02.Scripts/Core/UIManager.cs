@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
     private Image weaponImage;
     private Text weaponName;
     private Text weaponAbility;
+    private GameObject weaponUseBtn;
+    private GameObject weaponUnUseBtn;
 
     [SerializeField, Foldout("WeaponPanel")]
     private WeaponInfo weaponInfo;
@@ -56,9 +58,11 @@ public class UIManager : MonoBehaviour
     private SkillCollection skillCollection;
     #region Inventory
     [SerializeField, Foldout("Inventory")]
-    private GameObject inventory;
+    private GameObject inventoryController;
     [SerializeField, Foldout("Inventory")]
-    private TInventory<SkillDataSO> skillInventory;
+    private SkillInventory skillInventory;
+    [SerializeField, Foldout("Inventory")]
+    private WeaponInventory weaponInventory;
     #endregion
 
     private Dictionary<AbilityType, string> abilityDic = new Dictionary<AbilityType, string>();
@@ -83,6 +87,8 @@ public class UIManager : MonoBehaviour
         weaponImage = weaponPanel.transform.Find("WeaponImage").GetComponent<Image>();
         weaponName = weaponPanel.transform.Find("WeaponName").GetComponent<Text>();
         weaponAbility = weaponPanel.transform.Find("Description").GetComponent<Text>();
+        weaponUseBtn = weaponPanel.transform.Find("UseButton").gameObject;
+        weaponUnUseBtn = weaponPanel.transform.Find("UnUseButton").gameObject;
 
         UpdateSkillImage(isLeft: true);
         UpdateSkillImage(isLeft: false);
@@ -174,6 +180,7 @@ public class UIManager : MonoBehaviour
             {
                 leftSkill.sprite = skillCollection.LeftSkill.image;
             }
+            leftUISkill.sprite = leftSkill.sprite;
         }
         else
         {
@@ -185,6 +192,7 @@ public class UIManager : MonoBehaviour
             {
                 rightSkill.sprite = skillCollection.RightSkill.image;
             }
+            rightUISkill.sprite = rightSkill.sprite;
         }
     }
     #endregion
@@ -196,7 +204,7 @@ public class UIManager : MonoBehaviour
 
     public void SetInventoryActive(bool isActive)
     {
-        inventory.SetActive(isActive);
+        inventoryController.SetActive(isActive);
     }
 
     #region 장비 설명 띄우기
@@ -213,6 +221,17 @@ public class UIManager : MonoBehaviour
             weaponImage.sprite = weapon.image;
             weaponName.text = weapon.name;
             weaponAbility.text = abilityDic[weapon.abilityType] + " x" + weapon.mutiplyValue;
+
+            if (weaponInventory.ReturnActiveSelectUseText() == true)
+            {
+                weaponUseBtn.SetActive(false);
+                weaponUnUseBtn.SetActive(true);
+            }
+            else
+            {
+                weaponUseBtn.SetActive(true);
+                weaponUnUseBtn.SetActive(false);
+            }
         }
         else
         {

@@ -12,9 +12,9 @@ public class WeaponImage : MonoBehaviour
     private WeaponType type;
     public WeaponType Type => type;
 
-    public void ChangeItemImage(Sprite image)
+    public void ChangeItemImage(Sprite image, Color color)
     {
-        itemImage.color = Color.white;
+        itemImage.color = color;
         itemImage.sprite = image;
     }
 }

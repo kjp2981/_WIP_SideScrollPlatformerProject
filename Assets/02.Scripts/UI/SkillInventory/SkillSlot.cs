@@ -22,19 +22,20 @@ public class SkillSlot : TSlot<SkillDataSO>
 
     public override void OnClickEvent()
     {
-        //SkillDataSO data = parentInventory.GetIndexOfData(Id);
         SkillDataSO data = List;
         if(data != null)
         {
             UIManager.Instance.SetActiveSkillPanel(true);
             UIManager.Instance.SkillDescriptionPanel(data);
             parentInventory.SelectSlot = data;
+            parentInventory.SelectID = Id;
         }
         else
         {
             UIManager.Instance.SetActiveSkillPanel(false);
             UIManager.Instance.SkillDescriptionPanel(data);
             parentInventory.SelectSlot = data;
+            parentInventory.SelectID = Id;
         }
         
     }

@@ -14,6 +14,7 @@ public class WeaponInfo : MonoBehaviour
 
     private List<WeaponImage> weaponImage = new List<WeaponImage>();
     private WeaponInventory inventory;
+    public WeaponInventory Inventory => inventory;
 
     private void Start()
     {
@@ -35,11 +36,10 @@ public class WeaponInfo : MonoBehaviour
     {
         if (type.HasValue == false)
         {
-
             foreach (WeaponImage wi in weaponImage)
             {
                 if(weaponDataDic.ContainsKey(wi.Type))
-                    wi.ChangeItemImage(weaponDataDic[wi.Type].image);
+                    wi.ChangeItemImage(weaponDataDic[wi.Type].image, Color.white);
             }
         }
         else
@@ -48,7 +48,10 @@ public class WeaponInfo : MonoBehaviour
             {
                 if (wi.Type == type)
                 {
-                    wi.ChangeItemImage(weaponDataDic[wi.Type].image);
+                    if (weaponDataDic[wi.Type] != null)
+                        wi.ChangeItemImage(weaponDataDic[wi.Type].image, Color.white);
+                    else
+                        wi.ChangeItemImage(spriteDic[wi.Type], new Color(1, 1, 1, 0.3f));
                     break;
                 }
                 else continue;

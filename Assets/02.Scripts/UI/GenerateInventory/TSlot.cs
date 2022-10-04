@@ -16,7 +16,12 @@ public abstract class TSlot<T> : PoolableMono where T : ScriptableObject
     public int Id
     {
         get => id;
-        set => id = value;
+        set
+        {
+            // update ui
+            id = value;
+            // update ui
+        }
     }
 
     [SerializeField] protected Image image;

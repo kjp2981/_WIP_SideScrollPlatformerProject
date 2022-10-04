@@ -11,7 +11,9 @@ public class WeaponInventory : TInventory<WeaponStatusDataSO>
             Slash slot = PoolManager.Instance.Pop("WeaponSlot") as Slash;
             slot.transform.parent = slotParent;
             slot.transform.position = Vector3.zero;
-            slot.GetComponentInChildren<TSlot<WeaponStatusDataSO>>().SetParentInventory(this);
+            WeaponSlot tslot = slot.GetComponentInChildren<WeaponSlot>();
+            tslot.Id = i;
+            tslot.SetParentInventory(this);
         }
 
         FreshSlot();
@@ -23,5 +25,17 @@ public class WeaponInventory : TInventory<WeaponStatusDataSO>
             slots[idx].List = tList[idx];
         else
             slots[idx].List = null;
+    }
+
+    public void SetActiveUseText(bool active)
+    {
+        WeaponSlot slot = slots[selectId] as WeaponSlot;
+        slot.IsUse = active;
+    }
+
+    public bool ReturnActiveSelectUseText()
+    {
+        WeaponSlot slot = slots[selectId] as WeaponSlot;
+        return slot.IsUse;
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
 {
@@ -14,12 +15,20 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
     protected Transform slotParent;
     [SerializeField]
     protected TSlot<T>[] slots;
+    public TSlot<T>[] Slots => slots;
 
     protected T selectSlot;
     public T SelectSlot
     {
         get => selectSlot;
         set => selectSlot = value;
+    }
+
+    protected int selectId;
+    public int SelectID
+    {
+        get => selectId;
+        set => selectId = value;
     }
 
     protected void OnValidate()
@@ -39,7 +48,9 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
             Slash slot = PoolManager.Instance.Pop("Slot") as Slash;
             slot.transform.parent = slotParent;
             slot.transform.position = Vector3.zero;
-            slot.GetComponentInChildren<TSlot<T>>().SetParentInventory(this);
+            TSlot<T> tslot = slot.GetComponentInChildren<TSlot<T>>();
+            tslot.Id = i;
+            tslot.SetParentInventory(this);
         }
 
         FreshSlot();
