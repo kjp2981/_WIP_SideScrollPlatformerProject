@@ -2304,7 +2304,7 @@ GameObject:
   - component: {fileID: 846470387}
   - component: {fileID: 846470388}
   m_Layer: 0
-  m_Name: CanvasCam
+  m_Name: InventoryCam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7748,6 +7748,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 293e951220bf8ac4b845b3dfc93172a6, type: 2}
   - {fileID: 11400000, guid: 7930c5d17f76e944a9c48afcf51bab3c, type: 2}
   - {fileID: 11400000, guid: 27def7d5361789148a6147cb5527057a, type: 2}
+  - {fileID: 11400000, guid: 4a1178b2f0e7a22438bf87d7a93544b7, type: 2}
   slotParent: {fileID: 487394690}
   slots: []
 --- !u!1 &957222242

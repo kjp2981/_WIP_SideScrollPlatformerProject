@@ -260,7 +260,11 @@ public class SkillCollection : MonoBehaviour
     /// </summary>
     public void FireTornado()
     {
-
+        Tornado tornado = PoolManager.Instance.Pop("FireTornado") as Tornado;
+        Vector3 pos = transform.position;
+        pos.x -= tornado.Offset;
+        pos.y += (tornado.transform.localScale.y * 0.5f);
+        tornado.transform.position = pos;
     }
 
     /// <summary>

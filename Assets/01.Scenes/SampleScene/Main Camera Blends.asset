@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: VCam
-    m_To: CanvasCam
+    m_To: InventoryCam
     m_Blend:
       m_Style: 5
       m_Time: 0.7
@@ -24,7 +24,7 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-  - m_From: CanvasCam
+  - m_From: InventoryCam
     m_To: VCam
     m_Blend:
       m_Style: 2

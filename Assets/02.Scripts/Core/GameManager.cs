@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera playerVcam;
 
-    private bool isTimeStop = false;
+    private bool isPopup = false;
 
     void Awake()
     {
@@ -46,36 +46,32 @@ public class GameManager : MonoBehaviour
         {
             if (Time.timeScale != 0)
             {
-                if (isTimeStop != true)
-                {
-                    isTimeStop = true;
-                    UIManager.Instance.SetInventoryActive(true);
-                    TimeManager.Instance.ModifyTimeScale(0, 0);
-                    playerVcam.gameObject.SetActive(true);
-                }
+                isPopup = true;
+                UIManager.Instance.SetInventoryActive(true);
+                TimeManager.Instance.ModifyTimeScale(0, 0);
+                playerVcam.gameObject.SetActive(true);
             }
             else
             {
-                isTimeStop = false;
+                isPopup = false;
                 UIManager.Instance.SetInventoryActive(false);
                 TimeManager.Instance.ModifyTimeScale(1, 0);
                 playerVcam.gameObject.SetActive(false);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
+
+        if (isPopup != true)
         {
-            if (Time.timeScale != 0)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (isTimeStop != true)
+                if (Time.timeScale != 0)
                 {
-                    isTimeStop = true;
                     TimeManager.Instance.ModifyTimeScale(0, 0);
                 }
-            }
-            else
-            {
-                isTimeStop = false;
-                TimeManager.Instance.ModifyTimeScale(1, 0);
+                else
+                {
+                    TimeManager.Instance.ModifyTimeScale(1, 0);
+                }
             }
         }
     }

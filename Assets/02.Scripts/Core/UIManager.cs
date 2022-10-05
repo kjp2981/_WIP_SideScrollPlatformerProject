@@ -222,10 +222,10 @@ public class UIManager : MonoBehaviour
             weaponName.text = weapon.name;
             weaponAbility.text = abilityDic[weapon.abilityType] + " x" + weapon.mutiplyValue;
 
-            if (weaponInventory.ReturnActiveSelectUseText() == true)
+            if (weaponInventory.ReturnActiveSelectUseText() == true)//만약 장착이 된 상태라면
             {
-                weaponUseBtn.SetActive(false);
-                weaponUnUseBtn.SetActive(true);
+                weaponUseBtn.SetActive(false); //장착버튼 끄고
+                weaponUnUseBtn.SetActive(true); //해제버튼 클릭
             }
             else
             {
