@@ -29,6 +29,9 @@ public class WeaponInventory : TInventory<WeaponStatusDataSO>
 
     public void SetActiveUseText(bool active)
     {
+        WeaponSlot beforeSlot = slots[beforeId] as WeaponSlot;
+        beforeSlot.IsUse = false;
+
         WeaponSlot slot = slots[selectId] as WeaponSlot;
         slot.IsUse = active;
     }

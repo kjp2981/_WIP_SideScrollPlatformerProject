@@ -53,17 +53,16 @@ public class WeaponSlot : TSlot<WeaponStatusDataSO>
         if(data != null)
         {
             UIManager.Instance.SetActiveWeaponDescriptionPanel(true);
-            UIManager.Instance.WeaponDescriptionPanel(data);
             parentInventory.SelectSlot = data;
-            //weaponInfo.Inventory.Slots[weaponInfo.Inventory.SelectID].is // 어기서 전 ID의 IsUse를 False로 바꾸어야한다.
             parentInventory.SelectID = Id;
+            UIManager.Instance.WeaponDescriptionPanel(data);
         }
         else
         {
             UIManager.Instance.SetActiveWeaponDescriptionPanel(false);
-            UIManager.Instance.WeaponDescriptionPanel(data);
             parentInventory.SelectSlot = data;
             parentInventory.SelectID = Id;
+            UIManager.Instance.WeaponDescriptionPanel(data);
         }
     }
 }

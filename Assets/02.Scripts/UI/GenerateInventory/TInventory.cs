@@ -17,18 +17,47 @@ public abstract class TInventory<T> : MonoBehaviour where T : ScriptableObject
     protected TSlot<T>[] slots;
     public TSlot<T>[] Slots => slots;
 
+    protected T beforeSlot;
+    public T BeforeSlot
+    {
+        get => beforeSlot;
+        set
+        {
+            beforeSlot = value;
+        }
+    }
+
     protected T selectSlot;
     public T SelectSlot
     {
         get => selectSlot;
-        set => selectSlot = value;
+        set
+        {
+            beforeSlot = selectSlot;
+            selectSlot = value;
+        }
+    }
+
+    protected int beforeId;
+
+    public int BeforeID
+    {
+        get => beforeId;
+        set
+        {
+            beforeId = value;
+        }
     }
 
     protected int selectId;
     public int SelectID
     {
         get => selectId;
-        set => selectId = value;
+        set
+        {
+            beforeId = selectId;
+            selectId = value;
+        }
     }
 
     protected void OnValidate()

@@ -229,8 +229,8 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                weaponUseBtn.SetActive(true);
                 weaponUnUseBtn.SetActive(false);
+                weaponUseBtn.SetActive(true);
             }
         }
         else
