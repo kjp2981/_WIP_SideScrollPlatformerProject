@@ -89,11 +89,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
             else
             {
                 // 피 이펙트 넣기
-                
-
                 OnHit?.Invoke();
-
-                
             }
         }
     }

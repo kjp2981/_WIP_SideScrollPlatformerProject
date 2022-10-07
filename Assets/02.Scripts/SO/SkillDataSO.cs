@@ -12,5 +12,5 @@ public class SkillDataSO : ScriptableObject
     [ResizableTextArea]
     public string description;
 
-    public int coolTime;
+    public float coolTime;
 }
