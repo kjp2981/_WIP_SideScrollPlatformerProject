@@ -46,3 +46,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 103296923
+    locked: 0
+  - name: Floor
+    uniqueID: 2799702661
+    locked: 0
+  - name: Agent
+    uniqueID: 1467487833
+    locked: 0
+  - name: Skill
+    uniqueID: 2597128543
+    locked: 0
+  - name: Hit
+    uniqueID: 2854383487
+    locked: 0
+  - name: Front
+    uniqueID: 1837007289
+    locked: 0

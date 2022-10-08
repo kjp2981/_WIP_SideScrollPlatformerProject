@@ -111,7 +111,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     public bool isCritical()
     {
         int critical = Random.Range(0, 100);
-        if (critical < status.criticalRate)
+        if (critical < status.criticalRate/*여기도 마찬가지로 치확*/)
             return true;
         else
             return false;
@@ -129,6 +129,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
             damage = status.rangeAttack;
         }
 
+        // 여기에 장비 착용시 얻는 공격력 등을 넣어야한다.
+
         if(isStrong == true)
         {
             damage = Mathf.CeilToInt(damage * 1.5f);
@@ -136,7 +138,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 
         if(isCritical == true)
         {
-            damage = Mathf.CeilToInt(damage * status.critlcalDamage);
+            damage = Mathf.CeilToInt(damage * status.critlcalDamage/*여기도 마친가지로 치피*/);
         }
 
         return damage;
