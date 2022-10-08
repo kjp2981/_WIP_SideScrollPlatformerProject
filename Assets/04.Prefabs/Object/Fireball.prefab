@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb897b1db079cb4cb38fbb37b41c56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireballDamage: 5
-  explosionDamage: 8
+  fireballDamageOffset: 2
+  explosionDamageOffset: 2
   flyPower: 7
   flyTime: 2
   explosionDistance: 1

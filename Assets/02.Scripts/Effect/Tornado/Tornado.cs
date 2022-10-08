@@ -7,12 +7,13 @@ using System;
 public class Tornado : PoolableMono
 {
     [SerializeField]
-    private int damage = 10;
-
+    private int damageOffset = 10;
+    [SerializeField]
     private float offset = 3f;
     public float Offset => offset;
 
     private Animator animator;
+    private Player player;
     
 
     public override void Reset()
@@ -23,6 +24,7 @@ public class Tornado : PoolableMono
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        player = Define.Player.GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -46,7 +48,8 @@ public class Tornado : PoolableMono
         if (collision.CompareTag("Enemy"))
         {
             IHittable hittable = collision.GetComponent<IHittable>();
-            hittable?.Damage(damage, this.gameObject, false, 0, false);
+            bool isCritical = player.isCritical();
+            hittable?.Damage(player.GetAttackDamage() * damageOffset, this.gameObject, true, 0.1f, isCritical);
         }
     }
 }

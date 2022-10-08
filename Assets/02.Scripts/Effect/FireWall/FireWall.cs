@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireWall : PoolableMono
 {
     private Animator animator;
+    private Player player;
 
     private readonly int hashFireEnd = Animator.StringToHash("FireEnd");
 
@@ -15,13 +16,14 @@ public class FireWall : PoolableMono
     [SerializeField]
     private float damageRate = 1f;
     [SerializeField]
-    private int damage = 2;
+    private int damageOffset = 2;
 
     private bool isFire = false;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
+        player = Define.Player.GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -44,7 +46,8 @@ public class FireWall : PoolableMono
                     if (hitCol.CompareTag("Enemy") == false) continue;
                     IHittable hit = hitCol.GetComponent<IHittable>();
                     if (hit == null) continue;
-                    hit.Damage(damage, this.gameObject);
+                    bool isCritical = player.isCritical();
+                    hit.Damage(player.GetAttackDamage(false, false, isCritical) * damageOffset, this.gameObject, true, 0.1f, isCritical);
                 }
                 timer = 0;
             }

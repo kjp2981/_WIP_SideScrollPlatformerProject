@@ -66,7 +66,8 @@ public class AgentAttack : MonoBehaviour
                 if (ray.collider.CompareTag("Enemy"))
                 {
                     IHittable hit = ray.collider.GetComponent<IHittable>();
-                    hit.Damage(player.Status.meleeAttack, this.gameObject, true, 0.2f, false);
+                    bool isCritical = player.isCritical();
+                    hit.Damage(player.GetAttackDamage(true, false, isCritical), this.gameObject, true, 0.2f, isCritical);
                     OnAttackEffect?.Invoke();
                 }
             }
@@ -83,7 +84,8 @@ public class AgentAttack : MonoBehaviour
                 if (ray.collider.CompareTag("Enemy"))
                 {
                     IHittable hit = ray.collider.GetComponent<IHittable>();
-                    hit.Damage(Mathf.CeilToInt(player.Status.meleeAttack * 1.5f), this.gameObject, true, 0.5f, false);
+                    bool isCritical = player.isCritical();
+                    hit.Damage(player.GetAttackDamage(true, true, isCritical), this.gameObject, true, 0.5f, isCritical);
                 }
             }
         }
@@ -98,7 +100,6 @@ public class AgentAttack : MonoBehaviour
             rsCombo = 0;
 
             ++rwCombo;
-            Debug.Log("원거리 약공격");
             // 애니메이션 후 화살 생성
             // 플레이어 방향에 맞춰 화살 뒤집기
             StartCoroutine(CreateArrow(0.2f, spriteRenderer.transform.localScale.x == 1 ? false : true));
@@ -110,7 +111,6 @@ public class AgentAttack : MonoBehaviour
             rwCombo = 0;
 
             ++rsCombo;
-            Debug.Log("원거리 강공격");
             // 애니메이션 후 화살 생성
             // 플레이어 방향에 맞춰 화살 뒤집기
             StartCoroutine(CreateArrow(0.5f, spriteRenderer.transform.localScale.x == 1 ? false : true));

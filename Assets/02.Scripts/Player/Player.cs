@@ -107,4 +107,38 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         OnDash?.Invoke();
         Debug.Log("Avoid!");
     }
+
+    public bool isCritical()
+    {
+        int critical = Random.Range(0, 100);
+        if (critical < status.criticalRate)
+            return true;
+        else
+            return false;
+    }
+
+    public int GetAttackDamage(bool isMelee = true, bool isStrong = false, bool isCritical = false)
+    {
+        int damage = 0;
+        if(isMelee == true)
+        {
+            damage = status.meleeAttack;
+        }
+        else
+        {
+            damage = status.rangeAttack;
+        }
+
+        if(isStrong == true)
+        {
+            damage = Mathf.CeilToInt(damage * 1.5f);
+        }
+
+        if(isCritical == true)
+        {
+            damage = Mathf.CeilToInt(damage * status.critlcalDamage);
+        }
+
+        return damage;
+    }
 }

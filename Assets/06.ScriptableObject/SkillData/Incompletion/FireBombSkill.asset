@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3355775bcb195d54094c205867773e44, type: 3}
-  m_Name: PlayerStatusData
+  m_Script: {fileID: 11500000, guid: 84b91df15bbcb0742adbdad2423a40f1, type: 3}
+  m_Name: FireBombSkill
   m_EditorClassIdentifier: 
-  hp: 100
-  meleeAttack: 10
-  rangeAttack: 15
-  defence: 10
-  criticalRate: 20
-  critlcalDamage: 2
+  name: FireBomb
+  image: {fileID: 21300000, guid: 6e97c84749c15d24f81d801ed4697fa4, type: 3}
+  description: "\uD30C\uC774\uC5B4!~~"
+  coolTime: 5

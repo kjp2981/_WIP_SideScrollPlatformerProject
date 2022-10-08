@@ -8,9 +8,9 @@ public class Fireball : PoolableMono
     public bool IsLeft { get => isLeft; set => isLeft = value; }
 
     [SerializeField]
-    private int fireballDamage = 5;
+    private int fireballDamageOffset = 5;
     [SerializeField]
-    private int explosionDamage = 8;
+    private int explosionDamageOffset = 8;
     [SerializeField]
     private float flyPower = 2f;
     [SerializeField]
@@ -22,6 +22,8 @@ public class Fireball : PoolableMono
     private SpriteRenderer spriteRenderer = null;
     bool flipX = false;
 
+    private Player player;
+
     public override void Reset()
     {
         
@@ -30,6 +32,7 @@ public class Fireball : PoolableMono
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        player = Define.Player.GetComponent<Player>();
     }
 
     private void OnEnable()
@@ -63,7 +66,8 @@ public class Fireball : PoolableMono
                 IHittable hit = hitCol.GetComponent<IHittable>();
                 if (hit == null) continue;
                 if (hitCol.CompareTag("Enemy") == false) continue;
-                hit.Damage(explosionDamage, this.gameObject, true, 0.7f);
+                bool isCritical = player.isCritical();
+                hit.Damage(player.GetAttackDamage(true, true, isCritical) * explosionDamageOffset, this.gameObject, true, 0.7f, isCritical);
             }
         }
         PoolManager.Instance.Push(this);
@@ -81,7 +85,8 @@ public class Fireball : PoolableMono
         if (collision.CompareTag("Enemy"))
         {
             IHittable hit = collision.GetComponent<IHittable>();
-            hit.Damage(fireballDamage, this.gameObject);
+            bool isCritical = player.isCritical();
+            hit.Damage(player.GetAttackDamage(false, false, isCritical) * fireballDamageOffset, this.gameObject, true, 0.3f, isCritical);
             //StartCoroutine(Explosion());
             Explosion();
         }

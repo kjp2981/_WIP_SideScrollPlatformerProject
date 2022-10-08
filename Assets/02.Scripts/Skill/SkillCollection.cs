@@ -8,6 +8,7 @@ public class SkillCollection : MonoBehaviour
     // 에기에 스킬 함수를 작성한다
     // 유의사항 : 스킬 SO에 적은 이름을 함수이름으로 해야한다. GetMethod로 불러오기 때문!
 
+    private Player player;
     private AgentAttack playerAttack;
     private AgentAnimation playerAnimation;
     private SpriteRenderer playerSpriteRenderer;
@@ -51,17 +52,18 @@ public class SkillCollection : MonoBehaviour
     [SerializeField, BoxGroup("Explosion Parameta")]
     private float explosionDistance = 4f;
     [SerializeField, BoxGroup("Explosion Parameta")]
-    private int explosionDamage = 50;
+    private int explosionDamageOffset = 50;
     #endregion
     #region Slash Parameta
     [SerializeField, BoxGroup("Slash Parameta")]
     private float slashRadius;
     [SerializeField, BoxGroup("Slash Parameta")]
-    private int slashDamage;
+    private int slashDamageOffset;
     #endregion
 
     private void Awake()
     {
+        player = GetComponentInParent<Player>();
         playerAttack = GetComponentInParent<AgentAttack>();
         playerSpriteRenderer = transform.parent.Find("VisualSprite").GetComponent<SpriteRenderer>();
         playerAnimation = transform.parent.Find("VisualSprite").GetComponent<AgentAnimation>();
@@ -194,7 +196,8 @@ public class SkillCollection : MonoBehaviour
             if (!hitCol.CompareTag("Enemy")) continue;
             IHittable hittable = hitCol.GetComponent<IHittable>();
             if (hittable == null) continue;
-            hittable.Damage(slashDamage, this.transform.parent.gameObject, true, 0.4f);
+            bool isCritical = player.isCritical();
+            hittable.Damage(player.GetAttackDamage(true, true, isCritical) * slashDamageOffset, this.transform.parent.gameObject, true, 0.4f, isCritical);
         }
     }
 
@@ -210,7 +213,7 @@ public class SkillCollection : MonoBehaviour
     /// <summary>
     /// 익스플로션(폭발)
     /// </summary>
-    public void Explosion()
+    public void Explosion() // 미완성
     {
         Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, 1 << LayerMask.NameToLayer("Enemy"));
         foreach(Collider2D hitCol in col)
@@ -218,7 +221,8 @@ public class SkillCollection : MonoBehaviour
             if (hitCol.CompareTag("Enemy") == false) continue;
             IHittable hit = hitCol.GetComponent<IHittable>();
             if (hit == null) continue;
-            hit.Damage(explosionDamage, this.transform.parent.gameObject, false, 1f, false);
+            bool isCritical = player.isCritical();
+            hit.Damage(player.GetAttackDamage(true, true, isCritical) * explosionDamageOffset, this.transform.parent.gameObject, true, 1f, isCritical);
         }
     }
 
@@ -263,7 +267,7 @@ public class SkillCollection : MonoBehaviour
         Tornado tornado = PoolManager.Instance.Pop("FireTornado") as Tornado;
         Vector3 pos = transform.position;
         pos.x -= tornado.Offset;
-        pos.y += (tornado.transform.localScale.y * 0.5f);
+        pos.y += .35f;
         tornado.transform.position = pos;
     }
 

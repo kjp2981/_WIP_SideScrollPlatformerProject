@@ -50,7 +50,8 @@ public class Arrow : PoolableMono
             {
                 player = Define.Player.GetComponent<Player>();
             }
-            hit.Damage(player.Status.rangeAttack, this.gameObject);
+            bool isCritical = player.isCritical();
+            hit.Damage(player.GetAttackDamage(false, false, isCritical), this.gameObject, true, 0.1f, isCritical);
         }
 
         if ((collision.CompareTag("Player") == false) && (collision.CompareTag("Jump") == false) && (collision.CompareTag("Movement") == false))

@@ -17,11 +17,6 @@ public abstract class Item : PoolableMono
         isArrival = false;
     }
 
-    protected virtual void OnEnable()
-    {
-        Scattering();
-    }
-
     public virtual void Scattering()
     {
         Vector3 offset = Random.insideUnitCircle * 2;
