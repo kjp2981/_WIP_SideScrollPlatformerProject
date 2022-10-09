@@ -101,6 +101,11 @@ public class UIManager : MonoBehaviour
         abilityDic.Add(AbilityType.CriticalDamage, "치명타 데미지");
     }
 
+    public void Start()
+    {
+        SetInventoryActive(false);
+    }
+
     #region 플레이어 HP바
     public void PlayerOutHpbar(int currentHp, int maxHp)
     {
@@ -220,7 +225,7 @@ public class UIManager : MonoBehaviour
             weaponImage.color = new Color(1, 1, 1, 1);
             weaponImage.sprite = weapon.image;
             weaponName.text = weapon.name;
-            weaponAbility.text = abilityDic[weapon.abilityType] + " x" + weapon.mutiplyValue;
+            weaponAbility.text = abilityDic[weapon.abilityType] + " +" + weapon.addValue;
 
             if (weaponInventory.ReturnActiveSelectUseText() == true)//만약 장착이 된 상태라면
             {

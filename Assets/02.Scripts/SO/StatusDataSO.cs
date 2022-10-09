@@ -13,5 +13,5 @@ public class StatusDataSO : ScriptableObject
     [Range(1, 100)]
     public int criticalRate; // 크리티컬 확률
     [Min(1f)]
-    public float critlcalDamage;
+    public float criticalDamage;
 }

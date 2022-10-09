@@ -34,5 +34,6 @@ public class WeaponStatusDataSO : ScriptableObject
 
     public WeaponType weaponType;
     public AbilityType abilityType;
-    public float mutiplyValue;
+    [Min(0)]
+    public int addValue;
 }

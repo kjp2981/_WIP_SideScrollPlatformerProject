@@ -5,10 +5,72 @@ using UnityEngine.Events;
 using DG.Tweening;
 using NaughtyAttributes;
 
+public class Status
+{
+    public int hp;
+    public int meleeAttack;
+    public int rangeAttack;
+    public int defence;
+    public int criticalRate;
+    public float criticalDamage;
+}
+
 public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 {
     [SerializeField]
     private StatusDataSO status;
+
+    public Status realStatus
+    {
+        get
+        {
+            Status status = new Status();
+            int hpOffset = 0;
+            int defenceOffset = 0;
+            int meleeAttackOffset = 0;
+            int rangeAttackOffset = 0;
+            int criticalRateOffset = 0;
+            int criticalDamageOffset = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                if (weaponInfo.WeaponDataDic.ContainsKey((WeaponType)i) == true)
+                {
+                    if (weaponInfo.WeaponDataDic[(WeaponType)i] != null)
+                    {
+                        switch (weaponInfo.WeaponDataDic[(WeaponType)i].abilityType)
+                        {
+                            case AbilityType.HP:
+                                hpOffset += weaponInfo.WeaponDataDic[(WeaponType)i].addValue;
+                                break;
+                            case AbilityType.MeleeDamage:
+                                meleeAttackOffset += weaponInfo.WeaponDataDic[(WeaponType)i].addValue;
+                                break;
+                            case AbilityType.RangeDamage:
+                                rangeAttackOffset += weaponInfo.WeaponDataDic[(WeaponType)i].addValue;
+                                break;
+                            case AbilityType.Defence:
+                                defenceOffset += weaponInfo.WeaponDataDic[(WeaponType)i].addValue;
+                                break;
+                            case AbilityType.CriticalRate:
+                                criticalRateOffset += weaponInfo.WeaponDataDic[(WeaponType)i].addValue;
+                                break;
+                            case AbilityType.CriticalDamage:
+                                criticalDamageOffset += weaponInfo.WeaponDataDic[(WeaponType)i].addValue;
+                                break;
+                        }
+                    }
+                }
+            }
+            status.hp = this.status.hp + hpOffset;
+            status.meleeAttack = this.status.meleeAttack + meleeAttackOffset;
+            status.rangeAttack = this.status.rangeAttack + rangeAttackOffset;
+            status.defence = this.status.defence + defenceOffset;
+            status.criticalRate = this.status.criticalRate + criticalRateOffset;
+            status.criticalDamage = this.status.criticalDamage + criticalDamageOffset;
+
+            return status;
+        }
+    }
 
     public StatusDataSO Status => status;
 
@@ -30,7 +92,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         private set
         {
             hp = value;
-            UIManager.Instance.PlayerOutHpbar(HP, status.hp);
+            UIManager.Instance.PlayerOutHpbar(HP, realStatus.hp);
         }
     }
 
@@ -38,6 +100,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     #endregion
 
     private AgentMovement movement;
+    [SerializeField]
+    private WeaponInfo weaponInfo;
 
     private void Awake()
     {
@@ -46,7 +110,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 
     private void Start()
     {
-        HP = status.hp;
+        HP = realStatus.hp;
     }
 
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)
@@ -111,7 +175,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     public bool isCritical()
     {
         int critical = Random.Range(0, 100);
-        if (critical < status.criticalRate/*여기도 마찬가지로 치확*/)
+        if (critical <= realStatus.criticalRate)
             return true;
         else
             return false;
@@ -122,14 +186,12 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         int damage = 0;
         if(isMelee == true)
         {
-            damage = status.meleeAttack;
+            damage = realStatus.meleeAttack;
         }
         else
         {
-            damage = status.rangeAttack;
+            damage = realStatus.rangeAttack;
         }
-
-        // 여기에 장비 착용시 얻는 공격력 등을 넣어야한다.
 
         if(isStrong == true)
         {
@@ -138,7 +200,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
 
         if(isCritical == true)
         {
-            damage = Mathf.CeilToInt(damage * status.critlcalDamage/*여기도 마친가지로 치피*/);
+            damage = Mathf.CeilToInt(damage * realStatus.criticalDamage);
         }
 
         return damage;

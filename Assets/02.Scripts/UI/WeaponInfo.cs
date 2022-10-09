@@ -6,6 +6,7 @@ using NaughtyAttributes;
 public class WeaponInfo : MonoBehaviour
 {
     private Dictionary<WeaponType, WeaponStatusDataSO> weaponDataDic = new Dictionary<WeaponType, WeaponStatusDataSO>();
+    public Dictionary<WeaponType, WeaponStatusDataSO> WeaponDataDic => weaponDataDic;
 
     [SerializeField, BoxGroup("Default Image")]
     private Sprite swordDefaultImage, spearDefaultImage, wandDefaultImage, bowDefaultImage, shieldDefaultImage, abilityDefaultImage;
@@ -74,6 +75,9 @@ public class WeaponInfo : MonoBehaviour
         {
             weaponDataDic.Add(weapon.weaponType, weapon);
         }
+
+        // 여기서 피통을 늘려준다던가하는 거를 해야한다.
+        
         UpdateImage(weapon.weaponType);
     }
 

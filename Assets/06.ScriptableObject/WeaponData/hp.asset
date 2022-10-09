@@ -17,4 +17,4 @@ MonoBehaviour:
   description: "\uD754\uD55C \uBAA9\uAC80\uC774\uB2E4."
   weaponType: 0
   abilityType: 0
-  mutiplyValue: 1.2
+  addValue: 100
