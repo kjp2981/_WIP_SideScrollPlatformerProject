@@ -38,4 +38,19 @@ public class ItemDropper : MonoBehaviour
 
         return null;
     }
+
+    public void GetItem(int count = 5)
+    {
+        Item item = null;
+        for(int i = 0; i < count; i++)
+        {
+            Item dropItem = ItemDrop();
+            if (dropItem != null)
+            {
+                item = PoolManager.Instance.Pop(dropItem.name) as Item;
+                item.transform.position = this.transform.position;
+                item.Scattering();
+            }
+        }
+    }
 }
