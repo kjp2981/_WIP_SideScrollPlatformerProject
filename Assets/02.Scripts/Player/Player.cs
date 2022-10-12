@@ -123,11 +123,37 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         }
         else
         {
+            int realDamage = damage - realStatus.defence < 0 ? 0 : damage - realStatus.defence;
+            DamageText text = PoolManager.Instance.Pop("DamageText") as DamageText;
+            text.transform.position = this.transform.position;
+            if (isCritical == true)
+            {
+                text.SetDamageText(realDamage, isCritical, 5);
+            }
+            else
+            {
+                text.SetDamageText(realDamage, isCritical, 4);
+            }
+            if (realDamage <= 0) return;
+            HP -= realDamage;
+
+            if (HP <= 0)
+            {
+                Death = true;
+
+                OnDie?.Invoke(); // 여기에 사맘 이펙ㅌ 넣기 예) 스탑, 슬로우 모션, 쉐이크
+            }
+            else
+            {
+                // 피 이펙트 넣기
+                OnHit?.Invoke();
+            }
+
             if (isKnockback == true)
             {
                 if (transform.position == damageFactor.transform.position)
                 {
-                    Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f);
+                    Knockback(Random.Range(0, 2) == 1 ? 1 : -1, 0.7f, 0.3f); 
                 }
                 else
                 {
@@ -140,20 +166,6 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
                         Knockback(1, 0.7f, 0.3f);
                     }
                 }
-            }
-
-            HP -= damage;
-
-            if (HP <= 0)
-            {
-                Death = true;
-
-                OnDie?.Invoke(); // 여기에 사맘 이펙ㅌ 넣기 예) 스탑, 슬로우 모션, 쉐이크
-            }
-            else
-            {
-                // 피 이펙트 넣기
-                OnHit?.Invoke();
             }
         }
     }

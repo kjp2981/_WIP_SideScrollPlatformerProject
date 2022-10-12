@@ -75,15 +75,35 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         float value = damageFactor.transform.position.x > this.transform.position.x ? -1 : 1;
         bloodParticle.SetLocalScaleX(value);
 
+        
+
+        int realDamage = damage - status.defence < 0 ? 0 : damage - status.defence;
         DamageText text = PoolManager.Instance.Pop("DamageText") as DamageText;
         text.transform.position = this.transform.position;
         if (isCritical == true)
         {
-            text.SetDamageText(damage, isCritical, 5);
+            text.SetDamageText(realDamage, isCritical, 5);
         }
         else
         {
-            text.SetDamageText(damage, isCritical, 4);
+            text.SetDamageText(realDamage, isCritical, 4);
+        }
+        if (realDamage <= 0) return;
+        HP -= realDamage;
+
+        if (HP <= 0)
+        {
+            Death = true;
+
+            OnDie?.Invoke();
+
+            _enemyAIBrain.target = null;
+
+            parentSpawner.RemoveMonster(this.gameObject.name);
+        }
+        else
+        {
+            OnHit?.Invoke();
         }
 
         if (isKnockback == true)
@@ -105,22 +125,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback
             }
         }
 
-        HP -= damage;
-
-        if (HP <= 0)
-        {
-            Death = true;
-
-            OnDie?.Invoke();
-
-            _enemyAIBrain.target = null;
-
-            parentSpawner.RemoveMonster(this.gameObject.name);
-        }
-        else
-        {
-            OnHit?.Invoke();
-        }
+        
     }
 
     public void Knockback(float direction, float power, float duration)
