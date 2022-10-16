@@ -17,6 +17,12 @@ public class TestData : ScriptableObject
     public List<string> items = new List<string>();
     
     public List<string> Names = new List<string>();
+
+    /// <summary>
+    /// 데이터를 출력해주는 거 같고
+    /// </summary>
+    /// <param name="list"></param>
+    /// <param name="name"></param>
     internal void UpdateStats(List<GSTU_Cell> list, string name)
     {
         items.Clear();
@@ -69,16 +75,28 @@ public class DataEditor : Editor
         }
     }
 
+    /// <summary>
+    /// 이게 데이터를 가져오는 함수 같음
+    /// </summary>
+    /// <param name="callback"></param>
+    /// <param name="mergedCells"></param>
     void UpdateStats(UnityAction<GstuSpreadSheet> callback, bool mergedCells = false)
     {
         SpreadsheetManager.Read(new GSTU_Search(data.associatedSheet, data.associatedWorksheet), callback, mergedCells);
     }
 
+    /// <summary>
+    /// 이건 foreach로 모든 데이터 출려갛는 거 이 함수를 변경하면 될 듯?
+    /// </summary>
+    /// <param name="ss"></param>
     void UpdateMethodOne(GstuSpreadSheet ss)
     {
         //data.UpdateStats(ss.rows["Jim"]);
-        foreach (string dataName in data.Names)
-            data.UpdateStats(ss.rows[dataName], dataName);
+        //foreach (string dataName in data.Names)
+        //    data.UpdateStats(ss.rows[dataName], dataName);
+        
+        // TODO : 여기서 레벨 구간 데이터? 같은거를 가져와서 적용시키면 될듯
+
         EditorUtility.SetDirty(target);
     }
     
