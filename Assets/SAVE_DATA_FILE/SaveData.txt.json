@@ -1,0 +1,16 @@
+{
+    "weaponDataDic": [],
+    "weaponList": [],
+    "skillDataList": [
+        {
+            "instanceID": 0
+        },
+        {
+            "instanceID": 0
+        }
+    ],
+    "skillList": [],
+    "hp": 0,
+    "level": 1,
+    "currentExp": 0
+}

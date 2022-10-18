@@ -9,6 +9,12 @@ public class LevelController : MonoBehaviour
     private int currentExp;
     private int nextExp;
 
+    private void Start()
+    {
+        currentExp = 0;
+        nextExp = 100;
+    }
+
     public void AddExp(int exp)
     {
         currentExp += exp;
