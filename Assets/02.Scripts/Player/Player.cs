@@ -15,7 +15,7 @@ public class Status
     public float criticalDamage;
 }
 
-public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
+public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecovery
 {
     [SerializeField]
     private StatusDataSO status;
@@ -97,6 +97,10 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     }
 
     public bool Death { get; private set; } = false;
+
+    public float recoveryReduction { get; private set; }
+
+    public bool isRecorvery { get; private set; }
     #endregion
 
     private AgentMovement movement;
@@ -111,6 +115,20 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
     private void Start()
     {
         HP = realStatus.hp;
+    }
+
+    void Update()
+    {
+        if(isRecorvery == false)
+        {
+            if(recoveryReduction > 0)
+            {
+                recoveryReduction -= 0.1f;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+            Heal(5);
     }
 
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)
@@ -216,5 +234,30 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable
         }
 
         return damage;
+    }
+
+    public void Heal(int heal)
+    {
+        StopAllCoroutines();
+
+        StartCoroutine(HealCoroutine(heal));
+    }
+
+    private IEnumerator HealCoroutine(int heal)
+    {
+        isRecorvery = true;
+        int realHeal = Mathf.FloorToInt((float)heal - (float)heal * recoveryReduction);
+
+        DamageText text = PoolManager.Instance.Pop("DamageText") as DamageText;
+        text.transform.position = this.transform.position;
+        text.SetDamageText(realHeal, false, 4, Color.green);
+        DOTween.To(() => HP, x => HP = x, HP + realHeal, 0.5f);
+
+        recoveryReduction += 0.05f;
+        if (recoveryReduction > 0.9f)
+            recoveryReduction = 0.9f;
+
+        yield return new WaitForSeconds(1f);
+        isRecorvery = false;
     }
 }

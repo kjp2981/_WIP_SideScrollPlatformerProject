@@ -32,5 +32,9 @@ public class LevelController : MonoBehaviour
             level += 1;
             currentExp += temp;
         }
+
+        // 뭔가 혜택을 주면되지 않을까?
+        // 1. HP 회복 ?
+        // 2. 
     }
 }

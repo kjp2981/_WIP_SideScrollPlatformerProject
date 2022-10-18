@@ -18,7 +18,7 @@ public class DamageText : PoolableMono
         transform.DOKill();
     }
 
-    public void SetDamageText(int damage, bool isCritical = false, int fontSize = 4)
+    public void SetDamageText(int damage, bool isCritical = false, int fontSize = 4, Color? color = null)
     {
         if(text == null)
             text = GetComponent<TextMeshPro>();
@@ -26,13 +26,21 @@ public class DamageText : PoolableMono
         text.SetText(damage.ToString());
 
         text.fontSize = fontSize;
-        if(isCritical == true)
+
+        if (color.HasValue)
         {
-            text.color = Color.red;
+            text.color = color.Value;
         }
         else
         {
-            text.color = Color.white;
+            if (isCritical == true)
+            {
+                text.color = Color.red;
+            }
+            else
+            {
+                text.color = Color.white;
+            }
         }
 
         TextEffect();
