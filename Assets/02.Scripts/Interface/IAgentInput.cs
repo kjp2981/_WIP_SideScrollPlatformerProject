@@ -7,7 +7,7 @@ public interface IAgentInput
 {
     public UnityEvent<float> OnMovementInput { get; set; }
 
-    public UnityEvent OnDashInput { get; set; }
+    public UnityEvent<float> OnDashInput { get; set; }
 
     public UnityEvent OnJumpInput { get; set; }
 

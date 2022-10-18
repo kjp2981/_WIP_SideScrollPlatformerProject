@@ -7,6 +7,6 @@ public class Exp : Item
 {
     public override void UseItem()
     {
-        Debug.Log("Arrival in Player");
+        PoolManager.Instance.Push(this);
     }
 }

@@ -13,7 +13,7 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     [field: SerializeField, Foldout("Movement Event")]
     public UnityEvent OnJumpInput { get; set; }
     [field : SerializeField, Foldout("Movement Event")]
-    public UnityEvent OnDashInput { get; set; }
+    public UnityEvent<float> OnDashInput { get; set; }
     [field: SerializeField, Foldout("Attack Event")]
     public UnityEvent<bool> OnMeleeAttack { get; set; }
     [field: SerializeField, Foldout("Attack Event")]

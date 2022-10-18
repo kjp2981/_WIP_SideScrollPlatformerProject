@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using static Define;
 
+public enum DashType
+{
+    Front,
+    Back
+}
+
 public class AgentMovement : MonoBehaviour
 {
     private Rigidbody2D rigid;
@@ -28,6 +34,8 @@ public class AgentMovement : MonoBehaviour
     private bool isDash = false;
     public bool IsDash => isDash;
 
+    private DashType dashType = DashType.Front;
+
     #region 무지설 플링 대쉬 이펙트의 흔적
     private SpriteRenderer spriteRenderer;
     private float dashEffectTimer = 0f;
@@ -43,6 +51,8 @@ public class AgentMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = this.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
         dashEffectTimer = dashEffectTime;
+
+        moveDirection = spriteRenderer.transform.localScale.x == 1 ? new Vector2(-1, 0) : new Vector2(1, 0);
     }
 
     public void Jump()
@@ -64,9 +74,28 @@ public class AgentMovement : MonoBehaviour
         currentVelocity = CulculateSpeed(xInput);
     }
 
-    public void Dash()
+    public void Dash(float dash)
     {
-        StartCoroutine(DashCoroutine(dashTime));
+        if(dash <= 0.35f)
+        {
+            dashType = DashType.Back;
+            // bacldash
+            StartCoroutine(BackdashCoroutine());
+        }
+        else
+        {
+            dashType = DashType.Front;
+            StartCoroutine(DashCoroutine(dashTime));
+        }
+    }
+
+    private IEnumerator BackdashCoroutine()
+    {
+        isDash = true;
+        // back dash
+        yield return new WaitForSeconds(0.2f);
+        StopPlayer();
+        isDash = false;
     }
 
     private IEnumerator DashCoroutine(float time)
@@ -110,23 +139,6 @@ public class AgentMovement : MonoBehaviour
         rigid.velocity = pos;
     }
 
-    private void Update()
-    {
-        // 무지성 풀링으로 만든 대쉬 파티클. 근데 이게 뭔가 저 예쁨
-        //if (isDash == true)
-        //{
-        //    if (dashEffectTime >= dashEffectTimer)
-        //    {
-        //        DashEffect dash = PoolManager.Instance.Pop("DashEffect") as DashEffect;
-        //        dash.transform.position = this.transform.position;
-        //        dash.SpriteRenderer.sprite = spriteRenderer.sprite;
-        //        dash.SpriteRenderer.flipX = this.spriteRenderer.transform.localScale.x == 1 ? false : true;
-        //        dashEffectTimer = 0f;
-        //    }
-        //    dashEffectTimer += Time.deltaTime;
-        //}
-    }
-
     private void FixedUpdate()
     {
         OnVelocityChange?.Invoke(moveDirection.x);
@@ -134,7 +146,15 @@ public class AgentMovement : MonoBehaviour
         Vector2 velocity = rigid.velocity;
         if(isDash == true)
         {
-            velocity.x = moveDirection.x * dashPower;
+            switch (dashType)
+            {
+                case DashType.Front:
+                    velocity.x = moveDirection.x * dashPower;
+                    break;
+                case DashType.Back:
+                    velocity.x = -moveDirection.x * dashPower;
+                    break;
+            }
         }
         else
         {

@@ -13,7 +13,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
     [field : SerializeField, Foldout("Movement Event")]
     public UnityEvent OnJumpInput { get; set; }
     [field : SerializeField, Foldout("Movement Event")]
-    public UnityEvent OnDashInput { get; set; }
+    public UnityEvent<float> OnDashInput { get; set; }
 
     // 마우스를 누른 시간을 체크 후 약공격인지 강곡격인지 판별 후 넘겨줌(불 값을로 넘겨주기)
     [field : SerializeField, Foldout("Attack Event")]
@@ -50,6 +50,8 @@ public class AgentInput : MonoBehaviour, IAgentInput
     [SerializeField]
     private float dashCoolTime = 3f;
     private float dashTimer = 0f;
+
+    private float dashTime = 0f;
     #endregion
 
     private Player player;
@@ -75,9 +77,24 @@ public class AgentInput : MonoBehaviour, IAgentInput
                 {
                     Jump();
                 }
+
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    Dash();
+
+                }
+                else if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    dashTime += Time.deltaTime;
+
+                    if(dashTime >= 0.7f)
+                    {
+                        Dash(dashTime);
+                        dashTime = 0f;
+                    }
+                }
+                else if (Input.GetKeyUp(KeyCode.LeftShift))
+                {
+                    Dash(dashTime);
                 }
 
                 if (Input.GetKeyDown(KeyCode.Q))
@@ -184,12 +201,13 @@ public class AgentInput : MonoBehaviour, IAgentInput
         OnJumpInput?.Invoke();
     }
 
-    public void Dash()
+    public void Dash(float dashTime)
     {
         if(dashTimer >= dashCoolTime)
         {
-            OnDashInput?.Invoke();
+            OnDashInput?.Invoke(dashTime);
             dashTimer = 0f;
+            this.dashTime = 0f;
         }
     }
 
