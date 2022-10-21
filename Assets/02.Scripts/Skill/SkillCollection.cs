@@ -13,6 +13,9 @@ public class SkillCollection : MonoBehaviour
     private AgentAnimation playerAnimation;
     private SpriteRenderer playerSpriteRenderer;
 
+    [SerializeField]
+    private WeaponInfo weaponInfo;
+
     #region Skill
     [SerializeField]
     private SkillDataSO leftSkill;
@@ -36,12 +39,27 @@ public class SkillCollection : MonoBehaviour
             rightSkillCoolTime = rightSkill.coolTime;
         }
     }
+
+    [ShowNonSerializedField]
+    private WeaponStatusDataSO weaponSkill;
+    public WeaponStatusDataSO WeaponSkill
+    {
+        get => weaponSkill;
+        set
+        {
+            weaponSkill = value;
+            weaponSkillCoolTime = 10;
+        }
+    }
     
 
     private float leftSkillCoolTime = 0f;
     public float LeftSkillCoolTime => leftSkillCoolTime;
     private float rightSkillCoolTime = 0f;
     public float RightSkillCoolTime => rightSkillCoolTime;
+
+    private float weaponSkillCoolTime = 10f;
+    public float WeaponSkillCoolTime => weaponSkillCoolTime;
     #endregion
 
     #region FireWall Parameta
@@ -91,6 +109,20 @@ public class SkillCollection : MonoBehaviour
         {
             rightSkillCoolTime -= Time.deltaTime;
             UIManager.Instance.SkillCoolTime();
+        }
+
+        if(weaponSkillCoolTime > 0)
+        {
+            weaponSkillCoolTime -= Time.deltaTime;
+            UIManager.Instance.SkillCoolTime();
+        }
+    }
+
+    public void SetWeaponSkill()
+    {
+        if(weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
+        {
+            weaponSkill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary];
         }
     }
 
@@ -159,6 +191,13 @@ public class SkillCollection : MonoBehaviour
             UseSkill(rightSkill);
             rightSkillCoolTime = rightSkill.coolTime;
         }
+    }
+
+    public void UseWeaponSkill()
+    {
+        if (Time.timeScale == 0) return;
+
+        this.GetType().GetMethod(weaponSkill.name).Invoke(this, null);
     }
     #endregion
 

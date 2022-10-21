@@ -140,6 +140,10 @@ public class UIManager : MonoBehaviour
         {
             rightCoolTimeImage.fillAmount = skillCollection.RightSkillCoolTime / skillCollection.RightSkill.coolTime;
         }
+        if(skillCollection.WeaponSkill != null)
+        {
+
+        }
     }
     #endregion
 
