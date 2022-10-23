@@ -63,8 +63,12 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
 
     public void ChangeState(AIState state)
     {
+        if (_currentState == state) return;
+
         _beforeState = _currentState;
+        _beforeState.GetComponent<AIAction>().OnStateLeave();
         _currentState = state; //상태 변경
+        _currentState.GetComponent<AIAction>().OnStateEnter();
     }
 
     public AIState GetState()
@@ -75,6 +79,11 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     public AIState GetBeforeState()
     {
         return _beforeState;
+    }
+
+    public Vector3 GetPos()
+    {
+        return this.transform.position;
     }
 
     protected virtual void Update()
