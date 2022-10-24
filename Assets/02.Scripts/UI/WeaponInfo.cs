@@ -17,6 +17,9 @@ public class WeaponInfo : MonoBehaviour
     private WeaponInventory inventory;
     public WeaponInventory Inventory => inventory;
 
+    [SerializeField]
+    private SkillCollection skillCollection;
+
     private void Start()
     {
         spriteDic.Add(WeaponType.Sword, swordDefaultImage);
@@ -76,8 +79,11 @@ public class WeaponInfo : MonoBehaviour
             weaponDataDic.Add(weapon.weaponType, weapon);
         }
 
-        // 여기서 피통을 늘려준다던가하는 거를 해야한다.
-        
+        if(weapon.weaponType == WeaponType.Auxiliary)
+        {
+            skillCollection.SetWeaponSkill();
+        }
+
         UpdateImage(weapon.weaponType);
     }
 

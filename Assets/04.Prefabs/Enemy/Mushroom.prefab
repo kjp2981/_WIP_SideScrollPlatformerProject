@@ -1258,7 +1258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actions:
   - {fileID: 6331872985491721514}
-  _transitions: []
+  _transitions:
+  - {fileID: 216876841439423277}
 --- !u!114 &6331872985491721514
 MonoBehaviour:
   m_ObjectHideFlags: 0

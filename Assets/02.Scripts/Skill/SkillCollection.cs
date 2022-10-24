@@ -41,14 +41,14 @@ public class SkillCollection : MonoBehaviour
     }
 
     [ShowNonSerializedField]
-    private WeaponStatusDataSO weaponSkill;
-    public WeaponStatusDataSO WeaponSkill
+    private SkillDataSO weaponSkill;
+    public SkillDataSO WeaponSkill
     {
         get => weaponSkill;
         set
         {
             weaponSkill = value;
-            weaponSkillCoolTime = 10;
+            weaponSkillCoolTime = weaponSkill.coolTime;
         }
     }
     
@@ -58,7 +58,7 @@ public class SkillCollection : MonoBehaviour
     private float rightSkillCoolTime = 0f;
     public float RightSkillCoolTime => rightSkillCoolTime;
 
-    private float weaponSkillCoolTime = 10f;
+    private float weaponSkillCoolTime = 0f;
     public float WeaponSkillCoolTime => weaponSkillCoolTime;
     #endregion
 
@@ -122,7 +122,7 @@ public class SkillCollection : MonoBehaviour
     {
         if(weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
         {
-            weaponSkill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary];
+            weaponSkill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
         }
     }
 
@@ -197,11 +197,15 @@ public class SkillCollection : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        this.GetType().GetMethod(weaponSkill.name).Invoke(this, null);
+        if (weaponSkill != null)
+        {
+            this.GetType().GetMethod(weaponSkill.name).Invoke(this, null);
+            weaponSkillCoolTime = weaponSkill.coolTime;
+        }
     }
     #endregion
 
-    #region 스킬들
+    #region 일반 스킬들
 
     /// <summary>
     /// 파이어볼
@@ -329,6 +333,10 @@ public class SkillCollection : MonoBehaviour
             fireWall.transform.position = pos + new Vector3(offset == true ? -i - 1 : i + 1, 0, 0);
         }
     }
+    #endregion
+
+    #region 무기 스킬들
+
     #endregion
 
 #if UNITY_EDITOR

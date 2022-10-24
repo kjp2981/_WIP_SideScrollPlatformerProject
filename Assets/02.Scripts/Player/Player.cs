@@ -127,8 +127,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
-            Heal(5);
+        //if (Input.GetKeyDown(KeyCode.F))
+        //    Heal(5);
     }
 
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)

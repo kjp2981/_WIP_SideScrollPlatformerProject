@@ -1271,7 +1271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actions:
   - {fileID: 5456713886384837106}
-  _transitions: []
+  _transitions:
+  - {fileID: 8015601939971210268}
 --- !u!114 &5456713886384837106
 MonoBehaviour:
   m_ObjectHideFlags: 0

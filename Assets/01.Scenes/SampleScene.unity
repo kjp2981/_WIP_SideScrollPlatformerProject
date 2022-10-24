@@ -313,6 +313,7 @@ MonoBehaviour:
   playerInHpbar: {fileID: 1649180906}
   leftCoolTimeImage: {fileID: 1490991795}
   rightCoolTimeImage: {fileID: 957222244}
+  weaponCoolTimeImage: {fileID: 0}
   skillDescriptionPanel: {fileID: 1272642599}
   defaultImage: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 3}
   weaponPanel: {fileID: 1256872915}
@@ -4073,6 +4074,7 @@ MonoBehaviour:
   bowDefaultImage: {fileID: -328834791, guid: d8c0e0d19f909b64c9165b2d6013482b, type: 3}
   shieldDefaultImage: {fileID: 603802639, guid: d8c0e0d19f909b64c9165b2d6013482b, type: 3}
   abilityDefaultImage: {fileID: -383469605, guid: d8c0e0d19f909b64c9165b2d6013482b, type: 3}
+  skillCollection: {fileID: 1279985310}
 --- !u!1 &944789207
 GameObject:
   m_ObjectHideFlags: 0
@@ -9397,6 +9399,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ec9bb3505d6f484498975be8b0dc41c5, type: 2}
   - {fileID: 11400000, guid: bc0554fa6f42f05428b19a59cc4b202c, type: 2}
   - {fileID: 11400000, guid: 3900834bb110c4d4faedeb1b55d43dc6, type: 2}
+  - {fileID: 11400000, guid: 323a92e2673c89944aa6b55674393c29, type: 2}
   slotParent: {fileID: 1822597701}
   slots: []
 --- !u!224 &977185077 stripped
@@ -11360,6 +11363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280b77bb817de9841836892eb76f5fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponInfo: {fileID: 934533699}
   leftSkill: {fileID: 11400000, guid: 7adf95b80a4b2024388436445953b3fc, type: 2}
   rightSkill: {fileID: 11400000, guid: 0c3fffad90f4f7743bb99246604c048e, type: 2}
   spearDistance: 1
@@ -15203,6 +15207,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnWeaponSkill:
+    m_PersistentCalls:
+      m_Calls: []
   dashCoolTime: 1
 --- !u!114 &1997339203
 MonoBehaviour:

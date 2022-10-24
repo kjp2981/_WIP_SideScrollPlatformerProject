@@ -21,6 +21,8 @@ public class UIManager : MonoBehaviour
     private Image leftCoolTimeImage;
     [SerializeField, Foldout("CoolTimeImage")]
     private Image rightCoolTimeImage;
+    [SerializeField, Foldout("CoolTimeImage")]
+    private Image weaponCoolTimeImage;
     #endregion
 
     #region Skill Panel
@@ -142,7 +144,7 @@ public class UIManager : MonoBehaviour
         }
         if(skillCollection.WeaponSkill != null)
         {
-
+            weaponCoolTimeImage.fillAmount = skillCollection.WeaponSkillCoolTime / skillCollection.WeaponSkill.coolTime;
         }
     }
     #endregion

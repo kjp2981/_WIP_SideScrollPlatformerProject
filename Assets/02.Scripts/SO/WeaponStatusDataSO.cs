@@ -36,4 +36,6 @@ public class WeaponStatusDataSO : ScriptableObject
     public AbilityType abilityType;
     [Min(0)]
     public int addValue;
+
+    public SkillDataSO skill;
 }
