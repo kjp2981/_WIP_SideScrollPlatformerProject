@@ -1,8 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public enum Sfx
+{
+
+}
+
+public enum Bgm
 {
 
 }
@@ -11,10 +17,17 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance = null;
 
+    [SerializeField]
     private AudioSource bgmAudioSorce;
 
-    [SerializeField]
+    #region AudioClip List
+    [SerializeField, Foldout("Clip List")]
     private List<AudioClip> sfxClipList = new List<AudioClip>();
+    [SerializeField, Foldout("Clip List")]
+    private List<AudioClip> bgmClipList = new List<AudioClip>();
+    #endregion
+
+    private float sfxVolume = 1f;
     void Awake()
     {
         if (Instance == null)
@@ -34,15 +47,27 @@ public class SoundManager : MonoBehaviour
         AudioSource audioSource = audio.GetComponent<AudioSource>();
         audioSource.Stop();
         audioSource.clip = sfxClipList[(int)sfx];
+        audioSource.volume = sfxVolume;
         audioSource.Play();
     }
 
-    public void PlaySfxRandomness(Sfx sfx, float randomness)
+    public void PlayBgm(Bgm bgm)
     {
-        Audio audio = PoolManager.Instance.Pop("Audio") as Audio;
-        AudioSource audioSource = audio.GetComponent<AudioSource>();
-        audioSource.Stop();
-        audioSource.clip = sfxClipList[(int)sfx];
-        audioSource.Play();
+        if(bgmAudioSorce.loop == false)
+            bgmAudioSorce.loop = true;
+
+        bgmAudioSorce.Stop();
+        bgmAudioSorce.clip = bgmClipList[(int)bgm];
+        bgmAudioSorce.Play();
+    }
+
+    public void BgmVolume(float volume)
+    {
+        bgmAudioSorce.volume = volume;
+    }
+
+    public void SfxVolume(float volome)
+    {
+        sfxVolume = volome;
     }
 }

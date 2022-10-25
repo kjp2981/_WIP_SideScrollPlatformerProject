@@ -98,6 +98,12 @@ public class WeaponInfo : MonoBehaviour
         {
             weaponDataDic[weapon.weaponType] = null;
         }
+
+        if (weapon.weaponType == WeaponType.Auxiliary)
+        {
+            skillCollection.UnSetWeaponSkill();
+        }
+
         UpdateImage(weapon.weaponType);
     }
 }

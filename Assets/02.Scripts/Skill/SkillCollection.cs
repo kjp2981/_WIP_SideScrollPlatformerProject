@@ -51,6 +51,9 @@ public class SkillCollection : MonoBehaviour
             weaponSkillCoolTime = weaponSkill.coolTime;
         }
     }
+
+    [SerializeField]
+    private GameObject weaponSlot;
     
 
     private float leftSkillCoolTime = 0f;
@@ -123,6 +126,18 @@ public class SkillCollection : MonoBehaviour
         if(weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
         {
             weaponSkill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
+
+            weaponSlot.SetActive(true);
+        }
+    }
+
+    public void UnSetWeaponSkill()
+    {
+        if (weaponInfo.WeaponDataDic[WeaponType.Auxiliary] == null)
+        {
+            weaponSkill = null;
+
+            weaponSlot.SetActive(false);
         }
     }
 
