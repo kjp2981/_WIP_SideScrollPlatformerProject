@@ -185,7 +185,6 @@ public class AgentInput : MonoBehaviour, IAgentInput
         {
             if (Input.GetMouseButtonDown(1))
             {
-                
                 if (isAttack == false)
                     isAttack = true;
             }

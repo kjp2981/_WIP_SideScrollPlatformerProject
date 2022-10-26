@@ -72,6 +72,13 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject settingPanel;
 
+    #region Sound Slider
+    [SerializeField, Foldout("Sound Slider Fill")]
+    private GameObject bgmSliderFill;
+    [SerializeField, Foldout("Sound Slider Fill")]
+    private GameObject sfxSliderFill;
+    #endregion
+
     private Dictionary<AbilityType, string> abilityDic = new Dictionary<AbilityType, string>();
 
     private void Awake()
@@ -238,6 +245,30 @@ public class UIManager : MonoBehaviour
     public void SetSettingPanelActive(bool isActive)
     {
         settingPanel.SetActive(isActive);
+    }
+
+    public void BgmSliderValue(float value)
+    {
+        if(value > 0)
+        {
+            bgmSliderFill.SetActive(true);
+        }
+        else
+        {
+            bgmSliderFill.SetActive(false);
+        }
+    }
+
+    public void SfxSliderValue(float value)
+    {
+        if (value > 0)
+        {
+            sfxSliderFill.SetActive(true);
+        }
+        else
+        {
+            sfxSliderFill.SetActive(false);
+        }
     }
 
     #region 장비 설명 띄우기

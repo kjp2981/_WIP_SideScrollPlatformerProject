@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using NaughtyAttributes;
 
-public class Enemy : PoolableMono, IHittable, IKnockback
+public class Enemy : PoolableMono, IHittable, IKnockback, ICrowdControl
 {
     [SerializeField]
     private StatusDataSO status;
@@ -48,6 +48,10 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         set => parentSpawner = value;
     }
 
+    public CC cc { get; private set; }
+
+    public bool isCC { get; private set; }
+
     private Material material;
     private Animator animator;
 
@@ -74,8 +78,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         bloodParticle.transform.position = this.transform.position;
         float value = damageFactor.transform.position.x > this.transform.position.x ? -1 : 1;
         bloodParticle.SetLocalScaleX(value);
-
-        
 
         int realDamage = damage - status.defence < 0 ? 0 : damage - status.defence;
         DamageText text = PoolManager.Instance.Pop("DamageText") as DamageText;
@@ -124,8 +126,6 @@ public class Enemy : PoolableMono, IHittable, IKnockback
                 }
             }
         }
-
-        
     }
 
     public void Knockback(float direction, float power, float duration)
@@ -138,6 +138,16 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         Sequence seq = DOTween.Sequence();
         material.DOFloat(0f, "_Fade", 0.5f).SetDelay(animator.GetCurrentAnimatorStateInfo(0).length).OnComplete(() => PoolManager.Instance.Push(this));
     }
+    public void CCAction(CC cc)
+    {
+        switch (cc)
+        {
+            case CC.Faint:
+                break;
+            case CC.Fear:
+                break;
+        }
+    }
 
     public override void Reset()
     {
@@ -148,4 +158,5 @@ public class Enemy : PoolableMono, IHittable, IKnockback
         Death = false;
         _enemyAIBrain.target = Define.Player.transform;
     }
+
 }

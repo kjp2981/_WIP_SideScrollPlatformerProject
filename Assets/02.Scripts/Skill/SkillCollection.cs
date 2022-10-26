@@ -355,7 +355,7 @@ public class SkillCollection : MonoBehaviour
     #endregion
 
     #region 무기 스킬들
-    public void AbSkill()
+    public void AbSkill() // 테스트용 코드
     {
         Debug.Log("Test~");
     }
