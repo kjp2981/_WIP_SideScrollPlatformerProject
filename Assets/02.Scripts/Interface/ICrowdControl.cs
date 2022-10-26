@@ -4,8 +4,10 @@ using UnityEngine;
 
 public enum CC
 {
-    Faint,
-    Fear
+    Faint, // 기절
+    Fear, // 공포
+    Poison, // 독
+    Silence, // 침묵
 }
 
 public interface ICrowdControl

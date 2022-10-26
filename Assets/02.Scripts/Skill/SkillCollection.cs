@@ -355,9 +355,14 @@ public class SkillCollection : MonoBehaviour
     #endregion
 
     #region 무기 스킬들
-    public void AbSkill() // 테스트용 코드
+    public void IronShield()
     {
-        Debug.Log("Test~");
+        // 토사체를 막는 방패 소환
+    }
+
+    public void WoodenShield()
+    {
+        // 나무 방패 던지기
     }
     #endregion
 

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b91df15bbcb0742adbdad2423a40f1, type: 3}
+  m_Name: WoodenShieldSkillData
+  m_EditorClassIdentifier: 
+  name: WoodenShield
+  image: {fileID: 1187424823, guid: f9dbcfec236a6aa4999f88c0b3c1ccb4, type: 3}
+  description: "\uB098\uBB34 \uBC29\uD328\uB97C \uB358\uC838\uC11C \uACF5\uACA9\uD55C\uB2E4."
+  coolTime: 5

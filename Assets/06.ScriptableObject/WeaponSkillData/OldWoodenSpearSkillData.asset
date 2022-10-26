@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84b91df15bbcb0742adbdad2423a40f1, type: 3}
-  m_Name: AbSkillData
+  m_Name: OldWoodenSpearSkillData
   m_EditorClassIdentifier: 
-  name: AbSkill
-  image: {fileID: 21300000, guid: 1a918f756523f1047a272936bed53650, type: 3}
-  description: gg
-  coolTime: 10
+  name: OldWoodenSpear
+  image: {fileID: 1723034998, guid: f9dbcfec236a6aa4999f88c0b3c1ccb4, type: 3}
+  description: 
+  coolTime: 0
