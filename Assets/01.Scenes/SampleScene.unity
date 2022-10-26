@@ -325,6 +325,7 @@ MonoBehaviour:
   rightSkill: {fileID: 2104594890}
   leftUISkill: {fileID: 1080593729}
   rightUISkill: {fileID: 1814573664}
+  weaponSkill: {fileID: 1197380740}
   inventoryController: {fileID: 1742709513}
   skillInventory: {fileID: 955377365}
   weaponInventory: {fileID: 972439291}
@@ -2541,7 +2542,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1279985310}
         m_TargetAssemblyTypeName: SkillCollection, Assembly-CSharp
-        m_MethodName: UseRightSkill
+        m_MethodName: UseWeaponSkill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2564,7 +2565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5445176, g: 0.87020546, b: 0.9716981, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11081,7 +11082,7 @@ GameObject:
   - component: {fileID: 1197380741}
   - component: {fileID: 1197380740}
   m_Layer: 5
-  m_Name: rightskillImage
+  m_Name: weaponImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11525,7 +11526,7 @@ MonoBehaviour:
   weaponInfo: {fileID: 934533699}
   leftSkill: {fileID: 11400000, guid: 7adf95b80a4b2024388436445953b3fc, type: 2}
   rightSkill: {fileID: 11400000, guid: 0c3fffad90f4f7743bb99246604c048e, type: 2}
-  weaponSlot: {fileID: 0}
+  weaponSlot: {fileID: 528499168}
   spearDistance: 1
   explosionDistance: 4
   explosionDamageOffset: 5
@@ -11864,7 +11865,7 @@ GameObject:
   - component: {fileID: 1307824955}
   - component: {fileID: 1307824954}
   m_Layer: 5
-  m_Name: rightCooltimeBox
+  m_Name: weaponCooltimeBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15773,7 +15774,19 @@ MonoBehaviour:
         m_CallState: 2
   OnWeaponSkill:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1279985310}
+        m_TargetAssemblyTypeName: SkillCollection, Assembly-CSharp
+        m_MethodName: UseWeaponSkill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   dashCoolTime: 1
 --- !u!114 &1997339203
 MonoBehaviour:

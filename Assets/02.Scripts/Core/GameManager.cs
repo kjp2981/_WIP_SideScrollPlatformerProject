@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera playerVcam;
 
-    private bool isPopup = false;
     private List<KeyCode> popupList = new List<KeyCode>();
 
 

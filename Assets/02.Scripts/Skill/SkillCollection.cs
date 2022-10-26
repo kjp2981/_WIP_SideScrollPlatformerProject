@@ -127,6 +127,8 @@ public class SkillCollection : MonoBehaviour
         {
             weaponSkill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
 
+            UIManager.Instance.UpdateWeaponSkillImage();
+
             weaponSlot.SetActive(true);
         }
     }
@@ -136,6 +138,8 @@ public class SkillCollection : MonoBehaviour
         if (weaponInfo.WeaponDataDic[WeaponType.Auxiliary] == null)
         {
             weaponSkill = null;
+
+            UIManager.Instance.UpdateWeaponSkillImage();
 
             weaponSlot.SetActive(false);
         }
@@ -212,7 +216,7 @@ public class SkillCollection : MonoBehaviour
     {
         if (Time.timeScale == 0) return;
 
-        if (weaponSkill != null)
+        if (weaponSkill != null && weaponSkillCoolTime <= 0)
         {
             this.GetType().GetMethod(weaponSkill.name).Invoke(this, null);
             weaponSkillCoolTime = weaponSkill.coolTime;
@@ -351,7 +355,10 @@ public class SkillCollection : MonoBehaviour
     #endregion
 
     #region 무기 스킬들
-
+    public void AbSkill()
+    {
+        Debug.Log("Test~");
+    }
     #endregion
 
 #if UNITY_EDITOR

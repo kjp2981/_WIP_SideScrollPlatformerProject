@@ -55,6 +55,8 @@ public class UIManager : MonoBehaviour
     private Image leftSkill, rightSkill;
     [SerializeField, Foldout("Skill Image")]
     private Image leftUISkill, rightUISkill;
+    [SerializeField, Foldout("Skill Image")]
+    private Image weaponSkill;
     #endregion
 
     private SkillCollection skillCollection;
@@ -209,11 +211,23 @@ public class UIManager : MonoBehaviour
             rightUISkill.sprite = rightSkill.sprite;
         }
     }
+
+    public void UpdateWeaponSkillImage()
+    {
+        if(skillCollection.WeaponSkill == null)
+        {
+            weaponSkill.sprite = defaultImage;
+        }
+        else
+        {
+            weaponSkill.sprite = skillCollection.WeaponSkill.image;
+        }
+    }
     #endregion
 
     public void SetSkill(bool isLeft)
     {
-        skillCollection.SetSkill(skillInventory.SelectSlot, isLeft);
+        skillCollection.SetSkill(skillInventory.SelectSlot, isLeft); 
     }
 
     public void SetInventoryActive(bool isActive)
