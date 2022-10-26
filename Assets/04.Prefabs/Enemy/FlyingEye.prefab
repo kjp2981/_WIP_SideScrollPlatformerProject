@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6837014494529739373}
   - component: {fileID: 4396875404789044553}
   - component: {fileID: 4722403966241084429}
+  - component: {fileID: 5604507971132471196}
   m_Layer: 0
   m_Name: AttackTr
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisions:
   - {fileID: 4722403966241084429}
+  - {fileID: 5604507971132471196}
   positiveState: {fileID: 5904406459149725896}
   negativeState: {fileID: 0}
 --- !u!114 &4722403966241084429
@@ -62,6 +64,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1.2
+--- !u!114 &5604507971132471196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765435307691267900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974f58acafd188943bb296feba8b2edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.5
 --- !u!1 &5904406458112063173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1236,7 @@ GameObject:
   - component: {fileID: 5904406460042657104}
   - component: {fileID: 5904406460042657105}
   - component: {fileID: 5904406460042657106}
+  - component: {fileID: 1658182877905449369}
   m_Layer: 0
   m_Name: AttackTr
   m_TagString: Untagged
@@ -1257,6 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisions:
   - {fileID: 5904406460042657106}
+  - {fileID: 1658182877905449369}
   positiveState: {fileID: 5904406459149725896}
   negativeState: {fileID: 0}
 --- !u!114 &5904406460042657106
@@ -1272,6 +1289,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1.2
+--- !u!114 &1658182877905449369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5904406460042657111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974f58acafd188943bb296feba8b2edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.5
 --- !u!1 &5960682461342560459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab32d5374395e9c44b777ac9bfc94bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rommingDistance: 5
+  rommingDistance: {x: 0, y: 5}
 --- !u!1001 &5931347391603900002
 PrefabInstance:
   m_ObjectHideFlags: 0

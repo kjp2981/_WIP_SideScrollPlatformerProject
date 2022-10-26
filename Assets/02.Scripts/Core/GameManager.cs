@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private CinemachineVirtualCamera playerVcam;
 
     private bool isPopup = false;
+    private List<KeyCode> popupList = new List<KeyCode>();
+
 
     #region SAVE_DATA
     private string PATH = "";
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this.gameObject); 
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -62,31 +64,52 @@ public class GameManager : MonoBehaviour
         {
             if (Time.timeScale != 0)
             {
-                isPopup = true;
-                UIManager.Instance.SetInventoryActive(true);
-                TimeManager.Instance.ModifyTimeScale(0, 0);
-                playerVcam.gameObject.SetActive(true);
+                if (popupList.Count == 0)
+                {
+                    UIManager.Instance.SetInventoryActive(true);
+                    TimeManager.Instance.ModifyTimeScale(0, 0);
+                    playerVcam.gameObject.SetActive(true);
+
+                    popupList.Add(KeyCode.B);
+                }
             }
             else
             {
-                isPopup = false;
-                UIManager.Instance.SetInventoryActive(false);
-                TimeManager.Instance.ModifyTimeScale(1, 0);
-                playerVcam.gameObject.SetActive(false);
+                if (popupList.Contains(KeyCode.B))
+                {
+                    UIManager.Instance.SetInventoryActive(false);
+                    TimeManager.Instance.ModifyTimeScale(1, 0);
+                    playerVcam.gameObject.SetActive(false);
+
+                    popupList.Remove(KeyCode.B);
+                }
             }
         }
 
-        if (isPopup != true)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Time.timeScale != 0)
             {
-                if (Time.timeScale != 0)
+                if (popupList.Count == 0)
                 {
+                    UIManager.Instance.SetSettingPanelActive(true);
                     TimeManager.Instance.ModifyTimeScale(0, 0);
+
+                    popupList.Add(KeyCode.Escape);
                 }
-                else
+            }
+            else
+            {
+                if (popupList.Contains(KeyCode.Escape))
                 {
+                    UIManager.Instance.SetSettingPanelActive(false);
                     TimeManager.Instance.ModifyTimeScale(1, 0);
+
+                    popupList.Remove(KeyCode.Escape);
+                }
+                else if(popupList.Count > 0 && popupList.Contains(KeyCode.Escape) == false)
+                {
+
                 }
             }
         }

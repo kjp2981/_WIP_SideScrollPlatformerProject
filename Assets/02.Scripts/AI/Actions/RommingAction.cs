@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 using static Define;
 
 public class RommingAction : AIAction
@@ -11,8 +12,8 @@ public class RommingAction : AIAction
     private Vector3 nextPos;
     private int nextPosIdx;
 
-    [SerializeField]
-    private float rommingDistance = 5f;
+    [SerializeField, MinMaxSlider(0, 5)]
+    private Vector2 rommingDistance;
 
     private void Start()
     {
@@ -25,16 +26,21 @@ public class RommingAction : AIAction
     {
         if (rommingPosList.Count > 0) return;
 
-        rommingPosList.Add(transform.position - Vector3.left * rommingDistance);
-        rommingPosList.Add(transform.position - Vector3.right * rommingDistance);
+        rommingPosList.Add(transform.position - Vector3.left * GetRandomOffset());
+        rommingPosList.Add(transform.position - Vector3.right * GetRandomOffset());
+    }
+
+    private int GetRandomOffset()
+    {
+        return Random.Range((int)rommingDistance.x, (int)rommingDistance.y + 1);
     }
 
     public override void OnStateEnter()
     {
         if(rommingPosList.Count < 1)
         {
-            rommingPosList.Add(transform.position - Vector3.left * rommingDistance);
-            rommingPosList.Add(transform.position - Vector3.right * rommingDistance);
+            rommingPosList.Add(transform.position - Vector3.left * GetRandomOffset());
+            rommingPosList.Add(transform.position - Vector3.right * GetRandomOffset());
         }
 
         nextPos = rommingPosList[nextPosIdx];

@@ -67,6 +67,9 @@ public class UIManager : MonoBehaviour
     private WeaponInventory weaponInventory;
     #endregion
 
+    [SerializeField]
+    private GameObject settingPanel;
+
     private Dictionary<AbilityType, string> abilityDic = new Dictionary<AbilityType, string>();
 
     private void Awake()
@@ -216,6 +219,11 @@ public class UIManager : MonoBehaviour
     public void SetInventoryActive(bool isActive)
     {
         inventoryController.SetActive(isActive);
+    }
+
+    public void SetSettingPanelActive(bool isActive)
+    {
+        settingPanel.SetActive(isActive);
     }
 
     #region 장비 설명 띄우기

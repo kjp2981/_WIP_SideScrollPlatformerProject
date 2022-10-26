@@ -1159,6 +1159,7 @@ GameObject:
   - component: {fileID: 868300120687717944}
   - component: {fileID: 868300120687717945}
   - component: {fileID: 868300120687717946}
+  - component: {fileID: 586286466023003692}
   m_Layer: 0
   m_Name: AttackTr
   m_TagString: Untagged
@@ -1195,6 +1196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisions:
   - {fileID: 868300120687717946}
+  - {fileID: 586286466023003692}
   positiveState: {fileID: 868300119806321568}
   negativeState: {fileID: 0}
 --- !u!114 &868300120687717946
@@ -1210,6 +1212,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1.2
+--- !u!114 &586286466023003692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868300120687717951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974f58acafd188943bb296feba8b2edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.5
 --- !u!1 &2585146782258532118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,8 +1250,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2585146782258532118}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.47, y: -2.32, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1272,7 +1287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab32d5374395e9c44b777ac9bfc94bc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rommingDistance: 5
+  rommingDistance: {x: 0, y: 5}
 --- !u!1 &3039040603808161270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,6 +1299,7 @@ GameObject:
   - component: {fileID: 8226980047607054513}
   - component: {fileID: 216876841439423277}
   - component: {fileID: 353956074006086856}
+  - component: {fileID: 645935830481112169}
   m_Layer: 0
   m_Name: AttackTr
   m_TagString: Untagged
@@ -1320,6 +1336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decisions:
   - {fileID: 353956074006086856}
+  - {fileID: 645935830481112169}
   positiveState: {fileID: 868300119806321568}
   negativeState: {fileID: 0}
 --- !u!114 &353956074006086856
@@ -1335,6 +1352,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distance: 1.2
+--- !u!114 &645935830481112169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3039040603808161270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974f58acafd188943bb296feba8b2edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 1.5
 --- !u!1001 &1129305340972985610
 PrefabInstance:
   m_ObjectHideFlags: 0
