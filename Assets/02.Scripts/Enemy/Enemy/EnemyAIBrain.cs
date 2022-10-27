@@ -11,7 +11,7 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     [field : SerializeField, Foldout("Movement Event")]
     public UnityEvent<float> OnMovementInput { get; set; }
     [field: SerializeField, Foldout("Movement Event")]
-    public UnityEvent OnJumpInput { get; set; }
+    public UnityEvent<float> OnJumpInput { get; set; }
     [field : SerializeField, Foldout("Movement Event")]
     public UnityEvent<float> OnDashInput { get; set; }
     [field: SerializeField, Foldout("Attack Event")]
@@ -58,7 +58,10 @@ public class EnemyAIBrain : MonoBehaviour, IAgentInput
     public void Move(float moveDirection, float targetPosition)
     {
         OnMovementInput?.Invoke(moveDirection);
-        OnLook?.Invoke(targetPosition);
+        if(_aiActionData.attack == false)
+        {
+            OnLook?.Invoke(targetPosition);
+        }
     }
 
     public void ChangeState(AIState state)

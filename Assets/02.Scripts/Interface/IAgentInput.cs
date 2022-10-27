@@ -9,7 +9,7 @@ public interface IAgentInput
 
     public UnityEvent<float> OnDashInput { get; set; }
 
-    public UnityEvent OnJumpInput { get; set; }
+    public UnityEvent<float> OnJumpInput { get; set; }
 
     public UnityEvent<bool> OnMeleeAttack { get; set; }
 

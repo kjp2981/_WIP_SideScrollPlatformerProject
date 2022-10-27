@@ -26,7 +26,7 @@ public class ChaseAction : AIAction
 
     public override void TakeAction()
     {
-        _aiActionData.attack = false;
+        //_aiActionData.attack = false;
         if(_aiActionData.arrived == false)
         {
             _aiActionData.arrived = true;

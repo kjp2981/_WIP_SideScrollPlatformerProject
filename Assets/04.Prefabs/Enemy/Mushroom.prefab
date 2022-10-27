@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 868300119505366466}
   - component: {fileID: 868300119505366476}
   - component: {fileID: 868300119505366467}
+  - component: {fileID: 6145528443713463190}
   m_Layer: 0
   m_Name: IdleTr
   m_TagString: Untagged
@@ -269,6 +270,7 @@ MonoBehaviour:
   decisions:
   - {fileID: 868300119505366476}
   - {fileID: 868300119505366467}
+  - {fileID: 6145528443713463190}
   positiveState: {fileID: 0}
   negativeState: {fileID: 868300118788206078}
 --- !u!114 &868300119505366476
@@ -297,6 +299,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   height: 1.5
+--- !u!114 &6145528443713463190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868300119505366464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797799d2d4cc8bc4091a417146f6422f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &868300119663889946
 GameObject:
   m_ObjectHideFlags: 0

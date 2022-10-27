@@ -9,17 +9,17 @@ using UnityEngine.EventSystems;
 public class AgentInput : MonoBehaviour, IAgentInput
 {
     #region Input
-    [field : SerializeField, Foldout("Movement Event")]
+    [field: SerializeField, Foldout("Movement Event")]
     public UnityEvent<float> OnMovementInput { get; set; }
-    [field : SerializeField, Foldout("Movement Event")]
-    public UnityEvent OnJumpInput { get; set; }
-    [field : SerializeField, Foldout("Movement Event")]
+    [field: SerializeField, Foldout("Movement Event")]
+    public UnityEvent<float> OnJumpInput { get; set; }
+    [field: SerializeField, Foldout("Movement Event")]
     public UnityEvent<float> OnDashInput { get; set; }
 
     // 마우스를 누른 시간을 체크 후 약공격인지 강곡격인지 판별 후 넘겨줌(불 값을로 넘겨주기)
-    [field : SerializeField, Foldout("Attack Event")]
+    [field: SerializeField, Foldout("Attack Event")]
     public UnityEvent<bool> OnMeleeAttack { get; set; } // 근거리 공격
-    [field : SerializeField, Foldout("Attack Event")]
+    [field: SerializeField, Foldout("Attack Event")]
     public UnityEvent<bool> OnRangeAttack { get; set; } // 원거리 공격
 
     [Foldout("Skill Event")]
@@ -40,7 +40,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
     private bool isAttack = false;
     public bool IsAttack => isAttack;
 
-    
+
 
     private float meleeAttackCoolTimer = 0f;
     private float rangeAttackCoolTimer = 0f;
@@ -55,6 +55,10 @@ public class AgentInput : MonoBehaviour, IAgentInput
     private float dashTimer = 0f;
 
     private float dashTime = 0f;
+    #endregion
+
+    #region 점프 체크 변수
+    private float jumpTime = 0f;
     #endregion
 
     private Player player;
@@ -80,28 +84,43 @@ public class AgentInput : MonoBehaviour, IAgentInput
                 Movement(Input.GetAxisRaw("Horizontal"));
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Jump();
+                    jumpTime += Time.deltaTime;
+                }
+                else if (Input.GetKey(KeyCode.Space))
+                {
+                    jumpTime += Time.deltaTime;
+
+                    if (jumpTime >= 1)
+                    {
+                        Jump(jumpTime);
+                        jumpTime = 0;
+                    }
+                }
+                else if (Input.GetKeyUp(KeyCode.Space))
+                {
+                    Jump(jumpTime);
+                    jumpTime = 0;
                 }
 
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
+                    Dash(1f);
+                }
+                //else if (Input.GetKey(KeyCode.LeftShift))
+                //{
+                //    dashTime += Time.deltaTime;
 
-                }
-                else if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    dashTime += Time.deltaTime;
-
-                    if(dashTime >= 0.7f)
-                    {
-                        Dash(dashTime);
-                        dashTime = 0f;
-                    }
-                }
-                else if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-                    Dash(dashTime);
-                    dashTime = 0f;
-                }
+                //    if(dashTime >= 0.7f)
+                //    {
+                //        Dash(dashTime);
+                //        dashTime = 0f;
+                //    }
+                //}
+                //else if (Input.GetKeyUp(KeyCode.LeftShift))
+                //{
+                //    Dash(dashTime);
+                //    dashTime = 0f;
+                //}
 
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
@@ -116,7 +135,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
                     OnWeaponSkill?.Invoke();
                 }
             }
-            else if(isAttack == true)
+            else if (isAttack == true)
             {
                 Movement(0);
             }
@@ -170,7 +189,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
         }
         else
         {
-            if(meleeAttackTimer >= 1f)
+            if (meleeAttackTimer >= 1f)
             {
                 attackCnt = 0;
                 meleeAttackTimer = 0;
@@ -223,14 +242,14 @@ public class AgentInput : MonoBehaviour, IAgentInput
         OnMovementInput?.Invoke(value);
     }
 
-    public void Jump()
+    public void Jump(float value)
     {
-        OnJumpInput?.Invoke();
+        OnJumpInput?.Invoke(value);
     }
 
     public void Dash(float dashTime)
     {
-        if(dashTimer >= dashCoolTime)
+        if (dashTimer >= dashCoolTime)
         {
             OnDashInput?.Invoke(dashTime);
             dashTimer = 0f;

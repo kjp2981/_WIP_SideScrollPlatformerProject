@@ -55,10 +55,10 @@ public class AgentMovement : MonoBehaviour
         moveDirection = spriteRenderer.transform.localScale.x == 1 ? new Vector2(-1, 0) : new Vector2(1, 0);
     }
 
-    public void Jump()
+    public void Jump(float value)
     {
         if(IsGround() == true)
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            rigid.AddForce(Vector2.up * (jumpPower * value), ForceMode2D.Impulse);
     }
 
     public void Movement(float xInput)
