@@ -1,0 +1,530 @@
+fileFormatVersion: 2
+guid: 9ff30b7e42da3004786b9c5a2ca93885
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Smoke FX Lite_0
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66e2b123d1dae344ca4e6f6f3d2a6a1d
+      internalID: -921652436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2278e659740f1c44fb5db6fb6ed50a0d
+      internalID: 633497416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_2
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbed1332c7d054247a4901521a024da8
+      internalID: 126283759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_3
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 522e44ae6e55a4247853cc218312bc6f
+      internalID: 928658964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_4
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2ea51dee9d8b0d46969bcd9e8a60a47
+      internalID: -581843492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_5
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15d13ee4ac78de94d83c5d1091ebe1ff
+      internalID: 369336375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_6
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479fa5c20740ee947abd5ddf27c43195
+      internalID: -1226755019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_7
+      rect:
+        serializedVersion: 2
+        x: 1856
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f0c91db411dbad4390a34df6232177e
+      internalID: 283325943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_8
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 911df34b1396183458f7512a9003e7b4
+      internalID: 474764260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_9
+      rect:
+        serializedVersion: 2
+        x: 2368
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b505a7be57978324ebca7542a07a3276
+      internalID: -1124958682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_10
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5bb5f1b9abdab74ca18fc537aa50b5a
+      internalID: 207067755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_11
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 040c1dc9c8bc43040a2f4d380bdb29b6
+      internalID: 470923644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_12
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab5718973e9f6f04788ede0a8fc0f360
+      internalID: 1718568810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_13
+      rect:
+        serializedVersion: 2
+        x: 3392
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 326c175c659de0542846315a24b1b971
+      internalID: -1965457519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_14
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce553e2865365a54b99d347b6b8dbdca
+      internalID: 1028998611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Smoke FX Lite_15
+      rect:
+        serializedVersion: 2
+        x: 3904
+        y: 192
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 505b35a6b83309447bfbbed6f054a977
+      internalID: -746774914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Smoke FX Lite_34: 1431262889
+      Smoke FX Lite_38: 555914521
+      Smoke FX Lite_59: -1619351052
+      Smoke FX Lite_12: 1718568810
+      Smoke FX Lite_13: -1965457519
+      Smoke FX Lite_23: -174149711
+      Smoke FX Lite_2: 126283759
+      Smoke FX Lite_36: 2096128454
+      Smoke FX Lite_5: 369336375
+      Smoke FX Lite_53: -929255442
+      Smoke FX Lite_15: -746774914
+      Smoke FX Lite_60: 107152366
+      Smoke FX Lite_27: 1737314146
+      Smoke FX Lite_51: 1385342592
+      Smoke FX Lite_33: -619845854
+      Smoke FX Lite_31: -696667943
+      Smoke FX Lite_56: -1056596587
+      Smoke FX Lite_46: 905280126
+      Smoke FX Lite_57: 1778470635
+      Smoke FX Lite_54: 1616032144
+      Smoke FX Lite_58: 1775263316
+      Smoke FX Lite_7: 283325943
+      Smoke FX Lite_1: 633497416
+      Smoke FX Lite_35: -1583578218
+      Smoke FX Lite_40: 1526084886
+      Smoke FX Lite_50: -1594992855
+      Smoke FX Lite_41: 417554479
+      Smoke FX Lite_25: 1986147403
+      Smoke FX Lite_3: 928658964
+      Smoke FX Lite_39: 1552318053
+      Smoke FX Lite_9: -1124958682
+      Smoke FX Lite_37: 518889701
+      Smoke FX Lite_14: 1028998611
+      Smoke FX Lite_32: 983682164
+      Smoke FX Lite_18: -1559978876
+      Smoke FX Lite_45: -1672101063
+      Smoke FX Lite_42: -1570371262
+      Smoke FX Lite_29: 1463815019
+      Smoke FX Lite_8: 474764260
+      Smoke FX Lite_10: 207067755
+      Smoke FX Lite_49: 470545820
+      Smoke FX Lite_0: -921652436
+      Smoke FX Lite_62: -1556173988
+      Smoke FX Lite_52: -984776446
+      Smoke FX Lite_16: 1974494902
+      Smoke FX Lite_6: -1226755019
+      Smoke FX Lite_11: 470923644
+      Smoke FX Lite_4: -581843492
+      Smoke FX Lite_55: 370713622
+      Smoke FX Lite_43: 1936610798
+      Smoke FX Lite_26: 868522055
+      Smoke FX Lite_30: 2033486618
+      Smoke FX Lite_20: -1090715252
+      Smoke FX Lite_28: -225350831
+      Smoke FX Lite_47: 1021323875
+      Smoke FX Lite_24: 988906464
+      Smoke FX Lite_61: 2009075645
+      Smoke FX Lite_48: 1302108849
+      Smoke FX Lite_44: 1685834805
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

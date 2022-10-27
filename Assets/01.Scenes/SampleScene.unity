@@ -10096,7 +10096,7 @@ GameObject:
   - component: {fileID: 1029415442}
   - component: {fileID: 1029415441}
   - component: {fileID: 1029415445}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: IronShield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10188,8 +10188,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1467487833
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -912850126, guid: f9dbcfec236a6aa4999f88c0b3c1ccb4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -10210,7 +10210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029415440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.51, y: -2.389, z: 0}
+  m_LocalPosition: {x: -2.56, y: 6.38, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11040,7 +11040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1142232548}
   - component: {fileID: 1142232549}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: TriggerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

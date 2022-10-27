@@ -7,9 +7,6 @@ public class BloodParticle : PoolableMono
     private ParticleSystem ps;
     ParticleSystem.MainModule main;
 
-    [SerializeField]
-    private float initSpeed = 7;
-
     private void Start()
     {
         ps = GetComponent<ParticleSystem>();
@@ -28,13 +25,8 @@ public class BloodParticle : PoolableMono
         this.transform.localScale = pos;
     }
 
-    //public void SetSpeed(float speed)
-    //{
-    //    main.startSpeed = speed;
-    //}
-
     public override void Reset()
     {
-        //SetSpeed(initSpeed);
+
     }
 }
