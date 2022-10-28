@@ -90,7 +90,7 @@ public class AgentInput : MonoBehaviour, IAgentInput
                 {
                     jumpTime += Time.deltaTime;
 
-                    if (jumpTime >= 1)
+                    if (jumpTime >= 0.5f)
                     {
                         Jump(jumpTime);
                         jumpTime = 0;

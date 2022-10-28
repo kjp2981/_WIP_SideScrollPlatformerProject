@@ -58,7 +58,19 @@ public class AgentMovement : MonoBehaviour
     public void Jump(float value)
     {
         if(IsGround() == true)
-            rigid.AddForce(Vector2.up * (jumpPower * value), ForceMode2D.Impulse);
+        {
+            //rigid.AddForce(Vector2.up * (jumpPower * value), ForceMode2D.Impulse);
+            if(value < 0.5f)
+            {
+                // 낮은 점프
+                rigid.AddForce(Vector2.up * jumpPower * 0.7f, ForceMode2D.Impulse);
+            }
+            else
+            {
+                // 높은 점프
+                rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            }
+        }
     }
 
     public void Movement(float xInput)
