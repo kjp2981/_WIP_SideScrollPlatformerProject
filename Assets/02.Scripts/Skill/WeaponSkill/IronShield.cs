@@ -31,12 +31,18 @@ public class IronShield : PoolableMono, IHittable
             lifeTimer += Time.deltaTime;
         }
 
-        if(lifeTimer >= life)
-        {
-            // »èÁ¦ ÀÌÆåÆ®
+        //if(lifeTimer >= life)
+        //{
+        //    DestroyShield();
+        //}
+    }
 
-            PoolManager.Instance.Push(this);
-        }
+    private void DestroyShield()
+    {
+        BloodParticle destroyParticle = PoolManager.Instance.Pop("DestroyParticle") as BloodParticle;
+        destroyParticle.transform.position = this.transform.position;
+
+        PoolManager.Instance.Push(this);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -52,6 +58,6 @@ public class IronShield : PoolableMono, IHittable
 
     public override void Reset()
     {
-        throw new System.NotImplementedException();
+
     }
 }

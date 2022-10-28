@@ -105,20 +105,19 @@ public class SkillCollection : MonoBehaviour
         if(leftSkillCoolTime > 0)
         {
             leftSkillCoolTime -= Time.deltaTime;
-            UIManager.Instance.SkillCoolTime();
         }
 
         if (rightSkillCoolTime > 0)
         {
             rightSkillCoolTime -= Time.deltaTime;
-            UIManager.Instance.SkillCoolTime();
         }
 
         if(weaponSkillCoolTime > 0)
         {
             weaponSkillCoolTime -= Time.deltaTime;
-            UIManager.Instance.SkillCoolTime();
         }
+
+        UIManager.Instance.SkillCoolTime();
     }
 
     public void SetWeaponSkill()
@@ -358,6 +357,8 @@ public class SkillCollection : MonoBehaviour
     public void IronShield()
     {
         // 토사체를 막는 방패 소환
+        IronShield ironShield = PoolManager.Instance.Pop("IronShield") as IronShield;
+        ironShield.transform.position = transform.position + (playerSpriteRenderer.transform.localScale.x == 1 ? Vector3.left : Vector3.right) + Vector3.up;
     }
 
     public void WoodenShield()
