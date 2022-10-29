@@ -237,14 +237,19 @@ public class UIManager : MonoBehaviour
         skillCollection.SetSkill(skillInventory.SelectSlot, isLeft); 
     }
 
-    public void SetInventoryActive(bool isActive)
+    public GameObject SetInventoryActive(bool? isActive = null)
     {
-        inventoryController.SetActive(isActive);
+        if (isActive.HasValue)
+        {
+            inventoryController.SetActive(isActive.Value);
+        }
+        return inventoryController;
     }
 
-    public void SetSettingPanelActive(bool isActive)
+    public GameObject SetSettingPanelActive(bool isActive)
     {
         settingPanel.SetActive(isActive);
+        return settingPanel;
     }
 
     public void BgmSliderValue(float value)

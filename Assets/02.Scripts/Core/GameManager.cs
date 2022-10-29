@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,8 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera playerVcam;
 
-    private List<KeyCode> popupList = new List<KeyCode>();
-
+    private Action<bool> PopupPanelActive;
 
     #region SAVE_DATA
     private string PATH = "";
@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     private PlayerSaveData saveData;
     #endregion
+
+    public GameObject test;
 
     void Awake()
     {
@@ -59,61 +61,81 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        InputAllKey();
+    }
+
+    #region Popup Panel Setting
+    void SettingPanel(bool value)
+    {
+        UIManager.Instance.SetSettingPanelActive(value);
+    }
+
+    void InventoryPanel(bool value)
+    {
+        UIManager.Instance.SetInventoryActive(value);
+        playerVcam.gameObject.SetActive(value);
+    }
+
+    void Test(bool value)
+    {
+        test.SetActive(value);
+    }
+    #endregion
+
+    void InputAllKey()
+    {
         if (Input.GetKeyDown(KeyCode.B))
         {
-            if (Time.timeScale != 0)
-            {
-                if (popupList.Count == 0)
-                {
-                    UIManager.Instance.SetInventoryActive(true);
-                    TimeManager.Instance.ModifyTimeScale(0, 0);
-                    playerVcam.gameObject.SetActive(true);
-
-                    popupList.Add(KeyCode.B);
-                }
-            }
-            else
-            {
-                if (popupList.Contains(KeyCode.B))
-                {
-                    UIManager.Instance.SetInventoryActive(false);
-                    TimeManager.Instance.ModifyTimeScale(1, 0);
-                    playerVcam.gameObject.SetActive(false);
-
-                    popupList.Remove(KeyCode.B);
-                }
-            }
+            InputKey(KeyCode.B);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Time.timeScale != 0)
-            {
-                if (popupList.Count == 0)
-                {
-                    UIManager.Instance.SetSettingPanelActive(true);
-                    TimeManager.Instance.ModifyTimeScale(0, 0);
+            InputKey(KeyCode.Escape);
+        }
 
-                    popupList.Add(KeyCode.Escape);
-                }
-            }
-            else
-            {
-                if (popupList.Contains(KeyCode.Escape))
-                {
-                    UIManager.Instance.SetSettingPanelActive(false);
-                    TimeManager.Instance.ModifyTimeScale(1, 0);
-
-                    popupList.Remove(KeyCode.Escape);
-                }
-                else if(popupList.Count > 0 && popupList.Contains(KeyCode.Escape) == false)
-                {
-
-                }
-            }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            InputKey(KeyCode.G);
         }
     }
 
+    void InputKey(KeyCode key)
+    {
+        switch (key)
+        {
+            case KeyCode.Escape:
+                if(PopupPanelActive == null)
+                    PopupPanelActive = SettingPanel;
+                break;
+            case KeyCode.B:
+                if (PopupPanelActive == null)
+                    PopupPanelActive = InventoryPanel;
+                break;
+            case KeyCode.G:
+                if (PopupPanelActive == null)
+                    PopupPanelActive = Test;
+                break;
+            default:
+                break;
+        }
+
+        if (Time.timeScale != 0)
+        {
+            PopupPanelActive?.Invoke(true);
+            TimeManager.Instance.ModifyTimeScale(0, 0);
+        }
+        else
+        {
+            PopupPanelActive?.Invoke(false);
+            TimeManager.Instance.ModifyTimeScale(1, 0);
+
+            PopupPanelActive = null;
+        }
+    }
+
+
+    #region Save&Load
     public void SaveJson<T>(string createPath, string fileName, T value)
     {
         FileStream fileStream = new FileStream(string.Format("{0}/{1}.json", createPath, fileName), FileMode.Create);
@@ -137,4 +159,5 @@ public class GameManager : MonoBehaviour
         SaveJson<T>(loadPath, fileName, new T());
         return LoadJsonFile<T>(loadPath, fileName);
     }
+    #endregion
 }
