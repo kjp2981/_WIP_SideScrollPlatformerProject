@@ -286,15 +286,31 @@ public class UIManager : MonoBehaviour
             weaponName.text = weapon.name;
             weaponAbility.text = abilityDic[weapon.abilityType] + " +" + weapon.addValue;
 
-            if (weaponInventory.ReturnActiveSelectUseText() == true)//만약 장착이 된 상태라면
+            if (weaponInfo.WeaponDataDic.ContainsKey(weapon.weaponType) == true)
             {
-                weaponUseBtn.SetActive(false); //장착버튼 끄고
-                weaponUnUseBtn.SetActive(true); //해제버튼 클릭
+                if (weaponInfo.WeaponDataDic[weapon.weaponType] == null)
+                {
+                    weaponUseBtn.SetActive(true);
+                    weaponUnUseBtn.SetActive(false);
+                }
+                else
+                {
+                    if (weaponInfo.WeaponDataDic[weapon.weaponType] == weapon)
+                    {
+                        weaponUseBtn.SetActive(false);
+                        weaponUnUseBtn.SetActive(true);
+                    }
+                    else
+                    {
+                        weaponUseBtn.SetActive(true);
+                        weaponUnUseBtn.SetActive(false);
+                    }
+                }
             }
             else
             {
-                weaponUnUseBtn.SetActive(false);
                 weaponUseBtn.SetActive(true);
+                weaponUnUseBtn.SetActive(false);
             }
         }
         else

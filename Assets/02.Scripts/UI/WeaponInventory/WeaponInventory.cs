@@ -26,19 +26,4 @@ public class WeaponInventory : TInventory<WeaponStatusDataSO>
         else
             slots[idx].List = null;
     }
-
-    public void SetActiveUseText(bool active)
-    {
-        WeaponSlot beforeSlot = slots[beforeId] as WeaponSlot;
-        beforeSlot.IsUse = false;
-
-        WeaponSlot slot = slots[selectId] as WeaponSlot;
-        slot.IsUse = active;
-    }
-
-    public bool ReturnActiveSelectUseText()
-    {
-        WeaponSlot slot = slots[selectId] as WeaponSlot;
-        return slot.IsUse;
-    }
 }

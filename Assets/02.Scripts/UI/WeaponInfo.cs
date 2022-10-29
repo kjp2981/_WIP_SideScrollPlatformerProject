@@ -29,6 +29,11 @@ public class WeaponInfo : MonoBehaviour
         spriteDic.Add(WeaponType.Shield, shieldDefaultImage);
         spriteDic.Add(WeaponType.Auxiliary, abilityDefaultImage);
 
+        for(int i = 0; i < (int)WeaponType.COUNT; i++)
+        {
+            weaponDataDic.Add((WeaponType)i, null);
+        }
+
         inventory = GetComponentInParent<WeaponInventory>();
 
         GetComponentsInChildren<WeaponImage>(weaponImage);
@@ -43,7 +48,8 @@ public class WeaponInfo : MonoBehaviour
             foreach (WeaponImage wi in weaponImage)
             {
                 if(weaponDataDic.ContainsKey(wi.Type))
-                    wi.ChangeItemImage(weaponDataDic[wi.Type].image, Color.white);
+                    if(weaponDataDic[wi.Type] != null)
+                        wi.ChangeItemImage(weaponDataDic[wi.Type].image, Color.white);
             }
         }
         else

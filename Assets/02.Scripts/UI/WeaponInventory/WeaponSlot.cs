@@ -10,16 +10,6 @@ public class WeaponSlot : TSlot<WeaponStatusDataSO>
     [SerializeField]
     private Text useText;
 
-    private bool isUse = false;
-    public bool IsUse
-    {
-        get => isUse;
-        set
-        {
-            isUse = value;
-            SetActiveUseText(IsUse);
-        }
-    }
 
     private void Start()
     {

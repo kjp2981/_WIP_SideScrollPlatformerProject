@@ -10,7 +10,8 @@ public enum WeaponType
     Wand,
     Bow,
     Shield,
-    Auxiliary
+    Auxiliary,
+    COUNT
 }
 
 public enum AbilityType
