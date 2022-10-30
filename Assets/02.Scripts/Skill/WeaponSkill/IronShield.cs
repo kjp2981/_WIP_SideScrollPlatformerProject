@@ -24,7 +24,8 @@ public class IronShield : PoolableMono, IHittable
     [SerializeField]
     private float life = 5f;
 
-    private int hp;
+    [SerializeField]
+    private int hp = 10;
 
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2F, bool isCritlcal = false)
     {

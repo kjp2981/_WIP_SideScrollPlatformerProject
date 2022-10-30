@@ -60,6 +60,10 @@ public class Arrow : PoolableMono
             float value = transform.position.x < collision.transform.position.x ? 1f : -1f;
             splashParticle.SetLocalScaleX(value);
             splashParticle.transform.position = collision.transform.position + (value == 1 ? Vector3.left : Vector3.right);
+
+            IHittable hittable = collision.GetComponent<IHittable>();
+            hittable?.Damage(1, this.gameObject);
+
             PoolManager.Instance.Push(this);
         }
     }
