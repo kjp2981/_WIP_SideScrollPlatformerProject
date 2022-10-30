@@ -37,6 +37,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, ICrowdControl
     [field : SerializeField] public UnityEvent OnDie { get; set; }
 
     public bool Death { get; private set; } = false;
+    public bool isDamage { get; private set; } = false;
 
     private EnemyAIBrain _enemyAIBrain = null;
     #endregion
@@ -68,7 +69,9 @@ public class Enemy : PoolableMono, IHittable, IKnockback, ICrowdControl
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)
     {
         if (Death == true) return;
+        if (isDamage == true) return;
 
+        isDamage = true;
         Slash slash = PoolManager.Instance.Pop("HitEffect") as Slash;
         float rot = Random.Range(0, 360);
         Vector3 offset = Random.insideUnitCircle * 0.5f;
@@ -90,7 +93,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, ICrowdControl
         {
             text.SetDamageText(realDamage, isCritical, 4);
         }
-        if (realDamage <= 0) return;
+        if (realDamage <= 0) realDamage = 1;
         HP -= realDamage;
 
         if (HP <= 0)
@@ -126,6 +129,7 @@ public class Enemy : PoolableMono, IHittable, IKnockback, ICrowdControl
                 }
             }
         }
+        isDamage = false;
     }
 
     public void Knockback(float direction, float power, float duration)

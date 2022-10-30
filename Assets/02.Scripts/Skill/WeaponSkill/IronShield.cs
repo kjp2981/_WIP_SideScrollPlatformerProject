@@ -9,6 +9,8 @@ public class IronShield : PoolableMono, IHittable
 
     public bool Death => false;
 
+    public bool isDamage { get; private set; } = false;
+
     public Vector2 HitPos => transform.position;
     public UnityEvent OnHit { get; set; }
     public UnityEvent OnDie { get; set; }

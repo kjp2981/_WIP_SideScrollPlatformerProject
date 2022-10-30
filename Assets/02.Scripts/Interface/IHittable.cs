@@ -13,6 +13,7 @@ public interface IHittable
 {
     public bool IsEnemy { get; }
     public bool Death { get; }
+    public bool isDamage { get; }
     public Vector2 HitPos { get; }
 
     public UnityEvent OnHit { get; set; }

@@ -66,7 +66,8 @@ public class EnemyMeleeAttack : AgentAttack
             if (ray.collider.CompareTag("Player"))
             {
                 IHittable hit = ray.collider.GetComponent<IHittable>();
-                hit.Damage(Mathf.CeilToInt(enemy.Status.meleeAttack * 1.5f), this.gameObject);
+                bool isCritical = Random.Range(1, 101) <= enemy.Status.criticalRate;
+                hit.Damage(Mathf.CeilToInt(isCritical ? enemy.Status.meleeAttack * enemy.Status.criticalDamage : enemy.Status.meleeAttack), this.gameObject, isCritlcal: isCritical);
             }
         }
     }

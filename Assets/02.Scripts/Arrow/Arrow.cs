@@ -56,6 +56,10 @@ public class Arrow : PoolableMono
 
         if ((collision.CompareTag("Player") == false) && (collision.CompareTag("Jump") == false) && (collision.CompareTag("Movement") == false))
         {
+            BloodParticle splashParticle = PoolManager.Instance.Pop("SplashParticle") as BloodParticle;
+            float value = transform.position.x < collision.transform.position.x ? 1f : -1f;
+            splashParticle.SetLocalScaleX(value);
+            splashParticle.transform.position = collision.transform.position + (value == 1 ? Vector3.left : Vector3.right);
             PoolManager.Instance.Push(this);
         }
     }

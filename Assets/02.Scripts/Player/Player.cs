@@ -98,6 +98,8 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
 
     public bool Death { get; private set; } = false;
 
+    public bool isDamage { get; private set; } = false;
+
     public float recoveryReduction { get; private set; }
 
     public bool isRecorvery { get; private set; }
@@ -134,7 +136,9 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2f, bool isCritical = false)
     {
         if (Death == true) return;
+        if (isDamage == true) return;
 
+        isDamage = true;
         if (movement.IsDash == true)
         {
             Avoid();
@@ -152,7 +156,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
             {
                 text.SetDamageText(realDamage, isCritical, 4);
             }
-            if (realDamage <= 0) return;
+            if (realDamage <= 0) realDamage = 1;
             HP -= realDamage;
 
             if (HP <= 0)
@@ -186,6 +190,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
                 }
             }
         }
+        isDamage = false;
     }
 
     public void Knockback(float direction, float power, float duration)
@@ -204,7 +209,7 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
 
     public bool isCritical()
     {
-        int critical = Random.Range(0, 100);
+        int critical = Random.Range(1, 101);
         if (critical <= realStatus.criticalRate)
             return true;
         else

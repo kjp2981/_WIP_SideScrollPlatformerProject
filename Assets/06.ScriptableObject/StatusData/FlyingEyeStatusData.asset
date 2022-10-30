@@ -17,4 +17,4 @@ MonoBehaviour:
   rangeAttack: 20
   defence: 1
   criticalRate: 20
-  critlcalDamage: 1.5
+  criticalDamage: 2
