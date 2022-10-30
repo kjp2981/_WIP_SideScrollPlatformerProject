@@ -5,6 +5,9 @@ using UnityEngine.Events;
 
 public class IronShield : PoolableMono, IHittable
 {
+    private SpriteRenderer spriteRenderer;
+    private Material material;
+
     public bool IsEnemy => false;
 
     public bool Death => false;
@@ -21,9 +24,26 @@ public class IronShield : PoolableMono, IHittable
     [SerializeField]
     private float life = 5f;
 
+    private int hp;
+
     public void Damage(int damage, GameObject damageFactor, bool isKnockback = false, float knockPower = 0.2F, bool isCritlcal = false)
     {
-        
+        hp -= 1;
+
+        if (hp <= 0)
+        {
+            DestroyShield();
+        }
+        else
+        {
+            StartCoroutine(HitEffect());
+        }
+    }
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        material = spriteRenderer.material;
     }
 
     private void Update()
@@ -33,10 +53,17 @@ public class IronShield : PoolableMono, IHittable
             lifeTimer += Time.deltaTime;
         }
 
-        //if(lifeTimer >= life)
-        //{
-        //    DestroyShield();
-        //}
+        if (lifeTimer >= life)
+        {
+            DestroyShield();
+        }
+    }
+
+    IEnumerator HitEffect()
+    {
+        material.SetColor("_Color", new Color(1, 1, 1));
+        yield return new WaitForSeconds(0.1f);
+        material.SetColor("_Color", new Color(0, 0, 0));
     }
 
     private void DestroyShield()
@@ -60,6 +87,6 @@ public class IronShield : PoolableMono, IHittable
 
     public override void Reset()
     {
-
+        isUse = false;
     }
 }
