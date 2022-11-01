@@ -60,4 +60,11 @@ public class CameraController : MonoBehaviour
         CompletePrevFeedback();
     }
     #endregion
+
+    #region Camera Zoom In
+    public void CameraZoom(float zoom = 5)
+    {
+        VCam.m_Lens.FieldOfView = zoom; // 이거 맞나..?
+    }
+    #endregion
 }

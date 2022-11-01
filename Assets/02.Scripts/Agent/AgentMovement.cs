@@ -13,6 +13,7 @@ public enum DashType
 public class AgentMovement : MonoBehaviour
 {
     private Rigidbody2D rigid;
+    private SpriteRenderer spriteRenderer;
 
     [SerializeField]
     private MovementDataSO movementData = null;
@@ -36,23 +37,19 @@ public class AgentMovement : MonoBehaviour
 
     private DashType dashType = DashType.Front;
 
-    #region 무지설 플링 대쉬 이펙트의 흔적
-    private SpriteRenderer spriteRenderer;
-    private float dashEffectTimer = 0f;
-    [SerializeField, Tooltip("대쉬 이펙트가 생성되는 주기")]
-    private float dashEffectTime = 0.3f;
-    #endregion
-
     [SerializeField]
     private ParticleSystem dashParticle;
+
+    private ICrowdControl iCC;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = this.transform.Find("VisualSprite").GetComponent<SpriteRenderer>();
-        dashEffectTimer = dashEffectTime;
 
         moveDirection = spriteRenderer.transform.localScale.x == 1 ? new Vector2(-1, 0) : new Vector2(1, 0);
+
+        iCC = GetComponent<ICrowdControl>();
     }
 
     public void Jump(float value)
@@ -75,6 +72,8 @@ public class AgentMovement : MonoBehaviour
 
     public void Movement(float xInput)
     {
+        if (iCC.isCC == true) return;
+
         if(xInput != 0)
         {
             if(xInput != moveDirection.x)
@@ -88,6 +87,8 @@ public class AgentMovement : MonoBehaviour
 
     public void Dash(float dash)
     {
+        if (iCC.isCC == true) return;
+
         if(dash <= 0.35f)
         {
             dashType = DashType.Back;
@@ -145,6 +146,8 @@ public class AgentMovement : MonoBehaviour
 
     public void StopPlayer()
     {
+        if (iCC.isCC == true) return;
+
         currentVelocity = 0f;
         Vector2 pos = rigid.velocity;
         pos.x = 0f;
@@ -153,6 +156,8 @@ public class AgentMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (iCC.isCC == true) return;
+
         OnVelocityChange?.Invoke(moveDirection.x);
 
         Vector2 velocity = rigid.velocity;

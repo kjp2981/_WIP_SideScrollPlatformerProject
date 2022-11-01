@@ -1,9 +1,9 @@
 fileFormatVersion: 2
-guid: 19b87e781b74ef446955e01507cf4d89
+guid: 8321a7e289209564aa7bfc5b91454d6b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -116,55 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hit Effect_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 640
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a9b723227e896049ac587273b772242
-      internalID: 867512735
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hit Effect_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 512
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: df96a01b092e591489ba58ec32312ed7
-      internalID: -2050063894
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hit Effect_2
+      name: Line of fire_0
       rect:
         serializedVersion: 2
         x: 0
         y: 384
         width: 128
-        height: 128
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +131,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c6c4f6a6aae6904f8c3a0b2a62641ef
-      internalID: -329886092
+      spriteID: 6f55156daf369544092f0347928c612a
+      internalID: -607765763
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hit Effect_3
+      name: Line of fire_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f01b7187f6c67cf4880a709ee709ab2b
+      internalID: 1472787290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Line of fire_2
       rect:
         serializedVersion: 2
         x: 0
         y: 256
         width: 128
-        height: 128
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,20 +173,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5e0691617653464e9fdb0849df40e73
-      internalID: -734203983
+      spriteID: b5e6fa8dabf82f84c9b43004b5d84329
+      internalID: 923565186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Hit Effect_4
+      name: Line of fire_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 128
+        y: 192
         width: 128
-        height: 128
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,8 +194,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f8302c3f12b5544baf97f58aa9ee92a
-      internalID: 1902952612
+      spriteID: 55253aef75705434fbdae126a26bf0ae
+      internalID: -992121577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Line of fire_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 570f567d9e65dac43be76cd17e14af31
+      internalID: 871668968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Line of fire_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 128
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31ef2ae11f0582942a334dd054cd31a2
+      internalID: 1564312633
       vertices: []
       indices: 
       edges: []
@@ -231,11 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Hit Effect_0: 867512735
-      Hit Effect_4: 1902952612
-      Hit Effect_1: -2050063894
-      Hit Effect_2: -329886092
-      Hit Effect_3: -734203983
+      Line of fire_3: -992121577
+      Line of fire_2: 923565186
+      Line of fire_1: 1472787290
+      Line of fire_4: 871668968
+      Line of fire_5: 1564312633
+      Line of fire_0: -607765763
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

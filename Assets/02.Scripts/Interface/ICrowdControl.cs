@@ -8,6 +8,7 @@ public enum CC
     Fear, // 공포
     Poison, // 독
     Silence, // 침묵
+    Fascination, // 매혹
 }
 
 public interface ICrowdControl

@@ -15,7 +15,7 @@ public class Status
     public float criticalDamage;
 }
 
-public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecovery
+public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecovery, ICrowdControl
 {
     [SerializeField]
     private StatusDataSO status;
@@ -103,6 +103,10 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
     public float recoveryReduction { get; private set; }
 
     public bool isRecorvery { get; private set; }
+
+    public CC cc { get; private set; }
+
+    public bool isCC { get; private set; } = false;
     #endregion
 
     private AgentMovement movement;
@@ -264,5 +268,22 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
 
         yield return new WaitForSeconds(1f);
         isRecorvery = false;
+    }
+
+    public void CCAction(CC cc)
+    {
+        switch (cc)
+        {
+            case CC.Faint:
+                break;
+            case CC.Fear:
+                break;
+            case CC.Poison:
+                break;
+            case CC.Silence:
+                break;
+            case CC.Fascination:
+                break;
+        }
     }
 }

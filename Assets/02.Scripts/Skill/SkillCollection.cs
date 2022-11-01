@@ -365,6 +365,12 @@ public class SkillCollection : MonoBehaviour
     {
         // 나무 방패 던지기
     }
+
+    public void ImperialRifle()
+    {
+        Laser imperialRifle = PoolManager.Instance.Pop("ImperialRifle") as Laser;
+        imperialRifle.transform.rotation = 
+    }
     #endregion
 
 #if UNITY_EDITOR
