@@ -65,17 +65,23 @@ public class AgentInput : MonoBehaviour, IAgentInput
 
     private int attackCnt = 0;
 
+    private ICrowdControl icc;
+
     private void Start()
     {
         player = Define.Player.GetComponent<Player>();
 
         meleeAttackCoolTimer = meleeAttackCoolTime;
         rangeAttackCoolTimer = rangeAttackCoolTime;
+
+        icc = GetComponent<ICrowdControl>();
     }
 
     private void Update()
     {
         if (Time.timeScale == 0) return;
+
+        // CC중이면 입력 막기
 
         if (player.Death == false)
         {

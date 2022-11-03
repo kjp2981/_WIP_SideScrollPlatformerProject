@@ -60,10 +60,12 @@ MonoBehaviour:
   - prefab: {fileID: 3128948501923735332, guid: ef2dbc79f8c41534f9cc39f458dd1699, type: 3}
     poolCnt: 5
   - prefab: {fileID: 6881640795199168996, guid: 78c08514769cd2048b76a0f988ebaeb4, type: 3}
-    poolCnt: 5
+    poolCnt: 3
   - prefab: {fileID: 8158490643316463341, guid: b012d14c01c7f164587f483203888fda, type: 3}
     poolCnt: 5
   - prefab: {fileID: 3165772532691323126, guid: 062494efe5a1d674b84fa61d71c87457, type: 3}
     poolCnt: 5
-  - prefab: {fileID: 4373457079396992654, guid: e2cbce974112a274a8064ab417b6ab00, type: 3}
-    poolCnt: 5
+  - prefab: {fileID: 7427933364661068687, guid: e2cbce974112a274a8064ab417b6ab00, type: 3}
+    poolCnt: 1
+  - prefab: {fileID: 160003729070826546, guid: 9badd5d5f171f4e409f81474b74e62f4, type: 3}
+    poolCnt: 1

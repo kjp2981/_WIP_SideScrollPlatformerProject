@@ -154,6 +154,11 @@ public class AgentMovement : MonoBehaviour
         rigid.velocity = pos;
     }
 
+    public void RigidStop(RigidbodyType2D type = RigidbodyType2D.Dynamic)
+    {
+        rigid.bodyType = type;
+    }
+
     private void FixedUpdate()
     {
         if (iCC.isCC == true) return;

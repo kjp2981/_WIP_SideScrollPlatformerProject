@@ -2,10 +2,13 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using static Define;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance = null;
+
     [SerializeField, Range(0, 5)]
     private float _amplitude = 1, _instansity = 1;
 
@@ -23,6 +26,18 @@ public class CameraController : MonoBehaviour
                 _noise = VCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
             }
             return _noise;
+        }
+    }
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
         }
     }
 
@@ -64,7 +79,8 @@ public class CameraController : MonoBehaviour
     #region Camera Zoom In
     public void CameraZoom(float zoom = 5)
     {
-        VCam.m_Lens.FieldOfView = zoom; // 이거 맞나..?
+        //VCam.m_Lens.OrthographicSize = zoom;
+        DOTween.To(() => VCam.m_Lens.OrthographicSize, v => VCam.m_Lens.OrthographicSize = v, zoom, 0.3f);
     }
     #endregion
 }

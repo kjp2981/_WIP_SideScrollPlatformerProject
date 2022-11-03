@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using DG.Tweening;
+using static Define;
 
 public class SkillCollection : MonoBehaviour
 {
@@ -189,7 +191,7 @@ public class SkillCollection : MonoBehaviour
         }
     }
 
-    public void UseLeftSkill() // 이거 나중에 스킬 데미지랑 크리확률 같은거 매개변수로 넘겨져야한다.
+    public void UseLeftSkill()
     {
         if (Time.timeScale == 0) return;
 
@@ -368,8 +370,28 @@ public class SkillCollection : MonoBehaviour
 
     public void ImperialRifle()
     {
-        Laser imperialRifle = PoolManager.Instance.Pop("ImperialRifle") as Laser;
-        imperialRifle.transform.rotation = 
+        // 플레이어 완전히 정지 => rigid 스태틱으로 바꾸기?
+        player.GetComponent<AgentMovement>().RigidStop(RigidbodyType2D.Kinematic); // 이거 이따구로 짜지 말기
+        player.SetCC(CC.Ability);
+        player.SetIsCC(true);
+        CameraController.Instance.CameraZoom(4);
+
+        Slash imperialRifle = PoolManager.Instance.Pop("ImperialRifle") as Slash;
+        Vector3 localScale = playerSpriteRenderer.transform.localScale;
+        localScale.x *= -1;
+        imperialRifle.transform.localScale = localScale;
+        imperialRifle.transform.SetPositionAndRotation(transform.position + new Vector3(0, -0.3f, 0), Quaternion.Euler(0, 0, playerSpriteRenderer.transform.localRotation.x * -60));
+        imperialRifle.transform.DORotate(Vector3.zero, 0.2f, RotateMode.Fast).SetDelay(0.3f).OnComplete(() =>
+        {
+            Laser laser = PoolManager.Instance.Pop("Laser") as Laser;
+            laser.transform.position = transform.position + (playerSpriteRenderer.transform.localScale.x == 1 ? new Vector3(-5, -.3f, 0) : new Vector3(5, -.3f, 0));
+            laser.Shoot(() => PoolManager.Instance.Push(imperialRifle));
+
+            CameraController.Instance.CameraZoom();
+            player.GetComponent<AgentMovement>().RigidStop();
+            player.SetCC(CC.None);
+            player.SetIsCC(false);
+        });
     }
     #endregion
 

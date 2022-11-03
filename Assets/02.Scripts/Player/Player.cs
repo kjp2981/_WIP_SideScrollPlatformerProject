@@ -270,6 +270,17 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
         isRecorvery = false;
     }
 
+    public void SetCC(CC cc)
+    {
+        this.cc = cc;
+        CCAction(this.cc);
+    }
+
+    public void SetIsCC(bool iscc)
+    {
+        isCC = iscc;
+    }
+
     public void CCAction(CC cc)
     {
         switch (cc)
@@ -283,6 +294,10 @@ public class Player : MonoBehaviour, IHittable, IKnockback, IAvoidable, IRecover
             case CC.Silence:
                 break;
             case CC.Fascination:
+                break;
+            case CC.Ability:
+                break;
+            case CC.None:
                 break;
         }
     }
