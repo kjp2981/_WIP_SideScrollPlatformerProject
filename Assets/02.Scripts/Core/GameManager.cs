@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private CinemachineVirtualCamera playerVcam;
 
     private Action<bool> PopupPanelActive;
+    private bool isPopup = false;
 
     #region SAVE_DATA
     private string PATH = "";
@@ -25,7 +26,6 @@ public class GameManager : MonoBehaviour
     private PlayerSaveData saveData;
     #endregion
 
-    public GameObject test;
 
     void Awake()
     {
@@ -75,11 +75,6 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.SetInventoryActive(value);
         playerVcam.gameObject.SetActive(value);
     }
-
-    void Test(bool value)
-    {
-        test.SetActive(value);
-    }
     #endregion
 
     void InputAllKey()
@@ -111,22 +106,22 @@ public class GameManager : MonoBehaviour
             case KeyCode.B:
                 if (PopupPanelActive == null)
                     PopupPanelActive = InventoryPanel;
-                break;
-            case KeyCode.G:
-                if (PopupPanelActive == null)
-                    PopupPanelActive = Test;
+                else if (PopupPanelActive != InventoryPanel)
+                    return;
                 break;
             default:
-                break;
+                return;
         }
 
         if (Time.timeScale != 0)
         {
+            isPopup = true;
             PopupPanelActive?.Invoke(true);
             TimeManager.Instance.ModifyTimeScale(0, 0);
         }
         else
         {
+            isPopup = false;
             PopupPanelActive?.Invoke(false);
             TimeManager.Instance.ModifyTimeScale(1, 0);
 
