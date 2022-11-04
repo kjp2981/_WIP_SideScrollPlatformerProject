@@ -38,14 +38,29 @@ public class Laser : PoolableMono
     public void Damage()
     {
         Collider2D[] collList = Physics2D.OverlapBoxAll(transform.position, hitOffset, 0, hitlayer);
-        foreach(Collider2D col in collList)
+
+        StartCoroutine(LookAtTargets(collList));
+    }
+
+    private IEnumerator LookAtTargets(Collider2D[] list)
+    {
+        WaitForSeconds waitTIme = new WaitForSeconds(0.5f);
+        foreach(Collider2D col in list)
+        {
+            CameraController.Instance.CameraTargetChange(col.transform);
+            yield return waitTIme;
+        }
+
+        foreach (Collider2D col in list)
         {
             IHittable hit = col.GetComponent<IHittable>();
-            if(hit != null)
+            if (hit != null)
             {
                 hit.Damage(player.GetAttackDamage() * damage, player.gameObject, false, 0, player.isCritical());
             }
         }
+
+        CameraController.Instance.CameraTargetChange(Define.Player.transform);
     }
 
 #if UNITY_EDITOR

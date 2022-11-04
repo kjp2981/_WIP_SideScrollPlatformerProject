@@ -83,4 +83,12 @@ public class CameraController : MonoBehaviour
         DOTween.To(() => VCam.m_Lens.OrthographicSize, v => VCam.m_Lens.OrthographicSize = v, zoom, 0.3f);
     }
     #endregion
+
+    #region Camera Target Change
+    public void CameraTargetChange(Transform target)
+    {
+        VCam.Follow = target;
+        VCam.LookAt = target;
+    }
+    #endregion
 }

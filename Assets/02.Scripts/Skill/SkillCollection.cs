@@ -4,6 +4,7 @@ using UnityEngine;
 using NaughtyAttributes;
 using DG.Tweening;
 using static Define;
+using System;
 
 public class SkillCollection : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class SkillCollection : MonoBehaviour
     private AgentAttack playerAttack;
     private AgentAnimation playerAnimation;
     private SpriteRenderer playerSpriteRenderer;
+    private AgentMovement playerMovement;
 
     [SerializeField]
     private WeaponInfo weaponInfo;
@@ -90,6 +92,7 @@ public class SkillCollection : MonoBehaviour
         playerAttack = GetComponentInParent<AgentAttack>();
         playerSpriteRenderer = transform.parent.Find("VisualSprite").GetComponent<SpriteRenderer>();
         playerAnimation = transform.parent.Find("VisualSprite").GetComponent<AgentAnimation>();
+        playerMovement = player.GetComponent<AgentMovement>();
 
         if(leftSkill != null)
         {
@@ -371,7 +374,7 @@ public class SkillCollection : MonoBehaviour
     public void ImperialRifle()
     {
         // 플레이어 완전히 정지 => rigid 스태틱으로 바꾸기?
-        player.GetComponent<AgentMovement>().RigidStop(RigidbodyType2D.Kinematic); // 이거 이따구로 짜지 말기
+        playerMovement.RigidStop(RigidbodyType2D.Static); // 이거 이따구로 짜지 말기
         player.SetCC(CC.Ability);
         player.SetIsCC(true);
         CameraController.Instance.CameraZoom(4);
@@ -385,12 +388,14 @@ public class SkillCollection : MonoBehaviour
         {
             Laser laser = PoolManager.Instance.Pop("Laser") as Laser;
             laser.transform.position = transform.position + (playerSpriteRenderer.transform.localScale.x == 1 ? new Vector3(-5, -.3f, 0) : new Vector3(5, -.3f, 0));
-            laser.Shoot(() => PoolManager.Instance.Push(imperialRifle));
 
-            CameraController.Instance.CameraZoom();
-            player.GetComponent<AgentMovement>().RigidStop();
-            player.SetCC(CC.None);
-            player.SetIsCC(false);
+            Action action = null;
+            action += () => PoolManager.Instance.Push(imperialRifle);
+            action += () => CameraController.Instance.CameraZoom();
+            action += () => playerMovement.RigidStop();
+            action += () => player.SetCC(CC.None);
+            action += () => player.SetIsCC(false);
+            laser.Shoot(action);
         });
     }
     #endregion
