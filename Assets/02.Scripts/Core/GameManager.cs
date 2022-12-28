@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     private Action<bool> PopupPanelActive;
     private bool isPopup = false;
 
+    // 세이브 관련 애들 세이브매니저로 빼기
     #region SAVE_DATA
     private string PATH = "";
     private readonly string FILE_NAME = "SaveData.txt";

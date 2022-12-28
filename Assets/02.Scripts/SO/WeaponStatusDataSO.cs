@@ -24,7 +24,7 @@ public enum AbilityType
     CriticalDamage
 }
 
-[CreateAssetMenu(menuName = "SO/Agent/Weapon")]
+[CreateAssetMenu(menuName = "SO/Agent/Weapon"), System.Serializable]
 public class WeaponStatusDataSO : ScriptableObject
 {
     public new string name;

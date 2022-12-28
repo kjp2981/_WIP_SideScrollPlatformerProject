@@ -6,6 +6,42 @@ using DG.Tweening;
 using static Define;
 using System;
 
+[System.Serializable]
+public class SkillInfo
+{
+    [SerializeField]
+    private SkillDataSO _skill;
+    [SerializeField]
+    private float _skillCoolTime;
+
+    public SkillDataSO Skill
+    {
+        get => _skill;
+        set
+        {
+            if (_skill == value) return;
+            _skill = value;
+            _skillCoolTime = _skill.coolTime;
+        }
+    }
+
+    public float CoolTime
+    {
+        get => _skillCoolTime;
+        set
+        {
+            if (_skill == null) return;
+            _skillCoolTime = value;
+        }
+    }
+
+    public SkillInfo(SkillDataSO skill)
+    {
+        _skill = skill;
+        _skillCoolTime = _skill.coolTime;
+    }
+}
+
 public class SkillCollection : MonoBehaviour
 {
     // 에기에 스킬 함수를 작성한다
@@ -20,55 +56,14 @@ public class SkillCollection : MonoBehaviour
     [SerializeField]
     private WeaponInfo weaponInfo;
 
-    #region Skill
-    [SerializeField]
-    private SkillDataSO leftSkill;
-    public SkillDataSO LeftSkill
-    {
-        get => leftSkill;
-        set
-        {
-            leftSkill = value;
-            leftSkillCoolTime = leftSkill.coolTime;
-        }
-    }
-    [SerializeField]
-    private SkillDataSO rightSkill;
-    public SkillDataSO RightSkill
-    {
-        get => rightSkill;
-        set
-        {
-            rightSkill = value;
-            rightSkillCoolTime = rightSkill.coolTime;
-        }
-    }
+    private List<SkillInfo> _skilList = new List<SkillInfo>();
 
-    [ShowNonSerializedField]
-    private SkillDataSO weaponSkill;
-    public SkillDataSO WeaponSkill
-    {
-        get => weaponSkill;
-        set
-        {
-            weaponSkill = value;
-            weaponSkillCoolTime = weaponSkill.coolTime;
-        }
-    }
-
+    [SerializeField]
+    private List<SkillInfo> _weaponList = new List<SkillInfo>();
     [SerializeField]
     private GameObject weaponSlot;
-    
 
-    private float leftSkillCoolTime = 0f;
-    public float LeftSkillCoolTime => leftSkillCoolTime;
-    private float rightSkillCoolTime = 0f;
-    public float RightSkillCoolTime => rightSkillCoolTime;
-
-    private float weaponSkillCoolTime = 0f;
-    public float WeaponSkillCoolTime => weaponSkillCoolTime;
-    #endregion
-
+    // 애내도 수정하기
     #region FireWall Parameta
     [SerializeField, BoxGroup("FireWall Parameta")]
     private float spearDistance = 7f;
@@ -85,6 +80,7 @@ public class SkillCollection : MonoBehaviour
     [SerializeField, BoxGroup("Slash Parameta")]
     private int slashDamageOffset;
     #endregion
+    //
 
     private void Awake()
     {
@@ -94,32 +90,30 @@ public class SkillCollection : MonoBehaviour
         playerAnimation = transform.parent.Find("VisualSprite").GetComponent<AgentAnimation>();
         playerMovement = player.GetComponent<AgentMovement>();
 
-        if(leftSkill != null)
+        foreach(SkillInfo s in _skilList)
         {
-            leftSkillCoolTime = leftSkill.coolTime;
+            if(s.Skill != null)
+            {
+                s.CoolTime = s.Skill.coolTime;
+            }
         }
 
-        if (rightSkill != null)
+        if(_weaponList.Skill != null)
         {
-            rightSkillCoolTime = rightSkill.coolTime;
+            _weaponList.CoolTime = _weaponList.Skill.coolTime;
         }
     }
 
     private void Update()
     {
-        if(leftSkillCoolTime > 0)
+        foreach(SkillInfo s in _skilList)
         {
-            leftSkillCoolTime -= Time.deltaTime;
+            s.CoolTime -= Time.deltaTime;
         }
 
-        if (rightSkillCoolTime > 0)
+        if(_weaponList.CoolTime > 0)
         {
-            rightSkillCoolTime -= Time.deltaTime;
-        }
-
-        if(weaponSkillCoolTime > 0)
-        {
-            weaponSkillCoolTime -= Time.deltaTime;
+            _weaponList.CoolTime -= Time.deltaTime;
         }
 
         UIManager.Instance.SkillCoolTime();
@@ -129,7 +123,7 @@ public class SkillCollection : MonoBehaviour
     {
         if(weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
         {
-            weaponSkill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
+            _weaponList.Skill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
 
             UIManager.Instance.UpdateWeaponSkillImage();
 
@@ -141,7 +135,7 @@ public class SkillCollection : MonoBehaviour
     {
         if (weaponInfo.WeaponDataDic[WeaponType.Auxiliary] == null)
         {
-            weaponSkill = null;
+            _weaponList = null;
 
             UIManager.Instance.UpdateWeaponSkillImage();
 
@@ -149,38 +143,39 @@ public class SkillCollection : MonoBehaviour
         }
     }
 
-    public void SetSkill(SkillDataSO skill, bool isLeft)
+    public void SetSkill(SkillDataSO skill)
     {
         if (skill == null) return;
 
-        if(isLeft == true)
-        {
-            if(rightSkill == skill)
-            {
-                rightSkill = leftSkill;
-                leftSkill = skill;
-                UIManager.Instance.UpdateSkillImage();
-                UIManager.Instance.SkillCoolTime();
-                return;
-            }
-            leftSkill = skill;
-            UIManager.Instance.UpdateSkillImage(true);
-            UIManager.Instance.SkillCoolTime();
-        }
-        else
-        {
-            if(leftSkill == skill)
-            {
-                leftSkill = rightSkill;
-                rightSkill = skill;
-                UIManager.Instance.UpdateSkillImage();
-                UIManager.Instance.SkillCoolTime();
-                return;
-            }
-            rightSkill = skill;
-            UIManager.Instance.UpdateSkillImage(false);
-            UIManager.Instance.SkillCoolTime();
-        }
+        _skilList.Add(new SkillInfo(skill));
+        //if (isLeft == true)
+        //{
+        //    if (rightSkill == skill)
+        //    {
+        //        rightSkill = leftSkill;
+        //        leftSkill = skill;
+        //        UIManager.Instance.UpdateSkillImage();
+        //        UIManager.Instance.SkillCoolTime();
+        //        return;
+        //    }
+        //    leftSkill = skill;
+        //    UIManager.Instance.UpdateSkillImage(true);
+        //    UIManager.Instance.SkillCoolTime();
+        //}
+        //else
+        //{
+        //    if (leftSkill == skill)
+        //    {
+        //        leftSkill = rightSkill;
+        //        rightSkill = skill;
+        //        UIManager.Instance.UpdateSkillImage();
+        //        UIManager.Instance.SkillCoolTime();
+        //        return;
+        //    }
+        //    rightSkill = skill;
+        //    UIManager.Instance.UpdateSkillImage(false);
+        //    UIManager.Instance.SkillCoolTime();
+        //}
     }
 
     #region 스킬 사용 함수들
@@ -194,36 +189,45 @@ public class SkillCollection : MonoBehaviour
         }
     }
 
-    public void UseLeftSkill()
+    public void UseSkill(int index)
     {
-        if (Time.timeScale == 0) return;
+        if(Time.timeScale == 0) return;
+        if(index >= _skilList.Count) return;
+        if (_skilList[index].Skill == null) return;
 
-        if (leftSkill != null && leftSkillCoolTime <= 0)
-        {
-            UseSkill(leftSkill);
-            leftSkillCoolTime = leftSkill.coolTime;
-        }
+        UseSkill(_skilList[index].Skill);
     }
 
-    public void UseRightSkill()
-    {
-        if (Time.timeScale == 0) return;
+    //public void UseLeftSkill()
+    //{
+    //    if (Time.timeScale == 0) return;
 
-        if (rightSkill != null && rightSkillCoolTime <= 0)
-        {
-            UseSkill(rightSkill);
-            rightSkillCoolTime = rightSkill.coolTime;
-        }
-    }
+    //    if (leftSkill != null && leftSkillCoolTime <= 0)
+    //    {
+    //        UseSkill(leftSkill);
+    //        leftSkillCoolTime = leftSkill.coolTime;
+    //    }
+    //}
+
+    //public void UseRightSkill()
+    //{
+    //    if (Time.timeScale == 0) return;
+
+    //    if (rightSkill != null && rightSkillCoolTime <= 0)
+    //    {
+    //        UseSkill(rightSkill);
+    //        rightSkillCoolTime = rightSkill.coolTime;
+    //    }
+    //}
 
     public void UseWeaponSkill()
     {
         if (Time.timeScale == 0) return;
 
-        if (weaponSkill != null && weaponSkillCoolTime <= 0)
+        if (_weaponList != null && _weaponList.CoolTime <= 0)
         {
-            this.GetType().GetMethod(weaponSkill.name).Invoke(this, null);
-            weaponSkillCoolTime = weaponSkill.coolTime;
+            this.GetType().GetMethod(_weaponList.Skill.name).Invoke(this, null);
+            _weaponList.CoolTime = _weaponList.Skill.coolTime;
         }
     }
     #endregion

@@ -7,8 +7,8 @@ public class PlayerSaveData
     public List<WeaponStatusDataSO> weaponDataDic = new List<WeaponStatusDataSO>();
     public List<WeaponStatusDataSO> weaponList = new List<WeaponStatusDataSO>();
 
-    public SkillDataSO[] skillDataList = new SkillDataSO[2] { null, null };
-    public List<SkillDataSO> skillList = new List<SkillDataSO>();
+    //public SkillDataSO[] skillDataList = new SkillDataSO[2] { null, null };
+    public List<SkillDataSO> skillList = new List<SkillDataSO>(); // 왜 2개로 만들어 놯지..?
 
     public int hp;
 
