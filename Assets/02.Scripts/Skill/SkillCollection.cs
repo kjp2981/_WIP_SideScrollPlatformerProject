@@ -57,30 +57,14 @@ public class SkillCollection : MonoBehaviour
     private WeaponInfo weaponInfo;
 
     private List<SkillInfo> _skilList = new List<SkillInfo>();
+    public List<SkillInfo> SkillList => _skilList;
 
     [SerializeField]
     private List<SkillInfo> _weaponList = new List<SkillInfo>();
+    public List<SkillInfo> WeaponList => _weaponList;
     [SerializeField]
     private GameObject weaponSlot;
 
-    // 애내도 수정하기
-    #region FireWall Parameta
-    [SerializeField, BoxGroup("FireWall Parameta")]
-    private float spearDistance = 7f;
-    #endregion
-    #region Explosion Parameta
-    [SerializeField, BoxGroup("Explosion Parameta")]
-    private float explosionDistance = 4f;
-    [SerializeField, BoxGroup("Explosion Parameta")]
-    private int explosionDamageOffset = 50;
-    #endregion
-    #region Slash Parameta
-    [SerializeField, BoxGroup("Slash Parameta")]
-    private float slashRadius;
-    [SerializeField, BoxGroup("Slash Parameta")]
-    private int slashDamageOffset;
-    #endregion
-    //
 
     private void Awake()
     {
@@ -90,40 +74,43 @@ public class SkillCollection : MonoBehaviour
         playerAnimation = transform.parent.Find("VisualSprite").GetComponent<AgentAnimation>();
         playerMovement = player.GetComponent<AgentMovement>();
 
-        foreach(SkillInfo s in _skilList)
+        foreach (SkillInfo s in _skilList)
         {
-            if(s.Skill != null)
+            if (s.Skill != null)
             {
                 s.CoolTime = s.Skill.coolTime;
             }
         }
 
-        if(_weaponList.Skill != null)
+        foreach (SkillInfo w in _weaponList)
         {
-            _weaponList.CoolTime = _weaponList.Skill.coolTime;
+            if (w.Skill != null)
+            {
+                w.CoolTime = w.Skill.coolTime;
+            }
         }
     }
 
     private void Update()
     {
-        foreach(SkillInfo s in _skilList)
+        foreach (SkillInfo s in _skilList)
         {
             s.CoolTime -= Time.deltaTime;
         }
 
-        if(_weaponList.CoolTime > 0)
+        foreach (SkillInfo w in _weaponList)
         {
-            _weaponList.CoolTime -= Time.deltaTime;
-        }
+            w.CoolTime -= Time.deltaTime;
+        } 
 
         UIManager.Instance.SkillCoolTime();
     }
 
-    public void SetWeaponSkill()
+    public void SetWeaponSkill(SkillDataSO skill, int index)
     {
-        if(weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
+        if (weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
         {
-            _weaponList.Skill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
+            _weaponList[index].Skill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
 
             UIManager.Instance.UpdateWeaponSkillImage();
 
@@ -131,11 +118,11 @@ public class SkillCollection : MonoBehaviour
         }
     }
 
-    public void UnSetWeaponSkill()
+    public void UnSetWeaponSkill(int index)
     {
         if (weaponInfo.WeaponDataDic[WeaponType.Auxiliary] == null)
         {
-            _weaponList = null;
+            _weaponList[index] = null;
 
             UIManager.Instance.UpdateWeaponSkillImage();
 
@@ -143,11 +130,12 @@ public class SkillCollection : MonoBehaviour
         }
     }
 
-    public void SetSkill(SkillDataSO skill)
+    public void SetSkill(SkillDataSO skill, int index)
     {
         if (skill == null) return;
+        if (_skilList[index].Skill == skill) return;
 
-        _skilList.Add(new SkillInfo(skill));
+        _skilList[index] = new SkillInfo(skill);
         //if (isLeft == true)
         //{
         //    if (rightSkill == skill)
@@ -191,44 +179,24 @@ public class SkillCollection : MonoBehaviour
 
     public void UseSkill(int index)
     {
-        if(Time.timeScale == 0) return;
-        if(index >= _skilList.Count) return;
+        if (Time.timeScale == 0) return;
+        if (index >= _skilList.Count) return;
         if (_skilList[index].Skill == null) return;
+        if (_skilList[index].CoolTime > 0) return;
 
         UseSkill(_skilList[index].Skill);
+        _skilList[index].CoolTime = _skilList[index].Skill.coolTime;
     }
 
-    //public void UseLeftSkill()
-    //{
-    //    if (Time.timeScale == 0) return;
-
-    //    if (leftSkill != null && leftSkillCoolTime <= 0)
-    //    {
-    //        UseSkill(leftSkill);
-    //        leftSkillCoolTime = leftSkill.coolTime;
-    //    }
-    //}
-
-    //public void UseRightSkill()
-    //{
-    //    if (Time.timeScale == 0) return;
-
-    //    if (rightSkill != null && rightSkillCoolTime <= 0)
-    //    {
-    //        UseSkill(rightSkill);
-    //        rightSkillCoolTime = rightSkill.coolTime;
-    //    }
-    //}
-
-    public void UseWeaponSkill()
+    public void UseWeaponSkill(int index)
     {
         if (Time.timeScale == 0) return;
+        if (index >= _weaponList.Count) return;
+        if (_weaponList[index].Skill == null) return;
+        if (_weaponList[index].CoolTime > 0) return;
 
-        if (_weaponList != null && _weaponList.CoolTime <= 0)
-        {
-            this.GetType().GetMethod(_weaponList.Skill.name).Invoke(this, null);
-            _weaponList.CoolTime = _weaponList.Skill.coolTime;
-        }
+        UseSkill(_weaponList[index].Skill);
+        _weaponList[index].CoolTime = _weaponList[index].Skill.coolTime;
     }
     #endregion
 
@@ -241,11 +209,11 @@ public class SkillCollection : MonoBehaviour
     {
         Fireball fireball = PoolManager.Instance.Pop("Fireball") as Fireball;
         //fireball.IsLeft = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
-        if(playerSpriteRenderer.transform.localScale.x == 1)
+        if (playerSpriteRenderer.transform.localScale.x == 1)
         {
             fireball.IsLeft = true;
         }
-        if(playerSpriteRenderer.transform.localScale.x == -1)
+        if (playerSpriteRenderer.transform.localScale.x == -1)
         {
             fireball.IsLeft = false;
         }
@@ -261,7 +229,7 @@ public class SkillCollection : MonoBehaviour
         Slash slash = PoolManager.Instance.Pop("Slash360") as Slash;
         slash.transform.position = this.transform.position;
         Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, slashRadius, 1 << LayerMask.NameToLayer("Enemy"));
-        foreach(Collider2D hitCol in hit)
+        foreach (Collider2D hitCol in hit)
         {
             if (!hitCol.CompareTag("Enemy")) continue;
             IHittable hittable = hitCol.GetComponent<IHittable>();
@@ -286,7 +254,7 @@ public class SkillCollection : MonoBehaviour
     public void Explosion() // 미완성
     {
         Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, 1 << LayerMask.NameToLayer("Enemy"));
-        foreach(Collider2D hitCol in col)
+        foreach (Collider2D hitCol in col)
         {
             if (hitCol.CompareTag("Enemy") == false) continue;
             IHittable hit = hitCol.GetComponent<IHittable>();

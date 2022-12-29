@@ -9,7 +9,7 @@ public class WeaponInfo : MonoBehaviour
     public Dictionary<WeaponType, WeaponStatusDataSO> WeaponDataDic => weaponDataDic;
 
     [SerializeField, BoxGroup("Default Image")]
-    private Sprite swordDefaultImage, spearDefaultImage, wandDefaultImage, bowDefaultImage, shieldDefaultImage, abilityDefaultImage;
+    private Sprite[] _defaultImage;
     private Dictionary<WeaponType, Sprite> spriteDic = new Dictionary<WeaponType, Sprite>();
     public Dictionary<WeaponType, Sprite> SpriteDic => spriteDic;
 
@@ -22,12 +22,13 @@ public class WeaponInfo : MonoBehaviour
 
     private void Start()
     {
-        spriteDic.Add(WeaponType.Sword, swordDefaultImage);
-        spriteDic.Add(WeaponType.Spear, spearDefaultImage);
-        spriteDic.Add(WeaponType.Wand, wandDefaultImage);
-        spriteDic.Add(WeaponType.Bow, bowDefaultImage);
-        spriteDic.Add(WeaponType.Shield, shieldDefaultImage);
-        spriteDic.Add(WeaponType.Auxiliary, abilityDefaultImage);
+        spriteDic.Add(WeaponType.Sword, _defaultImage[(int)WeaponType.Sword]);
+        spriteDic.Add(WeaponType.Spear, _defaultImage[(int)WeaponType.Spear]);
+        spriteDic.Add(WeaponType.Wand, _defaultImage[(int)WeaponType.Wand]);
+        spriteDic.Add(WeaponType.Bow, _defaultImage[(int)WeaponType.Bow]);
+        spriteDic.Add(WeaponType.Shield, _defaultImage[(int)WeaponType.Shield]);
+        spriteDic.Add(WeaponType.Auxiliary, _defaultImage[(int)WeaponType.Auxiliary]);
+        spriteDic.Add(WeaponType.Auxiliary2 , _defaultImage[(int)WeaponType.Auxiliary2]);
 
         for(int i = 0; i < (int)WeaponType.COUNT; i++)
         {

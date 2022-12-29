@@ -16,13 +16,11 @@ public class UIManager : MonoBehaviour
     private GameObject playerInHpbar;
     #endregion
 
-    #region CoolTImeImage
+    #region CoolTimeImage
     [SerializeField, Foldout("CoolTimeImage")]
-    private Image leftCoolTimeImage;
+    private Image[] _skillCoolTimeImage;
     [SerializeField, Foldout("CoolTimeImage")]
-    private Image rightCoolTimeImage;
-    [SerializeField, Foldout("CoolTimeImage")]
-    private Image weaponCoolTimeImage;
+    private Image[] _weaponCoolTimeImage;
     #endregion
 
     #region Skill Panel
@@ -51,12 +49,21 @@ public class UIManager : MonoBehaviour
     #endregion
 
     #region Skill UI
+    //[SerializeField, Foldout("Skill Image")]
+    //private Image leftSkill, rightSkill;
+    //[SerializeField, Foldout("Skill Image")]
+    //private Image leftUISkill, rightUISkill;
+    //[SerializeField, Foldout("Skill Image")]
+    //private Image weaponSkill;
+
     [SerializeField, Foldout("Skill Image")]
-    private Image leftSkill, rightSkill;
+    private Image[] _skillImage;
     [SerializeField, Foldout("Skill Image")]
-    private Image leftUISkill, rightUISkill;
+    private Image[] _skillUIImage;
     [SerializeField, Foldout("Skill Image")]
-    private Image weaponSkill;
+    private Image[] _weaponImage;
+    [SerializeField, Foldout("Skill Image")]
+    private Image[] _weaponUIImage;
     #endregion
 
     private SkillCollection skillCollection;
@@ -146,17 +153,20 @@ public class UIManager : MonoBehaviour
     #region 스킬 쿨타임 표시
     public void SkillCoolTime()
     {
-        if (skillCollection.LeftSkill != null)
+        for (int i = 0; i < skillCollection.SkillList.Count; i++)
         {
-            leftCoolTimeImage.fillAmount = skillCollection.LeftSkillCoolTime / skillCollection.LeftSkill.coolTime;
+            if (skillCollection.SkillList[i].Skill != null)
+            {
+                _skillCoolTimeImage[i].fillAmount = skillCollection.SkillList[i].CoolTime / skillCollection.SkillList[i].Skill.coolTime;
+            }
         }
-        if (skillCollection.RightSkill != null)
+
+        for (int i = 0; i < skillCollection.WeaponList.Count; i++)
         {
-            rightCoolTimeImage.fillAmount = skillCollection.RightSkillCoolTime / skillCollection.RightSkill.coolTime;
-        }
-        if(skillCollection.WeaponSkill != null)
-        {
-            weaponCoolTimeImage.fillAmount = skillCollection.WeaponSkillCoolTime / skillCollection.WeaponSkill.coolTime;
+            if (skillCollection.WeaponList[i].Skill != null)
+            {
+                _weaponCoolTimeImage[i].fillAmount = skillCollection.WeaponList[i].CoolTime / skillCollection.WeaponList[i].Skill.coolTime;
+            }
         }
     }
     #endregion
@@ -191,51 +201,38 @@ public class UIManager : MonoBehaviour
         UpdateSkillImage(false);
     }
 
-    public void UpdateSkillImage(bool isLeft)
+    public void UpdateSkillImage(int index)
     {
-        if (isLeft == true)
+        if (skillCollection.SkillList[index] == null || skillCollection.SkillList[index].Skill == null)
         {
-            if (skillCollection.LeftSkill == null)
-            {
-                leftSkill.sprite = defaultImage;
-            }
-            else
-            {
-                leftSkill.sprite = skillCollection.LeftSkill.image;
-            }
-            leftUISkill.sprite = leftSkill.sprite;
+            _skillImage[index].sprite = defaultImage;
         }
         else
         {
-            if (skillCollection.RightSkill == null)
-            {
-                rightSkill.sprite = defaultImage;
-            }
-            else
-            {
-                rightSkill.sprite = skillCollection.RightSkill.image;
-            }
-            rightUISkill.sprite = rightSkill.sprite;
+            _skillImage[index].sprite = skillCollection.SkillList[index].Skill.image;
         }
+        _skillUIImage[index].sprite = _skillImage[index].sprite;
     }
 
-    public void UpdateWeaponSkillImage()
+    public void UpdateWeaponSkillImage(int index)
     {
-        if(skillCollection.WeaponSkill == null)
+        if (skillCollection.WeaponList[index] == null || skillCollection.WeaponList[index].Skill == null)
         {
-            weaponSkill.sprite = defaultImage;
+            _weaponImage[index].sprite = defaultImage;
         }
         else
         {
-            weaponSkill.sprite = skillCollection.WeaponSkill.image;
+            _weaponImage[index].sprite = skillCollection.WeaponList[index].Skill.image;
         }
+        _weaponUIImage[index].sprite = _weaponImage[index].sprite;
     }
     #endregion
 
-    public void SetSkill(bool isLeft)
+    public void SetSkill(int index)
     {
-        skillCollection.SetSkill(skillInventory.SelectSlot, isLeft); 
+        skillCollection.SetSkill(skillInventory.SelectSlot, index);
     }
+
 
     public GameObject SetInventoryActive(bool? isActive = null)
     {
@@ -254,7 +251,7 @@ public class UIManager : MonoBehaviour
 
     public void BgmSliderValue(float value)
     {
-        if(value > 0)
+        if (value > 0)
         {
             bgmSliderFill.SetActive(true);
         }
@@ -284,7 +281,7 @@ public class UIManager : MonoBehaviour
 
     public void WeaponDescriptionPanel(WeaponStatusDataSO weapon)
     {
-        if(weapon != null)
+        if (weapon != null)
         {
             weaponImage.color = new Color(1, 1, 1, 1);
             weaponImage.sprite = weapon.image;

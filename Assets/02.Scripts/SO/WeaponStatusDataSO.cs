@@ -11,6 +11,7 @@ public enum WeaponType
     Bow,
     Shield,
     Auxiliary,
+    Auxiliary2,
     COUNT
 }
 
