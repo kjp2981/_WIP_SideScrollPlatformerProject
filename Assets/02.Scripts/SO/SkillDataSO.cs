@@ -31,6 +31,7 @@ public class SkillDataSO : ScriptableObject
     public string description;
 
     public float attack; // 위력
+    public float range; // 범위
     public float coolTime;
 
     public SkillType type; // 2세트, 4세트 효과 추가하기

@@ -111,8 +111,7 @@ public class UIManager : MonoBehaviour
         weaponUseBtn = weaponPanel.transform.Find("UseButton").gameObject;
         weaponUnUseBtn = weaponPanel.transform.Find("UnUseButton").gameObject;
 
-        UpdateSkillImage(isLeft: true);
-        UpdateSkillImage(isLeft: false);
+        UpdateSkillImage();
 
         abilityDic.Add(AbilityType.HP, "생명력");
         abilityDic.Add(AbilityType.MeleeDamage, "근거리 공격력");
@@ -197,8 +196,15 @@ public class UIManager : MonoBehaviour
     #region 사용 스킬 UI 업데이트
     public void UpdateSkillImage()
     {
-        UpdateSkillImage(true);
-        UpdateSkillImage(false);
+        for(int i = 0; i < skillCollection.SkillList.Count; i++)
+        {
+            UpdateSkillImage(i);
+        }
+
+        for (int i = 0; i < skillCollection.WeaponList.Count; i++)
+        {
+            UpdateWeaponSkillImage(i);
+        }
     }
 
     public void UpdateSkillImage(int index)

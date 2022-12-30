@@ -112,7 +112,7 @@ public class SkillCollection : MonoBehaviour
         {
             _weaponList[index].Skill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
 
-            UIManager.Instance.UpdateWeaponSkillImage();
+            UIManager.Instance.UpdateWeaponSkillImage(index);
 
             weaponSlot.SetActive(true);
         }
@@ -124,7 +124,7 @@ public class SkillCollection : MonoBehaviour
         {
             _weaponList[index] = null;
 
-            UIManager.Instance.UpdateWeaponSkillImage();
+            UIManager.Instance.UpdateWeaponSkillImage(index);
 
             weaponSlot.SetActive(false);
         }
@@ -173,7 +173,7 @@ public class SkillCollection : MonoBehaviour
 
         if (skill != null)
         {
-            this.GetType().GetMethod(skill.name).Invoke(this, null);
+            this.GetType().GetMethod(skill.name).Invoke(this, new object[] { skill.attack });
         }
     }
 
@@ -205,7 +205,7 @@ public class SkillCollection : MonoBehaviour
     /// <summary>
     /// 파이어볼
     /// </summary>
-    public void Fireball()
+    public void Fireball(float attack)
     {
         Fireball fireball = PoolManager.Instance.Pop("Fireball") as Fireball;
         //fireball.IsLeft = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
@@ -224,25 +224,27 @@ public class SkillCollection : MonoBehaviour
     /// <summary>
     /// 슬래쉬
     /// </summary>
-    public void Slash()
+    public void Slash(float attack)
     {
         Slash slash = PoolManager.Instance.Pop("Slash360") as Slash;
         slash.transform.position = this.transform.position;
-        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, slashRadius, 1 << LayerMask.NameToLayer("Enemy"));
+        Collider2D[] hit = Physics2D.OverlapCircleAll(transform.position, 2, 1 << LayerMask.NameToLayer("Enemy"));
         foreach (Collider2D hitCol in hit)
         {
             if (!hitCol.CompareTag("Enemy")) continue;
             IHittable hittable = hitCol.GetComponent<IHittable>();
             if (hittable == null) continue;
             bool isCritical = player.isCritical();
-            hittable.Damage(player.GetAttackDamage(true, true, isCritical) * slashDamageOffset, this.transform.parent.gameObject, true, 0.4f, isCritical);
+
+            //                                              이거 공식으로 바꾸기
+            hittable.Damage(player.GetAttackDamage(true, true, isCritical) * (int)attack, this.transform.parent.gameObject, true, 0.4f, isCritical);
         }
     }
 
     /// <summary>
     /// 화살비?(엠버 궁)
     /// </summary>
-    public void ArrowRain()
+    public void ArrowRain(float attack)
     {
         Vector3 offset = playerSpriteRenderer.transform.localScale.x == 1 ? new Vector3(5, 0, 0) : new Vector3(-5, 0, 0);
         // 풀링하기
@@ -251,23 +253,23 @@ public class SkillCollection : MonoBehaviour
     /// <summary>
     /// 익스플로션(폭발)
     /// </summary>
-    public void Explosion() // 미완성
+    public void Explosion(float attack) // 미완성
     {
-        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, explosionDistance, 1 << LayerMask.NameToLayer("Enemy"));
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, 5, 1 << LayerMask.NameToLayer("Enemy"));
         foreach (Collider2D hitCol in col)
         {
             if (hitCol.CompareTag("Enemy") == false) continue;
             IHittable hit = hitCol.GetComponent<IHittable>();
             if (hit == null) continue;
             bool isCritical = player.isCritical();
-            hit.Damage(player.GetAttackDamage(true, true, isCritical) * explosionDamageOffset, this.transform.parent.gameObject, true, 1f, isCritical);
+            hit.Damage(player.GetAttackDamage(true, true, isCritical) * (int)attack, this.transform.parent.gameObject, true, 1f, isCritical);
         }
     }
 
     /// <summary>
     /// 창 찍기
     /// </summary>
-    public void Spear() // 변경해야함
+    public void Spear(float attack) // 변경해야함
     {
         // 변경 후보
         // 1. 3개의 유도 창
@@ -275,7 +277,7 @@ public class SkillCollection : MonoBehaviour
         // 3. 플레이어가 바라보는 방향으러 찌르기
         // 4. 대쉬하면서 뒤에 창 쫘롸락(종려 강공격)
 
-        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, spearDistance, 1 << LayerMask.NameToLayer("Enemy"));
+        Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, 3, 1 << LayerMask.NameToLayer("Enemy"));
         int num = 0;
         if (col.Length > 0)
         {
@@ -300,7 +302,7 @@ public class SkillCollection : MonoBehaviour
     /// <summary>
     /// 불 토네이도
     /// </summary>
-    public void FireTornado()
+    public void FireTornado(float attack)
     {
         Tornado tornado = PoolManager.Instance.Pop("FireTornado") as Tornado;
         Vector3 pos = transform.position;
@@ -312,12 +314,12 @@ public class SkillCollection : MonoBehaviour
     /// <summary>
     /// 불의 벽
     /// </summary>
-    public void FireWall()
+    public void FireWall(float attack)
     {
-        StartCoroutine(FireWallCoroutine());
+        StartCoroutine(FireWallCoroutine(attack));
     }
 
-    private IEnumerator FireWallCoroutine()
+    private IEnumerator FireWallCoroutine(float attack)
     {
         Vector3 pos = transform.position;
         bool offset = playerSpriteRenderer.transform.localScale.x == 1 ? true : false;
@@ -331,19 +333,19 @@ public class SkillCollection : MonoBehaviour
     #endregion
 
     #region 무기 스킬들
-    public void IronShield()
+    public void IronShield(float attack)
     {
         // 토사체를 막는 방패 소환
         IronShield ironShield = PoolManager.Instance.Pop("IronShield") as IronShield;
         ironShield.transform.position = transform.position + (playerSpriteRenderer.transform.localScale.x == 1 ? Vector3.left : Vector3.right) + Vector3.up;
     }
 
-    public void WoodenShield()
+    public void WoodenShield(float attack)
     {
         // 나무 방패 던지기
     }
 
-    public void ImperialRifle()
+    public void ImperialRifle(float attack)
     {
         // 플레이어 완전히 정지 => rigid 스태틱으로 바꾸기?
         playerMovement.RigidStop(RigidbodyType2D.Static); // 이거 이따구로 짜지 말기
@@ -376,11 +378,11 @@ public class SkillCollection : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, spearDistance);
+        Gizmos.DrawWireSphere(transform.position, 3);
         Gizmos.color = Color.white;
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, slashRadius);
+        Gizmos.DrawWireSphere(transform.position, 3);
         Gizmos.color = Color.white;
     }
 #endif
