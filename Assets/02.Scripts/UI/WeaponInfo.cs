@@ -99,7 +99,7 @@ public class WeaponInfo : MonoBehaviour
         SubtractionWeapon(inventory.SelectSlot);
     }
 
-    public void SubtractionWeapon(WeaponStatusDataSO weapon)
+    public void SubtractionWeapon(WeaponStatusDataSO weapon, int index)
     {
         if (weaponDataDic.ContainsKey(weapon.weaponType))
         {
@@ -108,7 +108,7 @@ public class WeaponInfo : MonoBehaviour
 
         if (weapon.weaponType == WeaponType.Auxiliary)
         {
-            skillCollection.UnSetWeaponSkill();
+            skillCollection.UnSetWeaponSkill(index);
         }
 
         UpdateImage(weapon.weaponType);
