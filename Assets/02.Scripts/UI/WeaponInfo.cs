@@ -5,8 +5,8 @@ using NaughtyAttributes;
 
 public class WeaponInfo : MonoBehaviour
 {
-    private Dictionary<WeaponType, WeaponStatusDataSO> weaponDataDic = new Dictionary<WeaponType, WeaponStatusDataSO>();
-    public Dictionary<WeaponType, WeaponStatusDataSO> WeaponDataDic => weaponDataDic;
+    private Dictionary<WeaponType, List<WeaponStatusDataSO>> weaponDataDic = new Dictionary<WeaponType, List<WeaponStatusDataSO>>();
+    public Dictionary<WeaponType, List<WeaponStatusDataSO>> WeaponDataDic => weaponDataDic;
 
     [SerializeField, BoxGroup("Default Image")]
     private Sprite[] _defaultImage;
@@ -50,7 +50,8 @@ public class WeaponInfo : MonoBehaviour
             {
                 if(weaponDataDic.ContainsKey(wi.Type))
                     if(weaponDataDic[wi.Type] != null)
-                        wi.ChangeItemImage(weaponDataDic[wi.Type].image, Color.white);
+                        foreach(var image in weaponDataDic[wi.Type])
+                            wi.ChangeItemImage(image.image, Color.white);
             }
         }
         else
@@ -75,20 +76,22 @@ public class WeaponInfo : MonoBehaviour
         AddWeapon(inventory.SelectSlot);
     }
 
-    public void AddWeapon(WeaponStatusDataSO weapon)
+    public void AddWeapon(WeaponStatusDataSO weapon, int index)
     {
         if (weaponDataDic.ContainsKey(weapon.weaponType))
         {
-            weaponDataDic[weapon.weaponType] = weapon;
+            weaponDataDic[weapon.weaponType][index] = weapon;
         }
         else
         {
-            weaponDataDic.Add(weapon.weaponType, weapon);
+            List<WeaponStatusDataSO> list = new List<WeaponStatusDataSO>();
+            list.Add(weapon);
+            weaponDataDic.Add(weapon.weaponType, list);
         }
 
         if(weapon.weaponType == WeaponType.Auxiliary)
         {
-            skillCollection.SetWeaponSkill();
+            skillCollection.SetWeaponSkill(weapon.skill, index);
         }
 
         UpdateImage(weapon.weaponType);
@@ -99,7 +102,7 @@ public class WeaponInfo : MonoBehaviour
         SubtractionWeapon(inventory.SelectSlot);
     }
 
-    public void SubtractionWeapon(WeaponStatusDataSO weapon, int index)
+    public void SubtractionWeapon(WeaponStatusDataSO weapon)
     {
         if (weaponDataDic.ContainsKey(weapon.weaponType))
         {
@@ -108,7 +111,7 @@ public class WeaponInfo : MonoBehaviour
 
         if (weapon.weaponType == WeaponType.Auxiliary)
         {
-            skillCollection.UnSetWeaponSkill(index);
+            skillCollection.UnSetWeaponSkill();
         }
 
         UpdateImage(weapon.weaponType);

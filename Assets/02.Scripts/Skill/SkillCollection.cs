@@ -110,7 +110,7 @@ public class SkillCollection : MonoBehaviour
     {
         if (weaponInfo.WeaponDataDic[WeaponType.Auxiliary] != null)
         {
-            _weaponList[index].Skill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary].skill;
+            _weaponList[index].Skill = weaponInfo.WeaponDataDic[WeaponType.Auxiliary][index].skill;
 
             UIManager.Instance.UpdateWeaponSkillImage(index);
 
